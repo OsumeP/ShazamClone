@@ -120,6 +120,32 @@ class FingerprintDB:
     def list_songs(self) -> list[sqlite3.Row]:
         return self.conn.execute("SELECT * FROM songs ORDER BY artist, title").fetchall()
 
+    def lookup(self, hashes: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Todas las apariciones en la BD de los hashes dados (Fase 4).
+
+        Los hashes únicos se cargan en una tabla temporal y se cruzan con
+        `fingerprints` por su clave primaria: una búsqueda de rango en el
+        B-tree por cada hash, sin límite de parámetros SQL.
+
+        Returns:
+            (hash, song_id, offset_frame) como arreglos int64 alineados.
+        """
+        cur = self.conn.cursor()
+        cur.row_factory = None
+        cur.execute("CREATE TEMP TABLE IF NOT EXISTS query_hashes (hash INTEGER PRIMARY KEY)")
+        cur.execute("DELETE FROM query_hashes")
+        cur.executemany(
+            "INSERT INTO query_hashes (hash) VALUES (?)",
+            ((h,) for h in np.unique(hashes).tolist()),
+        )
+        rows = cur.execute(
+            "SELECT f.hash, f.song_id, f.offset_frame"
+            " FROM query_hashes AS q JOIN fingerprints AS f ON f.hash = q.hash"
+        ).fetchall()
+        self.conn.commit()
+        data = np.array(rows, dtype=np.int64).reshape(-1, 3)
+        return data[:, 0], data[:, 1], data[:, 2]
+
     def stats(self) -> dict[str, int | float]:
         """Totales para el reporte de tamaños (RNF2)."""
         row = self.conn.execute(

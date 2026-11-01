@@ -28,7 +28,7 @@ PEAK_FMIN_HZ = 60.0
 PEAK_FMAX_HZ = 5_000.0
 PEAK_NEIGHBORHOOD_FREQ = 21     # bins (~226 Hz): tamaño del vecindario del máximo local
 PEAK_NEIGHBORHOOD_TIME = 21     # ventanas (~0.98 s)
-PEAK_MIN_PROMINENCE_DB = 10.0   # el pico debe superar la mediana del espectrograma en ≥ X dB
+PEAK_MIN_PROMINENCE_DB = 10.0   # el pico debe superar la mediana de su ventana en ≥ X dB
 
 # --- Hashing combinatorio (RF3, RNF2) ------------------------------------
 FAN_OUT = 10                    # pares por punto ancla
@@ -38,5 +38,13 @@ HASH_FREQ_BITS = 10             # f1, f2 < 1024 bins (≈ 11 kHz con N = 4096)
 HASH_DT_BITS = 12
 # Registro almacenado por hash: hash uint32 + offset uint32 + song_id uint16
 FINGERPRINT_RECORD_BYTES = 10
+
+# --- Matching (RF5) --------------------------------------------------------
+# Un fragmento que no empieza en múltiplo exacto de HOP desplaza sus ventanas
+# hasta ±R/2 respecto a las de la canción, así que algunos hashes alineados
+# caen en el Δoffset vecino; la tolerancia suma los bins [d, d + tol].
+MATCH_DELTA_TOLERANCE = 1
+MATCH_MIN_SCORE = 10            # hashes alineados mínimos (Fase 4: negativos ≤ 7, positivos ≥ 13)
+MATCH_MIN_RATIO = 2.0           # el mejor debe superar al segundo candidato en este factor
 
 AUDIO_EXTENSIONS = {".wav", ".mp3", ".flac", ".ogg", ".m4a"}

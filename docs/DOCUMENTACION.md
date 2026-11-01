@@ -43,8 +43,8 @@ a la canción:
 |---|---|---|
 | WAV normalizado | 44 100 muestras de 16 bits | 88 200 B |
 | Espectrograma | 21.5 ventanas × 2 049 bins (float32) | ~176 000 B (se descarta) |
-| Mapa de constelación | ~16.6 picos `(m, k)` | — |
-| Huella | ~152 hashes × 10 B | **~1 520 B (1.72 %)** |
+| Mapa de constelación | ~14.2 picos `(m, k)` | — |
+| Huella | ~134 hashes × 10 B | **~1 340 B (1.52 %)** |
 
 ---
 
@@ -64,11 +64,14 @@ Reúne en un solo lugar los parámetros del sistema para que todos los módulos
 | | `WINDOW` | Hann | Reduce la fuga espectral |
 | Constelación | `PEAK_FMIN_HZ`–`PEAK_FMAX_HZ` | 60 Hz – 5 kHz | Banda donde se buscan picos |
 | | `PEAK_NEIGHBORHOOD_*` | 21 × 21 | Vecindario del máximo local (~226 Hz × ~1 s) |
-| | `PEAK_MIN_PROMINENCE_DB` | 10 dB | Altura mínima sobre la mediana |
+| | `PEAK_MIN_PROMINENCE_DB` | 10 dB | Altura mínima sobre la mediana de la propia ventana |
 | Hashing | `FAN_OUT` | 10 | Pares por punto ancla |
 | | `TARGET_DT_MIN/MAX` | 1 – 63 ventanas | Zona objetivo (hasta ~2.9 s) |
 | | `HASH_FREQ_BITS` / `HASH_DT_BITS` | 10 / 12 | Distribución de bits del hash de 32 bits |
 | | `FINGERPRINT_RECORD_BYTES` | 10 | hash (4) + offset (4) + song_id (2) |
+| Matching | `MATCH_DELTA_TOLERANCE` | 1 ventana | Suma los bins Δ y Δ+1 del histograma |
+| | `MATCH_MIN_SCORE` | 10 | Hashes alineados mínimos para aceptar |
+| | `MATCH_MIN_RATIO` | 2.0 | El mejor candidato debe duplicar al segundo |
 
 También define las rutas del proyecto (`data/raw`, `data/normalized`,
 `docs/figures`).
@@ -126,7 +129,8 @@ energía. Un punto es pico si cumple dos condiciones:
 1. **Es máximo local** en un vecindario rectangular de 21 bins × 21 ventanas
    (`scipy.ndimage.maximum_filter`). El tamaño del vecindario controla la
    densidad: como mucho un pico por cada ~226 Hz × ~1 s.
-2. **Supera la mediana del espectrograma en al menos 10 dB.**
+2. **Supera en al menos 10 dB la mediana de su propia ventana**, es decir, de la
+   columna m del espectrograma dentro de la banda.
 
 Decisiones de diseño:
 
@@ -134,6 +138,17 @@ Decisiones de diseño:
   suma una constante a S_dB. El máximo local y la mediana se desplazan igual, así
   que **los picos no cambian con la ganancia del micrófono** (hay una prueba que
   lo verifica con −20 dB).
+- **Umbral local en el tiempo (mediana por ventana), no global.** En la Fase 2 el
+  umbral era la mediana de *todo* el espectrograma, y la evaluación de la Fase 4
+  mostró el problema. La intro de *Bad Apple* tiene una mediana 16 dB menor que
+  la de la canción completa. Al ingestar la canción entera, el umbral global
+  dejaba solo 35 picos en ese tramo; al consultar un fragmento de la intro, su
+  propio umbral producía 157, los mismos 35 más 122 adicionales. Esos picos de
+  más rompen casi todos los pares de hashing, y el fragmento obtenía apenas 8
+  coincidencias alineadas. Con la mediana por ventana, el umbral depende solo
+  del contenido de esa ventana, que es idéntico en la canción y en cualquier
+  fragmento suyo. Así la detección de picos es coherente entre ingesta y
+  consulta.
 - **Banda 60 Hz – 5 kHz.** La música concentra ahí su energía armónica. La
   frecuencia de muestreo sigue siendo 44.1 kHz (RNF1); solo se ignoran los bins
   altos al buscar picos.
@@ -145,7 +160,7 @@ Decisiones de diseño:
 **Relación con la entropía (marco teórico §3.5):** el piso de ruido, con
 energía repartida de forma uniforme (alta entropía), queda casi todo por debajo
 del umbral. Sobreviven los pocos puntos donde se concentra la energía musical
-(baja entropía). Es una reducción de ~176 000 B/s del espectrograma a ~17 puntos
+(baja entropía). Es una reducción de ~176 000 B/s del espectrograma a ~14 puntos
 por segundo.
 
 **Hallazgo:** en regiones que solo contienen ruido, la potencia de cada bin
@@ -200,6 +215,46 @@ real los tags del MP3 traen el nombre del canal que subió el video
 ("FLOWofficialVEVO", "Dan Music") y títulos con ruido ("(Lyrics)", "AMV"),
 mientras que los nombres de archivo los eligió el equipo.
 
+### 2.7 `matcher.py` — matching y coherencia temporal (RF5, RNF3)
+
+Implementa el Proceso 5.2, pasos 5 y 6, siguiendo Wang (2003) §2.3:
+
+1. **`find_matches`:** busca en la BD (`FingerprintDB.lookup`) todas las
+   apariciones de los hashes del fragmento. Un hash puede repetirse en el
+   fragmento y en la BD, así que se generan todas las combinaciones de forma
+   vectorizada (`searchsorted` + `repeat`). Cada coincidencia queda como
+   `(song_id, t_canción, t_fragmento)`.
+2. **`score_candidates`:** para cada coincidencia calcula
+   **Δ = t_canción − t_fragmento**. Si el fragmento proviene de una canción, sus
+   coincidencias verdaderas comparten el mismo Δ, es decir, forman una recta de
+   pendiente 1 en el plano (t_fragmento, t_canción). Las coincidencias casuales
+   con otras canciones tienen Δ dispersos. Se arma el histograma de Δ por
+   canción (codificando cada par (canción, Δ) como un entero y contándolos con
+   `np.unique`). **La puntuación es la altura del pico**, y ese Δ indica en qué
+   punto de la canción empieza el fragmento.
+   - **Tolerancia de ±1 ventana:** un fragmento real casi nunca empieza en un
+     múltiplo exacto de R. Sus ventanas quedan desplazadas hasta R/2 (≈ 23 ms)
+     respecto a las de la canción, y algunos pares alineados caen en el Δ
+     vecino. Por eso se suman los bins Δ y Δ+1. En la práctica el efecto es
+     pequeño: la puntuación mediana pasó de 366 a 370.
+3. **`is_confident` (regla de decisión):** se acepta el mejor candidato si
+   `score ≥ 10` **y** `score ≥ 2 × score del segundo`. La primera condición
+   descarta audio que no está en la BD, donde el pico casual máximo observado fue
+   7. La segunda descarta casos ambiguos.
+4. **`recognize`:** pipeline completo para un fragmento ya normalizado: huella
+   → búsqueda → puntuación → decisión. Devuelve la canción (o `None`), los
+   candidatos ordenados, el número de hashes de la consulta y los tiempos de
+   cada etapa. **La latencia se mide desde que el audio está en memoria**, que
+   equivale al fin de la grabación (acuerdo A3).
+
+**Ambigüedad de la posición en canciones repetitivas:** cuando una sección se
+repite de forma idéntica (loops de producción electrónica, estribillos
+copiados), el fragmento aparece realmente en varias posiciones y el histograma
+tiene varios picos. La canción se identifica bien, pero la posición estimada
+puede ser la de otra repetición. Por ejemplo, en *Sunset Lover* el error es
+siempre 10.56 s, la duración de un loop, y en la figura de *Crawling* aparece un
+segundo pico en el estribillo repetido.
+
 ---
 
 ## 2b. Base de datos — `backend/db/database.py` (Proceso 5.1, paso 6)
@@ -240,7 +295,10 @@ Decisiones de diseño:
   rápidas, y `foreign_keys = ON` para que funcione el borrado en cascada.
 
 Clase `FingerprintDB` (context manager): `add_song`, `delete_song`,
-`song_by_sha1`, `get_song`, `list_songs` y `stats`. Este último devuelve los
+`song_by_sha1`, `get_song`, `list_songs`, `lookup` y `stats`. `lookup` carga los
+hashes únicos de la consulta en una tabla temporal y la cruza con
+`fingerprints` por su clave primaria: una búsqueda de rango en el B-tree por
+hash, sin el límite de parámetros de una cláusula `IN (...)`. Este último devuelve los
 totales y el tamaño en disco, calculado como `page_size × page_count` después de
 un checkpoint del WAL.
 
@@ -257,8 +315,16 @@ Se ejecutan desde `backend/` con el venv activo: `python -m scripts.<nombre>`.
 | `plot_constellation` | Espectrograma con los picos superpuestos y, debajo, los pares ancla → objetivo de algunos anclas (como la fig. 1 de Wang). |
 | `fingerprint_stats` | Por canción: picos/s, hashes/s y tamaño de la huella vs. WAV normalizado (RNF2). |
 | `ingest_folder` | **Proceso 5.1 completo.** Por archivo: SHA-1 (omite los ya cargados) → metadatos → normalización (guarda el WAV de referencia) → huella → inserción. Al final reporta el tamaño de la huella lógica y del archivo SQLite frente al WAV. `--list` lista el contenido de la BD; `--folder` y `--db` cambian las rutas. |
+| `recognize_file` | Reconoce un fragmento (`--start`, `--duration`) de un archivo contra la BD. Muestra la canción, la posición estimada, los mejores candidatos y la latencia por etapa. |
+| `plot_matches` | Coherencia temporal de un fragmento. Para la canción reconocida y la segunda candidata muestra el diagrama t_fragmento vs. t_canción, una ampliación alrededor del mejor Δ (con la recta de pendiente 1) y el histograma de Δ. |
 
 Las figuras se guardan en `docs/figures/`.
+
+### Evaluación — `evaluation/`
+
+| Script | Función |
+|---|---|
+| `eval_matching.py` | **Positivos:** N fragmentos por canción y duración, en posiciones aleatorias con resolución de una muestra. **Negativos:** arma una BD temporal sin 1 de cada 4 canciones y consulta fragmentos de esas canciones excluidas, donde lo correcto es rechazar. Reporta top-1, acierto con la regla de decisión, puntuaciones, error de posición, latencia y falsos positivos. El detalle queda en `evaluation/results/fase4_matching.csv`. Se ejecuta desde `backend/` con `python ../evaluation/eval_matching.py [--per-song 10] [--tolerance 1]`. |
 
 ---
 
@@ -273,6 +339,7 @@ Se ejecutan con `python -m pytest` desde `backend/`.
 | `test_fingerprint.py` | `pack`/`unpack` de ida y vuelta; los picos del tono puro son los dominantes; picos dentro de la banda sin acumularse en el borde; **invariancia a la ganancia**; zona objetivo y fan-out; determinismo; **invariancia temporal** (un fragmento comparte > 50 % de hashes alineados); huella < 5 % del WAV. |
 
 | `test_database.py` | Insertar y leer; hashes uint32 altos (≥ 2³¹) se conservan; SHA-1 duplicado rechazado sin dejar datos a medias; borrado en cascada; la búsqueda por hash usa la clave primaria; estadísticas; SHA-1 de archivo; separación `Artista - Título` en 6 casos reales; prioridad de `metadata.json`. |
+| `test_matcher.py` | Expansión de hashes repetidos en `find_matches`; pico del histograma con y sin tolerancia; regla de decisión (aceptar, ambiguo, insuficiente); reconocimiento de fragmentos no alineados con R, con error de posición ≤ 1 ventana y latencia < 3 s; rechazo de audio fuera de la BD; búsqueda vacía. |
 
 Las pruebas usan señales sintéticas (tonos, acordes aleatorios) y bases de datos
 temporales, así que no dependen del corpus, que no se versiona.
@@ -289,9 +356,12 @@ temporales, así que no dependen del corpus, que no se versiona.
   líneas verticales de la percusión, energía concentrada por debajo de 2 kHz.
 
 ### Fase 2 — Constelación y hashing
-- **16.6 picos/s, 152 hashes/s, huella = 1.72 % del WAV normalizado** (peor
-  caso 1.87 %; límite de RNF2: 5 %). Unos 0.8 s por canción.
-- Exploración de robustez: fragmentos de 10 s de 10 canciones con ruido blanco a
+- Con el umbral global original: 16.6 picos/s, 152 hashes/s, huella = 1.72 %
+  del WAV. **Con el umbral por ventana adoptado en la Fase 4: 14.2 picos/s,
+  134 hashes/s, huella = 1.52 %** (peor caso 1.74 %; límite de RNF2: 5 %). Unos
+  0.8 s por canción.
+- Exploración de robustez (con el umbral global original, como referencia
+  histórica): fragmentos de 10 s de 10 canciones con ruido blanco a
   SNR = 5 dB, comparando sus hashes con los de la canción completa:
 
   | Vecindario | Umbral | Hashes/s | Supervivencia | Hashes alineados por consulta |
@@ -307,14 +377,41 @@ temporales, así que no dependen del corpus, que no se versiona.
   identifica la canción, así que se eligió 21×21 / +10 dB.
 
 ### Fase 3 — Base de datos e ingesta
-- 20 canciones (80.8 min) cargadas en 37 s → **737 321 hashes**. Las 20 tomaron
-  sus metadatos del nombre de archivo.
-- Tamaños frente al WAV normalizado (427.5 MB):
+- 20 canciones (80.8 min) cargadas en ~35 s. Las 20 tomaron sus metadatos del
+  nombre de archivo.
+- Tamaños frente al WAV normalizado (427.5 MB), con la BD regenerada tras el
+  cambio de umbral de la Fase 4 (649 001 hashes):
 
   | Medida | Tamaño | % del WAV |
   |---|---|---|
-  | Huella lógica (10 B/hash) | 7.37 MB | **1.72 %** |
-  | Archivo SQLite en disco (con estructura del B-tree) | 11.35 MB | **2.65 %** |
+  | Huella lógica (10 B/hash) | 6.49 MB | **1.52 %** |
+  | Archivo SQLite en disco (con estructura del B-tree) | 9.95 MB | **2.33 %** |
 
-  RNF2 (≤ 5 %) se cumple incluso contando el archivo completo de la BD.
+  RNF2 (≤ 5 %) se cumple incluso contando el archivo completo de la BD. Con el
+  umbral global original eran 737 321 hashes, 1.72 % y 2.65 %.
 - Repetir la ingesta no agrega nada (20 omitidas en 0.1 s).
+
+### Fase 4 — Matching y coherencia temporal (audio limpio)
+Evaluación final (`eval_matching.py --per-song 10`): 20 canciones × 10
+fragmentos × 2 duraciones, en posiciones aleatorias no alineadas con R, más 100
+consultas de canciones fuera de la BD.
+
+| Duración | Consultas | Top-1 correcto | Acierto (regla de decisión) | Score mín. | Score mediano | Latencia mediana | Latencia máx. |
+|---|---|---|---|---|---|---|---|
+| 5 s | 200 | 100 % | **100 %** | 26 | 186 | 143 ms | 193 ms |
+| 10 s | 200 | 100 % | **100 %** | 57 | 378 | 170 ms | 235 ms |
+
+- **Negativos:** 100 consultas, **0 % de falsos positivos**. Score máximo de 5
+  (7 en una corrida previa con otra semilla), contra un umbral de 10.
+- **RNF3:** latencia máxima de 235 ms, muy por debajo de 3 s. Se reparte entre
+  ~20 ms de huella, ~70–150 ms de búsqueda en SQLite y ~2 ms de puntuación.
+- **Antes y después del umbral por ventana** (5 fragmentos por canción): top-1
+  de 5 s pasó de 99 % a 100 % y el score mínimo de 1 a 13. El fallo restante
+  con umbral global era *Bad Apple* desde 3 s (8 alineados). Otro fallo,
+  *Geoxor* a 310 s, era el final que se desvanece a −70 dBFS, 60 dB por debajo
+  de la canción.
+- Figura `docs/figures/matching_Linkin Park - Crawling.png`: en la ampliación,
+  las coincidencias alineadas forman la recta t_canción = t_fragmento + 73.4 s y
+  el histograma tiene un pico de 648. La segunda candidata tiene 61
+  coincidencias dispersas con un pico de 3. Se ve además un pico secundario en el
+  estribillo repetido (~128 s).
