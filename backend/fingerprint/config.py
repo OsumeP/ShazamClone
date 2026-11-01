@@ -8,6 +8,8 @@ DATA_DIR = REPO_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 NORMALIZED_DIR = DATA_DIR / "normalized"
 FIGURES_DIR = REPO_ROOT / "docs" / "figures"
+DB_PATH = DATA_DIR / "fingerprints.db"
+METADATA_FILE = "metadata.json"     # correcciones manuales de metadatos en data/raw/
 
 # --- Normalización (RNF1, acuerdo A1) ------------------------------------
 SAMPLE_RATE = 44_100        # Hz; frecuencia de Nyquist = 22 050 Hz

@@ -28,7 +28,7 @@ from . import config
 _SOUNDFILE_EXTENSIONS = {".wav", ".flac", ".ogg"}
 
 
-def _find_binary(name: str) -> str:
+def find_binary(name: str) -> str:
     """Ubica ffmpeg/ffprobe (variable de entorno FFMPEG_DIR o PATH)."""
     custom_dir = os.environ.get("FFMPEG_DIR")
     if custom_dir:
@@ -47,7 +47,7 @@ def _probe_stream(path: Path) -> tuple[int, int]:
     """Devuelve (frecuencia de muestreo, canales) del primer stream de audio."""
     result = subprocess.run(
         [
-            _find_binary("ffprobe"), "-v", "error",
+            find_binary("ffprobe"), "-v", "error",
             "-select_streams", "a:0",
             "-show_entries", "stream=sample_rate,channels",
             "-of", "json", str(path),
@@ -63,7 +63,7 @@ def _decode_ffmpeg(path: Path) -> tuple[np.ndarray, int]:
     fs, channels = _probe_stream(path)
     result = subprocess.run(
         [
-            _find_binary("ffmpeg"), "-v", "error", "-nostdin",
+            find_binary("ffmpeg"), "-v", "error", "-nostdin",
             "-i", str(path),
             "-map", "0:a:0",
             "-f", "f32le", "-acodec", "pcm_f32le",
