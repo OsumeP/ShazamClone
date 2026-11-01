@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Datos (audio y BD no se versionan)
+data/raw/*
+data/normalized/*
+!data/raw/.gitkeep
+!data/normalized/.gitkeep
+*.db
+*.db-journal
+
+# Frontend
+node_modules/
+frontend/dist/
+
+# Entorno / editores
+.env
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+CLAUDE.md
+PLAN.md
