@@ -12,10 +12,12 @@ float32 en [-1, 1], mono, 44.1 kHz.
 
 from __future__ import annotations
 
+import io
 import json
 import os
 import shutil
 import subprocess
+import tempfile
 from fractions import Fraction
 from pathlib import Path
 
@@ -117,6 +119,22 @@ def load_audio(path: str | Path) -> np.ndarray:
     """Carga cualquier archivo soportado ya normalizado (mono, 44.1 kHz)."""
     data, fs = read_audio(path)
     return normalize(data, fs)
+
+
+def load_audio_bytes(data: bytes, suffix: str = ".wav") -> np.ndarray:
+    """Como load_audio, pero desde el contenido de un archivo en memoria
+    (p. ej. un archivo subido a la API). `suffix` indica el formato."""
+    suffix = suffix.lower() if suffix else ".wav"
+    if suffix in _SOUNDFILE_EXTENSIONS:
+        try:
+            audio, fs = sf.read(io.BytesIO(data), dtype="float32", always_2d=True)
+            return normalize(audio, fs)
+        except sf.LibsndfileError:
+            pass                      # extensión engañosa: se intenta con FFmpeg
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / ("upload" + suffix)
+        path.write_bytes(data)
+        return normalize(*_decode_ffmpeg(path))
 
 
 def save_wav(path: str | Path, x: np.ndarray, fs: int = config.SAMPLE_RATE) -> None:

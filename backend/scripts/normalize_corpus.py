@@ -10,10 +10,12 @@ import argparse
 import time
 
 from fingerprint import config
+from scripts import console
 from fingerprint.audio_io import load_audio, save_wav
 
 
 def main() -> None:
+    console.setup()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force", action="store_true", help="re-normalizar aunque ya exista")
     args = parser.parse_args()

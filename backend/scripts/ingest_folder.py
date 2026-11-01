@@ -14,11 +14,12 @@ import argparse
 import time
 from pathlib import Path
 
-from db.database import FingerprintDB, file_sha1
+from db.database import FingerprintDB
+from db.ingest import ingest_file
 from fingerprint import config
-from fingerprint.audio_io import load_audio, save_wav
-from fingerprint.hashing import fingerprint_signal, fingerprint_size_bytes
-from fingerprint.metadata import load_overrides, resolve_metadata
+from scripts import console
+from fingerprint.hashing import fingerprint_size_bytes
+from fingerprint.metadata import load_overrides
 
 
 def ingest(folder: Path, db: FingerprintDB) -> None:
@@ -28,34 +29,16 @@ def ingest(folder: Path, db: FingerprintDB) -> None:
     t_start = time.perf_counter()
 
     for path in files:
-        sha1 = file_sha1(path)
-        existing = db.song_by_sha1(sha1)
-        if existing:
-            print(f"[omitido] {path.name}  (ya existe como id {existing['id']})")
+        t0 = time.perf_counter()
+        r = ingest_file(path, db, overrides)
+        if r.already_existed:
+            print(f"[omitido] {path.name}  (ya existe como id {r.song_id})")
             skipped += 1
             continue
-
-        t0 = time.perf_counter()
-        meta = resolve_metadata(path, overrides)
-        x = load_audio(path)
-        wav_path = config.NORMALIZED_DIR / (path.stem + ".wav")
-        save_wav(wav_path, x)
-        _, hashes, offsets = fingerprint_signal(x)
-        song_id = db.add_song(
-            title=meta["title"],
-            artist=meta["artist"],
-            album=meta["album"],
-            duration_s=len(x) / config.SAMPLE_RATE,
-            file_name=path.name,
-            file_sha1=sha1,
-            wav_bytes=wav_path.stat().st_size,
-            hashes=hashes,
-            offsets=offsets,
-        )
         added += 1
         print(
-            f"[{song_id:3d}] {meta['artist'] or '?'} — {meta['title']}  "
-            f"({meta['source']}, {len(hashes)} hashes, {time.perf_counter() - t0:.2f} s)"
+            f"[{r.song_id:3d}] {r.artist or '?'} — {r.title}  "
+            f"({r.metadata_source}, {r.n_hashes} hashes, {time.perf_counter() - t0:.2f} s)"
         )
 
     print(f"\n{added} agregadas, {skipped} omitidas en {time.perf_counter() - t_start:.1f} s")
@@ -83,6 +66,7 @@ def list_songs(db: FingerprintDB) -> None:
 
 
 def main() -> None:
+    console.setup()
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--folder", type=Path, default=config.RAW_DIR)
     parser.add_argument("--db", type=Path, default=config.DB_PATH)

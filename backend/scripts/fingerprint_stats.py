@@ -12,11 +12,13 @@ from __future__ import annotations
 import time
 
 from fingerprint import config
+from scripts import console
 from fingerprint.audio_io import load_audio
 from fingerprint.hashing import fingerprint_signal, fingerprint_size_bytes
 
 
 def main() -> None:
+    console.setup()
     files = sorted(config.NORMALIZED_DIR.glob("*.wav"))
     if not files:
         print("No hay WAV normalizados; ejecuta primero scripts.normalize_corpus")

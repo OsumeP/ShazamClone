@@ -16,3 +16,4 @@ sounddevice==0.5.6
 
 # Pruebas
 pytest==9.2.0
+httpx==0.28.1               # requerido por fastapi.testclient
