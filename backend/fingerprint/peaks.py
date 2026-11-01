@@ -2,11 +2,14 @@
 
 Un punto (m, k) del espectrograma es un pico si
   1. es el máximo de su vecindario rectangular (frecuencia × tiempo), y
-  2. supera la mediana del espectrograma en al menos PEAK_MIN_PROMINENCE_DB.
+  2. supera en al menos PEAK_MIN_PROMINENCE_DB la mediana de su propia ventana
+     (columna m del espectrograma, dentro de la banda).
 
 La condición 2 es relativa a la propia señal, por lo que no depende de la
 ganancia de grabación: sumar una constante en dB a todo el espectrograma
-(subir o bajar el volumen) no cambia los picos detectados. El piso de ruido
+(subir o bajar el volumen) no cambia los picos detectados. Y es local en el
+tiempo, así que una canción completa y un fragmento suyo obtienen los mismos
+picos en las ventanas que comparten. El piso de ruido
 plano (alta entropía) queda por debajo del umbral y se descarta; sobreviven
 los pocos puntos de máxima energía (baja entropía).
 """
@@ -52,8 +55,11 @@ def find_peaks(
         S_db[e_lo:e_hi], size=neighborhood, mode="constant", cval=-np.inf
     )[k_lo - e_lo : k_hi - e_lo]
 
+    # Umbral por ventana: depende solo del contenido de esa ventana, que es el
+    # mismo en la canción completa y en cualquier fragmento que la contenga.
+    # (Una mediana global de la señal cambia según qué porción se analiza.)
     band = S_db[k_lo:k_hi]
-    threshold = np.median(band) + min_prominence_db
+    threshold = np.median(band, axis=0, keepdims=True) + min_prominence_db
     is_peak = (band == local_max) & (band >= threshold)
 
     k_idx, m_idx = np.nonzero(is_peak)
