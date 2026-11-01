@@ -14,11 +14,13 @@ from pathlib import Path
 
 from db.database import FingerprintDB
 from fingerprint import config
+from scripts import console
 from fingerprint.audio_io import load_audio
 from fingerprint.matcher import recognize
 
 
 def main() -> None:
+    console.setup()
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("path", type=Path)
     parser.add_argument("--start", type=float, default=0.0, help="inicio del fragmento (s)")

@@ -303,7 +303,87 @@ Clase `FingerprintDB` (context manager): `add_song`, `delete_song`,
 `song_by_sha1`, `get_song`, `list_songs`, `lookup` y `stats`. `lookup` carga los
 hashes únicos de la consulta en una tabla temporal y la cruza con
 `fingerprints` por su clave primaria: una búsqueda de rango en el B-tree por
-hash, sin el límite de parámetros de una cláusula `IN (...)`. Este último devuelve los
+hash, sin el límite de parámetros de una cláusula `IN (...)`.
+
+### `backend/db/ingest.py` — ingesta de un archivo
+
+`ingest_file(path, db, overrides)` concentra el Proceso 5.1 para un solo
+archivo: SHA-1 (si ya existe, devuelve la canción existente) → metadatos →
+normalización (guarda el WAV de referencia) → huella → inserción. Lo usan
+tanto la CLI `ingest_folder` como el endpoint `POST /api/ingest`, así que ambos
+caminos producen exactamente la misma huella.
+
+---
+
+## 2c. API REST — `backend/api/main.py` (Fase 6)
+
+API con FastAPI. Se ejecuta desde `backend/` con `uvicorn api.main:app --reload`;
+la documentación interactiva queda en `http://127.0.0.1:8000/docs`.
+
+| Método y ruta | Entrada | Respuesta |
+|---|---|---|
+| `GET /api/health` | — | `{status, songs, hashes}` |
+| `GET /api/songs` | — | Lista de canciones (`id, title, artist, album, duration_s, n_hashes`) |
+| `POST /api/recognize` | `multipart/form-data` con `file` (grabación de 1–30 s; se recomienda WAV PCM) | `recognized`, `song`, `score`, `confidence` (mejor / segundo), `offset_s`, `query_duration_s`, `n_query_hashes`, los 5 mejores `candidates` y `timings_ms` (`decode`, `fingerprint`, `lookup`, `scoring`, `total`, `server_total`) |
+| `POST /api/ingest` | `file` + opcionalmente `title`, `artist`, `album` | `song`, `already_existed`, `metadata_source` |
+
+Decisiones de diseño:
+
+- **Decodificación en memoria (`audio_io.load_audio_bytes`).** WAV, FLAC y OGG
+  se leen directamente desde los bytes. Cualquier otro formato, o un archivo con
+  extensión engañosa, pasa por FFmpeg mediante un archivo temporal. El resultado
+  siempre se normaliza a mono a 44.1 kHz, así que el navegador puede enviar
+  audio a 48 kHz y estéreo.
+- **Una conexión SQLite por petición** (dependencia `get_db`): `sqlite3` no
+  comparte conexiones entre hilos, y FastAPI ejecuta los endpoints síncronos en
+  un pool de hilos.
+- **Errores con mensaje claro:**
+  - 400: audio vacío o que no se puede decodificar.
+  - 413: archivo mayor a 20 MB (reconocer) o 200 MB (ingestar).
+  - 422: duración fuera de 1–30 s.
+  - 409: ya existe en `data/raw/` otro archivo distinto con el mismo nombre.
+  - 500: FFmpeg no instalado; además, al iniciar el servidor se registra un aviso
+    si no está en el PATH.
+- **Latencia en la respuesta (`timings_ms`).** El servidor reporta su parte, y
+  el cliente le suma el tiempo de subida para medir la latencia desde el fin de
+  la grabación (A3).
+- **CORS:** por defecto solo se permite el servidor de desarrollo de Vite
+  (`localhost:5173`). Se configura con `SHAZAM_CORS_ORIGINS`; la ruta de la BD,
+  con `SHAZAM_DB_PATH`.
+- **Ingesta por API:** guarda el archivo en `data/raw/` con su nombre original
+  (sin rutas, para evitar escrituras fuera de la carpeta). Si se envía `title`,
+  los metadatos del formulario tienen prioridad sobre el nombre de archivo.
+
+---
+
+## 2d. Frontend — `frontend/` (Fase 7)
+
+React 19 + TypeScript con Vite 8. Para desarrollo: `npm install` y luego
+`npm run dev` en `frontend/`, con el backend corriendo en el puerto 8000. Se
+abre http://localhost:5173. El servidor de Vite redirige `/api` al backend
+(`vite.config.ts`), así el navegador ve un solo origen.
+
+| Archivo | Función |
+|---|---|
+| `src/audio/recorder.ts` | **Captura del micrófono (RF4, A2).** Pide `getUserMedia` con `echoCancellation`, `noiseSuppression` y `autoGainControl` en `false`, y conecta el micrófono a un AudioWorklet que entrega **PCM crudo**. No usa `MediaRecorder`, que comprimiría con Opus/AAC, un códec con pérdidas. Graba exactamente N segundos, reporta el nivel en vivo y marca `endedAt` al terminar, que es el inicio de la latencia (A3). Devuelve también `getSettings()` de la pista, para mostrar qué procesamiento aplicó realmente el navegador. |
+| `public/recorder-worklet.js` | AudioWorklet que copia el canal 0 en bloques de 2048 muestras. Va en `public/` porque algunos navegadores no aceptan módulos de worklet incrustados como URL `data:`. |
+| `src/audio/wav.ts` | Codificación WAV PCM de 16 bits mono y nivel RMS en dBFS. Probado con Vitest (`wav.test.ts`: cabecera, cuantización con saturación, −3 dBFS de una senoide). |
+| `src/api.ts` | Tipos y llamadas a la API, con mensajes de error legibles (incluido "backend sin conexión"). |
+| `src/components/Recognizer.tsx` | Botón *Escuchar* con duración de 5, 7 o 10 s, progreso, medidor de nivel, espectrograma en vivo y la opción de reconocer un archivo. Calcula la **latencia desde el fin de la grabación** hasta la respuesta. Maneja la cancelación y el permiso de micrófono denegado. |
+| `src/components/LevelMeter.tsx` | Medidor en dBFS con la zona recomendada (−35 a −15 dBFS) y avisos. Responde a la lección de la Fase 6: un nivel bajo era la causa principal de fallo. |
+| `src/components/LiveSpectrogram.tsx` | Espectrograma desplazable de 0 a 5 kHz dibujado con un `AnalyserNode`: la STFT de RF2 vista en tiempo real. |
+| `src/components/ResultCard.tsx` | Canción, artista, posición dentro de la canción, hashes alineados frente al segundo candidato, latencia total y por etapa del servidor, diagnóstico de la grabación (nivel, frecuencia y procesamiento del navegador) y tabla de candidatos. |
+| `src/components/Library.tsx` | Biblioteca de canciones y formulario para agregar una (`POST /api/ingest`) con título y artista opcionales. |
+
+**Decisión — remuestreo en el servidor y no en el navegador.** El plan (7.3)
+proponía remuestrear a 44.1 kHz en el cliente. Se optó por enviar el WAV a la
+frecuencia nativa del `AudioContext` (normalmente 48 kHz, que cumple RNF1:
+≥ 44.1 kHz). El backend lo remuestrea con el mismo filtro polifásico
+anti-aliasing (`resample_poly`) que usa para las canciones de la BD, así la
+consulta y la BD pasan por una normalización idéntica. Además se evita un
+remuestreo en JavaScript de menor calidad, y crear un `AudioContext` a
+44.1 kHz falla en algunos navegadores cuando el micrófono trabaja a otra
+frecuencia. Este último devuelve los
 totales y el tamaño en disco, calculado como `page_size × page_count` después de
 un checkpoint del WAL.
 
@@ -321,6 +401,7 @@ Se ejecutan desde `backend/` con el venv activo: `python -m scripts.<nombre>`.
 | `fingerprint_stats` | Por canción: picos/s, hashes/s y tamaño de la huella vs. WAV normalizado (RNF2). |
 | `ingest_folder` | **Proceso 5.1 completo.** Por archivo: SHA-1 (omite los ya cargados) → metadatos → normalización (guarda el WAV de referencia) → huella → inserción. Al final reporta el tamaño de la huella lógica y del archivo SQLite frente al WAV. `--list` lista el contenido de la BD; `--folder` y `--db` cambian las rutas. |
 | `recognize_file` | Reconoce un fragmento (`--start`, `--duration`) de un archivo contra la BD. Muestra la canción, la posición estimada, los mejores candidatos y la latencia por etapa. |
+| `record_and_recognize` | **Proceso 5.2 completo con micrófono (RF4).** Cuenta regresiva, graba 5–10 s mono a 44.1 kHz (si el dispositivo no lo admite, graba a su frecuencia nativa y remuestrea), informa el nivel (dBFS) con avisos de saturación o señal débil, reconoce y muestra la latencia desde el fin de la grabación. `--exclusive` usa la versión WASAPI del micrófono en modo exclusivo, que salta el procesamiento de audio de Windows (A2), pero también su ganancia (ver resultados de la Fase 6); `--save` guarda la grabación; `--list-devices` lista los micrófonos. |
 | `plot_matches` | Coherencia temporal de un fragmento. Para la canción reconocida y la segunda candidata muestra el diagrama t_fragmento vs. t_canción, una ampliación alrededor del mejor Δ (con la recta de pendiente 1) y el histograma de Δ. |
 
 Las figuras se guardan en `docs/figures/`. `plot_style.py` configura
@@ -353,6 +434,7 @@ Se ejecutan con `python -m pytest` desde `backend/`.
 
 | `test_database.py` | Insertar y leer; hashes uint32 altos (≥ 2³¹) se conservan; SHA-1 duplicado rechazado sin dejar datos a medias; borrado en cascada; la búsqueda por hash usa la clave primaria; estadísticas; SHA-1 de archivo; separación `Artista - Título` en 6 casos reales; prioridad de `metadata.json`. |
 | `test_matcher.py` | Expansión de hashes repetidos en `find_matches`; pico del histograma con y sin tolerancia; regla de decisión (aceptar, ambiguo, insuficiente); reconocimiento de fragmentos no alineados con R, con error de posición ≤ 1 ventana y latencia < 3 s; rechazo de audio fuera de la BD; búsqueda vacía. |
+| `test_api.py` | Health y lista de canciones; reconocimiento de un WAV **estéreo a 48 kHz** (como el del navegador) con posición y tiempos; "no reconocida"; errores 400 (vacío o basura) y 422 (muy corto); 500 con mensaje si falta FFmpeg; ingesta → reconocimiento de la canción nueva; re-ingesta idempotente; metadatos del formulario; extensión inválida (400) y conflicto de nombre (409); WAV con extensión engañosa. Usa una BD y carpetas temporales. |
 
 Las pruebas usan señales sintéticas (tonos, acordes aleatorios) y bases de datos
 temporales, así que no dependen del corpus, que no se versiona.
@@ -439,6 +521,63 @@ Ver la sección 6 completa. En resumen, con la configuración final y ruido
 moderado (SNR ≥ 5 dB), el acierto es **≥ 98 % con 5 s y 100 % con 10 s** para
 los cuatro tipos de ruido (RNF4 exige > 80 %). No hubo falsos positivos en 1 000
 consultas negativas, y la latencia máxima fue de 456 ms.
+
+### Fase 6 — Captura por micrófono y API
+- 50 pruebas automáticas OK, 9 de ellas de la API.
+- **Prueba de punta a punta con el servidor real** (uvicorn y un cliente HTTP),
+  con fragmentos de 8 s de 10 canciones enviados como WAV a 48 kHz, igual que
+  los enviará el navegador: **10/10 reconocidas**, con una ida y vuelta HTTP
+  mediana de 631 ms y máxima de 747 ms (RNF3 < 3 s). Un MP3 a 64 kbit/s también
+  se reconoce (score 750).
+- Hallazgo: con un servidor iniciado sin FFmpeg en el PATH, un archivo inválido
+  producía un error 500 genérico (sin JSON). Ahora la API responde con un
+  mensaje claro y avisa al iniciar.
+- Posible optimización (no necesaria para RNF3): la búsqueda en SQLite domina la
+  latencia del servidor. Se probó `PRAGMA mmap_size` sin mejora apreciable.
+- **Prueba con micrófono real** (parlante del celular → aire → micrófono,
+  *Sunset Lover*, 10 s):
+
+  | Intento | Micrófono / modo | Nivel | Resultado |
+  |---|---|---|---|
+  | 1 | Externo, MME | −42.7 dBFS | No reconocida: Sunset Lover primera con score 8 (< 10) |
+  | 2 | Externo, WASAPI exclusivo | −58.6 dBFS | No reconocida (score 4) |
+  | 3 | Integrado del portátil, MME, más volumen en Windows | −49.8 dBFS | **Reconocida, score 23, 111 ms** |
+
+  Diagnóstico con `prueba.wav` (intento 2):
+  - **La música sí llegó.** La entropía espectral fue 0.52, como la de la música
+    (0.57) y lejos de la del ruido (≥ 0.82), y se ven las líneas melódicas.
+  - **El canal recorta mucho.** Respecto a la banda de 600–1200 Hz, los graves
+    (< 300 Hz) llegan 25–30 dB más débiles que en la canción: el parlante del
+    celular no los reproduce. Los agudos (> 2.5 kHz), donde están los golpes de
+    percusión, quedan bajo el ruido propio del micrófono por el nivel tan bajo.
+    La BD toma muchos de sus picos justamente de los graves y de esos golpes.
+  - **Simulación** de las causas sobre audio limpio (10 canciones, 10 s): filtro
+    de celular 300 Hz–4 kHz → 10/10, score mediano 506; reverberación de 0.5 s →
+    10/10, score 100; celular + reverberación + ruido a 10 dB → 10/10, score
+    mínimo 46. Por separado ninguna explica el fallo: **la causa decisiva fue el
+    nivel bajo**, que hace que el ruido del micrófono domine las bandas débiles.
+  - **Se descartó un desajuste de versión o velocidad**: remuestrear la grabación
+    entre ×0.90 y ×1.10 no aumentó la puntuación.
+  - **El modo WASAPI exclusivo** salta la supresión de ruido de Windows, pero
+    también su ganancia de software. En este equipo bajó el nivel ~16 dB, así que
+    no se recomienda aquí. Para usarlo, el script tuvo que buscar la versión
+    WASAPI del micrófono (el dispositivo por defecto es MME) y aceptar su formato
+    nativo de 48 kHz estéreo.
+  - **Lección para la Fase 8:** el canal real (parlante pequeño, reverberación,
+    ganancia del micrófono) es más exigente que el ruido aditivo de la Fase 5. Una
+    puntuación de 23 deja un margen modesto sobre el umbral; conviene evaluar más
+    canciones y, si hace falta, hacer la huella más resistente a canales de banda
+    limitada.
+
+### Fase 7 — Frontend
+- `npm run build` (comprobación de tipos con TypeScript y compilación con
+  Vite): OK, 233 kB de JavaScript (74 kB comprimido). `npm test`: 3 pruebas del
+  codificador WAV OK.
+- Con los servidores corriendo: la página, el worklet y el proxy `/api` (health,
+  songs) responden. Un WAV de 7 s a 48 kHz subido a través del proxy de Vite se
+  reconoce (*稲葉曇 - ラグトレイン*, score 165, 111 ms en el servidor).
+- La prueba con el micrófono en el navegador la hace el equipo (ver `PLAN.md`,
+  tarea 7.7).
 
 ---
 
