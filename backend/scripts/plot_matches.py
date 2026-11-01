@@ -13,9 +13,9 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import matplotlib
+from scripts import plot_style
 
-matplotlib.use("Agg")
+plot_style.setup()
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 

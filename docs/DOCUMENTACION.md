@@ -43,8 +43,8 @@ a la canción:
 |---|---|---|
 | WAV normalizado | 44 100 muestras de 16 bits | 88 200 B |
 | Espectrograma | 21.5 ventanas × 2 049 bins (float32) | ~176 000 B (se descarta) |
-| Mapa de constelación | ~14.2 picos `(m, k)` | — |
-| Huella | ~134 hashes × 10 B | **~1 340 B (1.52 %)** |
+| Mapa de constelación | ~24.8 picos `(m, k)` | — |
+| Huella | ~226 hashes × 10 B | **~2 260 B (2.56 %)** |
 
 ---
 
@@ -63,7 +63,7 @@ Reúne en un solo lugar los parámetros del sistema para que todos los módulos
 | | `HOP` (R) | 2 048 | ≈ 46 ms entre ventanas (50 % de solape) |
 | | `WINDOW` | Hann | Reduce la fuga espectral |
 | Constelación | `PEAK_FMIN_HZ`–`PEAK_FMAX_HZ` | 60 Hz – 5 kHz | Banda donde se buscan picos |
-| | `PEAK_NEIGHBORHOOD_*` | 21 × 21 | Vecindario del máximo local (~226 Hz × ~1 s) |
+| | `PEAK_NEIGHBORHOOD_*` | 15 × 15 | Vecindario del máximo local (~161 Hz × ~0.7 s); 21×21 hasta la Fase 5 |
 | | `PEAK_MIN_PROMINENCE_DB` | 10 dB | Altura mínima sobre la mediana de la propia ventana |
 | Hashing | `FAN_OUT` | 10 | Pares por punto ancla |
 | | `TARGET_DT_MIN/MAX` | 1 – 63 ventanas | Zona objetivo (hasta ~2.9 s) |
@@ -126,9 +126,11 @@ que las magnitudes, que son lo que usa el sistema, son idénticas.
 Reduce el espectrograma a un conjunto disperso de puntos (m, k) de máxima
 energía. Un punto es pico si cumple dos condiciones:
 
-1. **Es máximo local** en un vecindario rectangular de 21 bins × 21 ventanas
+1. **Es máximo local** en un vecindario rectangular de 15 bins × 15 ventanas
    (`scipy.ndimage.maximum_filter`). El tamaño del vecindario controla la
-   densidad: como mucho un pico por cada ~226 Hz × ~1 s.
+   densidad: como mucho un pico por cada ~161 Hz × ~0.7 s. Hasta la Fase 5 era
+   21×21; se redujo porque más picos por segundo dan más hashes que sobreviven
+   al ruido (ver §6.4).
 2. **Supera en al menos 10 dB la mediana de su propia ventana**, es decir, de la
    columna m del espectrograma dentro de la banda.
 
@@ -160,14 +162,17 @@ Decisiones de diseño:
 **Relación con la entropía (marco teórico §3.5):** el piso de ruido, con
 energía repartida de forma uniforme (alta entropía), queda casi todo por debajo
 del umbral. Sobreviven los pocos puntos donde se concentra la energía musical
-(baja entropía). Es una reducción de ~176 000 B/s del espectrograma a ~14 puntos
-por segundo.
+(baja entropía). Es una reducción de ~176 000 B/s del espectrograma a ~25 puntos
+por segundo. La Fase 5 (§6.2) muestra que esta hipótesis se cumple para el ruido
+blanco y el rosa, pero no para todo ruido.
 
 **Hallazgo:** en regiones que solo contienen ruido, la potencia de cada bin
-sigue una distribución exponencial. El máximo esperado de 21×21 = 441 de esas
-muestras supera a la mediana en ~9.7 dB, por lo que con un umbral de +10 dB
-algunos picos de ruido pasan el filtro. Esos picos producen hashes que no se
-alinean en el tiempo con ninguna canción; su efecto se evaluará en la Fase 5.
+sigue una distribución exponencial. El máximo esperado de N de esas muestras es
+≈ ln N veces la media, es decir, ≈ ln N / ln 2 veces la mediana: ~9.7 dB sobre
+la mediana para 21×21 = 441 muestras y ~8.9 dB para 15×15 = 225. Con un umbral
+de +10 dB algunos picos de ruido pasan el filtro. Esos picos producen hashes
+que no se alinean en el tiempo con ninguna canción: en la Fase 5 los negativos
+nunca superaron una puntuación de 7, frente al umbral de aceptación de 10.
 
 ### 2.5 `hashing.py` — hashing combinatorio (RF3, RNF2)
 
@@ -318,13 +323,21 @@ Se ejecutan desde `backend/` con el venv activo: `python -m scripts.<nombre>`.
 | `recognize_file` | Reconoce un fragmento (`--start`, `--duration`) de un archivo contra la BD. Muestra la canción, la posición estimada, los mejores candidatos y la latencia por etapa. |
 | `plot_matches` | Coherencia temporal de un fragmento. Para la canción reconocida y la segunda candidata muestra el diagrama t_fragmento vs. t_canción, una ampliación alrededor del mejor Δ (con la recta de pendiente 1) y el histograma de Δ. |
 
-Las figuras se guardan en `docs/figures/`.
+Las figuras se guardan en `docs/figures/`. `plot_style.py` configura
+matplotlib para todos los scripts de figuras: backend sin ventana y fuentes de
+respaldo (Yu Gothic, MS Gothic…) para que títulos como *東方 - Bad Apple* no
+salgan con recuadros vacíos.
 
 ### Evaluación — `evaluation/`
 
 | Script | Función |
 |---|---|
 | `eval_matching.py` | **Positivos:** N fragmentos por canción y duración, en posiciones aleatorias con resolución de una muestra. **Negativos:** arma una BD temporal sin 1 de cada 4 canciones y consulta fragmentos de esas canciones excluidas, donde lo correcto es rechazar. Reporta top-1, acierto con la regla de decisión, puntuaciones, error de posición, latencia y falsos positivos. El detalle queda en `evaluation/results/fase4_matching.csv`. Se ejecuta desde `backend/` con `python ../evaluation/eval_matching.py [--per-song 10] [--tolerance 1]`. |
+| `common.py` | Utilidades compartidas: cargar canciones y audio de la BD, recortar fragmentos aleatorios, separar canciones de la BD y canciones fuera, y armar una BD temporal con una función de huella cualquiera. |
+| `noise.py` | Generadores de ruido y mezcla a una SNR dada (ver §6.1). |
+| `eval_noise.py` | **Acierto vs. SNR (RNF4).** Diseño pareado: los mismos fragmentos limpios reciben cada tipo de ruido a cada SNR. Incluye negativos y un barrido del umbral `MATCH_MIN_SCORE`, que recalcula la decisión sin repetir consultas. Salidas: `results/fase5_ruido.csv` y `docs/figures/ruido_acierto_vs_snr.png`. |
+| `info_theory.py` | Entropía espectral (música vs. ruidos), supervivencia de picos y hashes vs. SNR, y capacidad de Shannon-Hartley. Salidas: `results/fase5_teoria.md`, `docs/figures/entropia_espectral.png` y `docs/figures/canal_ruidoso_vs_snr.png`. |
+| `tune_params.py` | Compara configuraciones de la huella (vecindario, umbral, fan-out) en condiciones de ruido difíciles. Mide acierto, falsos positivos, tamaño (RNF2) y latencia, con una BD temporal por configuración. |
 
 ---
 
@@ -360,6 +373,8 @@ temporales, así que no dependen del corpus, que no se versiona.
   del WAV. **Con el umbral por ventana adoptado en la Fase 4: 14.2 picos/s,
   134 hashes/s, huella = 1.52 %** (peor caso 1.74 %; límite de RNF2: 5 %). Unos
   0.8 s por canción.
+- **Configuración final (vecindario 15×15, Fase 5): 24.8 picos/s, 226 hashes/s,
+  huella = 2.56 % del WAV (peor caso 3.06 %).**
 - Exploración de robustez (con el umbral global original, como referencia
   histórica): fragmentos de 10 s de 10 canciones con ruido blanco a
   SNR = 5 dB, comparando sus hashes con los de la canción completa:
@@ -379,16 +394,16 @@ temporales, así que no dependen del corpus, que no se versiona.
 ### Fase 3 — Base de datos e ingesta
 - 20 canciones (80.8 min) cargadas en ~35 s. Las 20 tomaron sus metadatos del
   nombre de archivo.
-- Tamaños frente al WAV normalizado (427.5 MB), con la BD regenerada tras el
-  cambio de umbral de la Fase 4 (649 001 hashes):
+- Tamaños frente al WAV normalizado (427.5 MB) según la configuración de cada
+  momento:
 
-  | Medida | Tamaño | % del WAV |
-  |---|---|---|
-  | Huella lógica (10 B/hash) | 6.49 MB | **1.52 %** |
-  | Archivo SQLite en disco (con estructura del B-tree) | 9.95 MB | **2.33 %** |
+  | Configuración | Hashes | Huella lógica (10 B/hash) | Archivo SQLite en disco |
+  |---|---|---|---|
+  | Fase 3: 21×21, umbral global | 737 321 | 7.37 MB = 1.72 % | 11.35 MB = 2.65 % |
+  | Fase 4: 21×21, umbral por ventana | 649 001 | 6.49 MB = 1.52 % | 9.95 MB = 2.33 % |
+  | **Final (Fase 5): 15×15, umbral por ventana** | **1 094 427** | **10.94 MB = 2.56 %** | **16.80 MB = 3.93 %** |
 
-  RNF2 (≤ 5 %) se cumple incluso contando el archivo completo de la BD. Con el
-  umbral global original eran 737 321 hashes, 1.72 % y 2.65 %.
+  RNF2 (≤ 5 %) se cumple en todas, incluso contando el archivo completo de la BD.
 - Repetir la ingesta no agrega nada (20 omitidas en 0.1 s).
 
 ### Fase 4 — Matching y coherencia temporal (audio limpio)
@@ -396,22 +411,207 @@ Evaluación final (`eval_matching.py --per-song 10`): 20 canciones × 10
 fragmentos × 2 duraciones, en posiciones aleatorias no alineadas con R, más 100
 consultas de canciones fuera de la BD.
 
-| Duración | Consultas | Top-1 correcto | Acierto (regla de decisión) | Score mín. | Score mediano | Latencia mediana | Latencia máx. |
-|---|---|---|---|---|---|---|---|
-| 5 s | 200 | 100 % | **100 %** | 26 | 186 | 143 ms | 193 ms |
-| 10 s | 200 | 100 % | **100 %** | 57 | 378 | 170 ms | 235 ms |
+| Config. | Duración | Consultas | Top-1 correcto | Acierto (regla de decisión) | Score mín. | Score mediano | Latencia mediana | Latencia máx. |
+|---|---|---|---|---|---|---|---|---|
+| 21×21 (Fase 4) | 5 s | 200 | 100 % | **100 %** | 26 | 186 | 143 ms | 193 ms |
+| 21×21 (Fase 4) | 10 s | 200 | 100 % | **100 %** | 57 | 378 | 170 ms | 235 ms |
+| **15×15 (final)** | 5 s | 200 | 100 % | **100 %** | 50 | 342 | 244 ms | 342 ms |
+| **15×15 (final)** | 10 s | 200 | 100 % | **100 %** | 145 | 612 | 279 ms | 373 ms |
 
-- **Negativos:** 100 consultas, **0 % de falsos positivos**. Score máximo de 5
-  (7 en una corrida previa con otra semilla), contra un umbral de 10.
-- **RNF3:** latencia máxima de 235 ms, muy por debajo de 3 s. Se reparte entre
-  ~20 ms de huella, ~70–150 ms de búsqueda en SQLite y ~2 ms de puntuación.
+- **Negativos:** 100 consultas, **0 % de falsos positivos**, con un score máximo
+  de 7 frente a un umbral de 10.
+- **RNF3:** latencia máxima de 373 ms, muy por debajo de 3 s. La mayor parte se va
+  en la búsqueda en SQLite; la huella toma ~20 ms y la puntuación unos pocos ms.
 - **Antes y después del umbral por ventana** (5 fragmentos por canción): top-1
   de 5 s pasó de 99 % a 100 % y el score mínimo de 1 a 13. El fallo restante
   con umbral global era *Bad Apple* desde 3 s (8 alineados). Otro fallo,
   *Geoxor* a 310 s, era el final que se desvanece a −70 dBFS, 60 dB por debajo
   de la canción.
-- Figura `docs/figures/matching_Linkin Park - Crawling.png`: en la ampliación,
-  las coincidencias alineadas forman la recta t_canción = t_fragmento + 73.4 s y
-  el histograma tiene un pico de 648. La segunda candidata tiene 61
-  coincidencias dispersas con un pico de 3. Se ve además un pico secundario en el
-  estribillo repetido (~128 s).
+- Figura `docs/figures/matching_Linkin Park - Crawling.png` (configuración
+  final): en la ampliación, las coincidencias alineadas forman la recta
+  t_canción = t_fragmento + 73.4 s y el histograma tiene un pico de **1016**. La
+  segunda candidata (*Bad Apple*) tiene 128 coincidencias dispersas con un pico
+  de **4**. Se ve además un pico secundario de ~105 en el estribillo repetido
+  (~128 s). Con la configuración 21×21 los picos eran 648 y 3.
+
+### Fase 5 — Robustez ante ruido
+Ver la sección 6 completa. En resumen, con la configuración final y ruido
+moderado (SNR ≥ 5 dB), el acierto es **≥ 98 % con 5 s y 100 % con 10 s** para
+los cuatro tipos de ruido (RNF4 exige > 80 %). No hubo falsos positivos en 1 000
+consultas negativas, y la latencia máxima fue de 456 ms.
+
+---
+
+## 6. Robustez ante ruido y Teoría de la Información (Fase 5)
+
+### 6.1 Modelo del canal ruidoso
+
+Se simula el canal *Fuente → Aire con ruido → Micrófono* sumando ruido al
+fragmento limpio a una SNR dada:
+SNR = 10·log₁₀(P_música / P_ruido), con potencias medias sobre todo el fragmento
+y toda la banda (0–22.05 kHz). Si la mezcla satura, se reduce la ganancia total,
+lo que no altera la SNR ni los picos.
+
+| Ruido | Modelo | Representa |
+|---|---|---|
+| `white` | Densidad espectral plana | Ruido térmico y electrónico |
+| `pink` | Potencia ∝ 1/f (igual energía por octava) | Ruido ambiental genérico |
+| `brown` | Potencia ∝ 1/f² | Retumbe grave: tráfico, aire acondicionado |
+| `babble` | 6 voces simuladas: serie armónica con f0 = 100–250 Hz variable, más ruido en banda vocal (300–3400 Hz), moduladas por una envolvente silábica (~4 Hz) | Murmullo de gente (café, multitud) |
+
+Una misma SNR global no daña igual a todos los ruidos. Lo que importa es cuánta
+potencia de ruido cae en la banda de análisis (60 Hz–5 kHz):
+
+| SNR global | Blanco (en banda) | Rosa (en banda) | Marrón (en banda) | Murmullo (en banda) |
+|---|---|---|---|---|
+| 5 dB | 10.4 dB | 6.4 dB | 11.7 dB | **3.9 dB** |
+| 0 dB | 5.4 dB | 1.4 dB | 6.7 dB | **−1.1 dB** |
+
+El ruido blanco reparte su potencia hasta 22 kHz, así que casi tres cuartas
+partes caen fuera de la banda. El marrón concentra su potencia en los primeros
+bins, por debajo de los 60 Hz. El murmullo pone toda su potencia justo en la
+banda de la música.
+
+### 6.2 Entropía espectral: música vs. ruido
+
+Entropía de Shannon de cada ventana, normalizada a [0, 1]:
+p_k = S(m,k)/Σ S(m,k), H = −Σ p_k log₂ p_k / log₂ K, en la banda de análisis
+(`docs/figures/entropia_espectral.png`):
+
+| Señal | Mediana | P10–P90 |
+|---|---|---|
+| Música (20 canciones) | **0.566** | 0.371–0.714 |
+| Ruido blanco | 0.931 | 0.925–0.937 |
+| Ruido rosa | 0.822 | 0.779–0.855 |
+| Ruido marrón | 0.544 | 0.466–0.613 |
+| Murmullo | 0.630 | 0.561–0.676 |
+
+**Interpretación.** La hipótesis del marco teórico (§3.5: música de baja
+entropía, ruido de alta entropía) se cumple para el ruido blanco y el rosa, pero
+**no** para el marrón ni el murmullo:
+- El ruido marrón tiene una entropía *menor* que la música porque concentra su
+  energía en pocos bins graves. Aun así es el menos dañino: esos bins están en el
+  borde de la banda y no tapan los picos del resto del espectro.
+- El murmullo tiene una entropía parecida a la de la música porque, como ella,
+  está hecho de armónicos. **Es el ruido más dañino**, no por ser aleatorio sino
+  porque *se parece a la música*: produce picos espectrales que compiten por los
+  máximos locales y desplazan a los picos de la canción.
+
+La conclusión, más precisa que la hipótesis inicial: el filtrado por picos es
+robusto frente a ruido de **energía dispersa** (alta entropía), que queda por
+debajo del umbral. Es más vulnerable frente a interferencias **estructuradas**
+(baja entropía) que caen en la misma banda que la música.
+
+### 6.3 Supervivencia de picos y hashes
+
+Fracción de los picos y hashes del fragmento limpio que siguen presentes, en la
+misma posición, tras sumar el ruido (10 fragmentos de 10 s;
+`docs/figures/canal_ruidoso_vs_snr.png`). Configuración final:
+
+| SNR | Blanco: picos / hashes | Rosa: picos / hashes | Marrón: picos / hashes | Murmullo: picos / hashes |
+|---|---|---|---|---|
+| 20 dB | 89 % / 77 % | 87 % / 74 % | 96 % / 92 % | 87 % / 72 % |
+| 10 dB | 72 % / 50 % | 66 % / 43 % | 89 % / 76 % | 67 % / 43 % |
+| 5 dB | 60 % / 36 % | 50 % / 25 % | 82 % / 65 % | 46 % / 22 % |
+| 0 dB | 42 % / 18 % | 31 % / 10 % | 70 % / 49 % | 26 % / 8 % |
+| −5 dB | 25 % / 7 % | 15 % / 3 % | 56 % / 32 % | 10 % / 1 % |
+
+- **Supervivencia de hashes ≈ (supervivencia de picos)².** Por ejemplo, con ruido
+  blanco a 5 dB: 0.60² = 0.36. Un hash sobrevive solo si sobreviven sus dos
+  picos, así que el hashing combinatorio gana especificidad a costa de robustez
+  (Wang 2003 §2.2).
+- Aun con solo un 10 % de hashes vivos el sistema reconoce: un fragmento de 5 s
+  tiene ~1 100 hashes, así que el 10 % da ~110 coincidencias alineadas, muy por
+  encima del umbral de 10 y del ruido de fondo de los negativos (≤ 7).
+
+### 6.4 Ajuste de parámetros (`tune_params.py`)
+
+Fragmentos de 5 s en condiciones difíciles; BD temporal con 15 canciones; 240
+positivos y 80 negativos por configuración:
+
+| Configuración | Hashes/s | % WAV | Murmullo 0 dB | Murmullo −5 dB | Rosa −5 dB | Blanco −5 dB | FP |
+|---|---|---|---|---|---|---|---|
+| 21×21, +10 dB, fan-out 10 (anterior) | 133 | 1.51 | 76.7 % | 20.0 % | 61.7 % | 93.3 % | 0 |
+| Umbral +15 dB | 101 | 1.15 | 68.3 % | 18.3 % | 36.7 % | 58.3 % | 0 |
+| Umbral +6 dB | 156 | 1.77 | 78.3 % | 28.3 % | 61.7 % | 83.3 % | 0 |
+| Fan-out 5 | 63 | 0.71 | 53.3 % | 5.0 % | 40.0 % | 58.3 % | 0 |
+| Fan-out 15 | 204 | 2.31 | 86.7 % | 30.0 % | 70.0 % | 96.7 % | 0 |
+| Vecindario 21×11 | 229 | 2.60 | 88.3 % | 41.7 % | 76.7 % | 95.0 % | 0 |
+| **Vecindario 15×15 (elegida)** | **227** | **2.57** | **90.0 %** | 38.3 % | 75.0 % | 95.0 % | 0 |
+| 15×15, fan-out 15 | 351 | 3.98 | 91.7 % | 48.3 % | 80.0 % | 98.3 % | 0 |
+| 15×15, umbral +6 dB | 275 | 3.11 | 90.0 % | 50.0 % | 73.3 % | 91.7 % | 0 |
+
+- **Subir el umbral empeora todo.** Se pierden picos verdaderos, no solo picos de
+  ruido.
+- **Más densidad mejora la robustez.** Aumentar el número de picos (vecindario
+  más pequeño) rinde más que aumentar el fan-out con la misma huella: 15×15 da
+  90 % con 227 hashes/s, contra 86.7 % del fan-out 15 con 204 hashes/s.
+- Se eligió **15×15 con fan-out 10**. Las variantes más densas solo ganan en
+  −5 dB, fuera del rango de RNF4, y la de fan-out 15 llevaría la huella cerca
+  del límite (3.98 % lógico, ~6 % en disco).
+- Ningún cambio produjo falsos positivos.
+
+### 6.5 Tasa de acierto vs. SNR (RNF4)
+
+`eval_noise.py` con la configuración final: 20 canciones × 5 fragmentos × 4
+ruidos × 5 SNR × 2 duraciones = 4 000 consultas positivas y 1 000 negativas
+(`docs/figures/ruido_acierto_vs_snr.png`).
+
+**Fragmentos de 5 s** (acierto con la regla de decisión):
+
+| Ruido | 20 dB | 10 dB | **5 dB** | 0 dB | −5 dB |
+|---|---|---|---|---|---|
+| Blanco | 100 % | 100 % | **100 %** | 100 % | 94 % |
+| Rosa | 100 % | 100 % | **99 %** | 96 % | 76 % |
+| Marrón | 100 % | 100 % | **100 %** | 100 % | 99 % |
+| Murmullo | 100 % | 99 % | **98 %** | 82 % | 29 % |
+
+**Fragmentos de 10 s:**
+
+| Ruido | 20 dB | 10 dB | **5 dB** | 0 dB | −5 dB |
+|---|---|---|---|---|---|
+| Blanco | 100 % | 100 % | **100 %** | 100 % | 100 % |
+| Rosa | 100 % | 100 % | **100 %** | 100 % | 88 % |
+| Marrón | 100 % | 100 % | **100 %** | 100 % | 100 % |
+| Murmullo | 100 % | 100 % | **100 %** | 97 % | 62 % |
+
+- **RNF4 se cumple:** en ruido moderado (SNR ≥ 5 dB) el peor caso es 98 %
+  (murmullo, 5 s). El sistema incluso supera el 80 % hasta 0 dB con todos los
+  ruidos.
+- Comparado con la configuración anterior (21×21), el murmullo a 0 dB subió de
+  74 % a 82 % (5 s) y de 91 % a 97 % (10 s), y el rosa a −5 dB de 59 % a 76 %
+  (5 s).
+- 10 s siempre es mejor que 5 s: el doble de hashes da el doble de coincidencias
+  alineadas para separarse del ruido de fondo.
+- **Falsos positivos: 0 de 1 000.** Score de los negativos: mediana 4, máximo 7.
+  El barrido del umbral muestra que con 8 todavía hay 0 falsos positivos y con 6
+  aparecen 15. Se mantiene `MATCH_MIN_SCORE = 10` como margen de seguridad, con
+  un costo de solo 0.1 puntos de acierto en SNR ≥ 5 dB.
+- **Latencia (RNF3):** mediana de 234 ms y máximo de 456 ms en 4 998 consultas.
+  Se excluyeron dos consultas que midieron 1 343 s y 1 673 s porque la
+  computadora entró en suspensión (Modern Standby) durante la corrida; el
+  registro de eventos de Windows lo confirma.
+
+### 6.6 Capacidad del canal (Shannon-Hartley)
+
+C = B·log₂(1 + SNR), con B = 4 940 Hz (banda de análisis) y la SNR medida en
+esa banda:
+
+| SNR global | C banda completa (22 050 Hz) | C banda de análisis, ruido rosa | Bits disponibles en 5 s (rosa) |
+|---|---|---|---|
+| 20 dB | 146.8 kbit/s | 35.2 kbit/s | 176 039 |
+| 5 dB | 45.4 kbit/s | 12.0 kbit/s | 59 969 |
+| 0 dB | 22.1 kbit/s | 6.2 kbit/s | 31 026 |
+| −5 dB | 8.7 kbit/s | 2.6 kbit/s | 12 972 |
+
+- **Información necesaria para identificar** un par (canción, posición) entre las
+  104 364 ventanas de la BD: log₂(104 364) ≈ **16.7 bits**.
+- Incluso a −5 dB el canal transporta ~13 000 bits en 5 s, unas 780 veces lo
+  necesario. **El límite práctico no es la capacidad del canal**, sino la
+  capacidad del algoritmo para extraer de forma consistente la parte de la señal
+  que identifica a la canción. La enorme redundancia explica por qué basta con
+  que sobreviva el 1–10 % de los hashes.
+- **Compresión:** la huella de la consulta ocupa ~226 hashes/s × 32 bits ≈
+  7.2 kbit/s, contra 705.6 kbit/s del PCM de 16 bits (≈ 1 %). Guarda la
+  información identificadora y descarta el resto (timbre, fase, detalle
+  espectral).

@@ -16,28 +16,15 @@ from __future__ import annotations
 
 import argparse
 import csv
-import sys
 import tempfile
 from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
-
-from db.database import FingerprintDB  # noqa: E402
-from fingerprint import config  # noqa: E402
-from fingerprint.audio_io import load_audio  # noqa: E402
-from fingerprint.hashing import fingerprint_signal  # noqa: E402
-from fingerprint.matcher import is_confident, recognize  # noqa: E402
-
-RESULTS_DIR = Path(__file__).resolve().parent / "results"
-FS = config.SAMPLE_RATE
-
-
-def random_clips(x: np.ndarray, duration: float, n: int, rng) -> list[tuple[int, np.ndarray]]:
-    length = int(duration * FS)
-    starts = rng.integers(0, len(x) - length, size=n)
-    return [(int(s), x[s : s + length]) for s in starts]
+from common import FS, RESULTS_DIR, build_db, load_library, random_clips, split_holdout
+from db.database import FingerprintDB
+from fingerprint import config
+from fingerprint.matcher import recognize
 
 
 def run_queries(db, songs, audio, durations, per_song, tolerance, rng, positive):
@@ -104,23 +91,18 @@ def main() -> None:
     rng = np.random.default_rng(args.seed)
 
     with FingerprintDB(config.DB_PATH) as db:
-        songs = [dict(r) for r in db.list_songs()]
-        audio = {s["file_name"]: load_audio(config.NORMALIZED_DIR / (Path(s["file_name"]).stem + ".wav")) for s in songs}
+        songs, audio = load_library(db)
         print(f"BD principal: {len(songs)} canciones. Consultas positivas…")
         rows = run_queries(db, songs, audio, args.durations, args.per_song, args.tolerance, rng, positive=True)
 
-    held_out = songs[:: args.holdout_every]
-    kept = [s for s in songs if s not in held_out]
-    with tempfile.TemporaryDirectory() as tmp, FingerprintDB(Path(tmp) / "neg.db") as neg_db:
-        print(f"BD de negativos: {len(kept)} canciones; {len(held_out)} fuera. Consultas negativas…")
-        for s in kept:
-            _, h, o = fingerprint_signal(audio[s["file_name"]])
-            new_id = neg_db.add_song(
-                title=s["title"], artist=s["artist"], album=s["album"], duration_s=s["duration_s"],
-                file_name=s["file_name"], file_sha1=s["file_sha1"], wav_bytes=s["wav_bytes"], hashes=h, offsets=o,
-            )
-            assert new_id
-        rows += run_queries(neg_db, held_out, audio, args.durations, args.per_song, args.tolerance, rng, positive=False)
+    kept, held_out = split_holdout(songs, args.holdout_every)
+    with tempfile.TemporaryDirectory() as tmp:
+        neg_db = build_db(Path(tmp) / "neg.db", kept, audio)
+        try:
+            print(f"BD de negativos: {len(kept)} canciones; {len(held_out)} fuera. Consultas negativas…")
+            rows += run_queries(neg_db, held_out, audio, args.durations, args.per_song, args.tolerance, rng, positive=False)
+        finally:
+            neg_db.close()
 
     summarize(rows, args.durations)
     print(f"\nRegla de decisión: score ≥ {config.MATCH_MIN_SCORE} y score ≥ {config.MATCH_MIN_RATIO} × segundo")

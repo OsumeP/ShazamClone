@@ -1,501 +1,501 @@
 tipo,cancion,duracion_s,inicio_real_s,top1_correcto,reconocida,correcta,score,score_2,error_inicio_s,hashes_consulta,latencia_ms
-positivo,Adrian Barba - El poder nuestro es,5.0,195.665,True,True,True,157,2,0.013,685,65.8
-positivo,Adrian Barba - El poder nuestro es,5.0,146.517,True,True,True,765,3,0.001,872,66.5
-positivo,Adrian Barba - El poder nuestro es,5.0,117.574,True,True,True,172,2,0.012,719,62.5
-positivo,Adrian Barba - El poder nuestro es,5.0,62.058,True,True,True,88,2,0.014,718,62.9
-positivo,Adrian Barba - El poder nuestro es,5.0,70.808,True,True,True,140,3,0.034,672,62.4
-positivo,Adrian Barba - El poder nuestro es,5.0,9.425,True,True,True,362,3,0.002,554,62.8
-positivo,Adrian Barba - El poder nuestro es,5.0,17.307,True,True,True,81,3,0.031,747,62.6
-positivo,Adrian Barba - El poder nuestro es,5.0,3.802,True,True,True,390,3,0.006,689,69.6
-positivo,Adrian Barba - El poder nuestro es,5.0,40.316,True,True,True,281,3,0.006,598,61.1
-positivo,Adrian Barba - El poder nuestro es,5.0,187.072,True,True,True,125,2,0.012,701,79.4
-positivo,Adrian Barba - El poder nuestro es,10.0,146.135,True,True,True,366,3,0.035,1780,77.8
-positivo,Adrian Barba - El poder nuestro es,10.0,205.393,True,True,True,310,3,0.035,1576,161.1
-positivo,Adrian Barba - El poder nuestro es,10.0,113.329,True,True,True,127,3,0.015,1537,175.1
-positivo,Adrian Barba - El poder nuestro es,10.0,136.508,True,True,True,150,4,0.021,1530,184.8
-positivo,Adrian Barba - El poder nuestro es,10.0,218.441,True,True,True,358,5,0.034,1537,208.1
-positivo,Adrian Barba - El poder nuestro es,10.0,164.155,True,True,True,489,3,0.036,1784,188.7
-positivo,Adrian Barba - El poder nuestro es,10.0,142.277,True,True,True,237,3,0.031,1636,198.5
-positivo,Adrian Barba - El poder nuestro es,10.0,122.329,True,True,True,510,5,0.006,1417,201.9
-positivo,Adrian Barba - El poder nuestro es,10.0,125.995,True,True,True,765,5,0.004,1556,235.1
-positivo,Adrian Barba - El poder nuestro es,10.0,210.414,True,True,True,944,3,0.005,1557,188.5
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,66.383,True,True,True,36,3,0.02,747,146.1
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,195.275,True,True,True,512,3,0.005,894,119.8
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,160.575,True,True,True,42,3,0.032,735,148.3
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,0.655,True,True,True,155,3,0.005,400,118.7
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,94.34,True,True,True,68,2,0.02,768,149.0
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,205.22,True,True,True,440,3,0.002,676,146.0
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,132.676,True,True,True,400,3,0.043,702,140.7
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,8.039,True,True,True,313,3,0.005,668,156.6
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,183.077,True,True,True,299,3,0.011,777,192.9
-positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,174.643,True,True,True,101,3,0.029,772,177.1
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,198.395,True,True,True,815,3,0.004,1460,182.7
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,41.165,True,True,True,96,3,0.019,1548,177.3
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,20.924,True,True,True,101,5,0.026,1607,164.3
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,5.18,True,True,True,175,3,0.025,1451,177.2
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,126.892,True,True,True,223,4,0.018,1473,167.0
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,18.842,True,True,True,228,5,0.034,1600,159.8
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,70.238,True,True,True,185,3,0.02,1596,160.8
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,112.737,True,True,True,93,4,0.027,1405,164.0
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,99.057,True,True,True,1072,4,0.001,1276,178.2
-positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,94.499,True,True,True,434,5,0.04,1344,168.1
-positivo,Bôa - Duvet,5.0,5.627,True,True,True,341,3,0.008,627,158.5
-positivo,Bôa - Duvet,5.0,1.064,True,True,True,486,2,0.005,761,147.4
-positivo,Bôa - Duvet,5.0,24.696,True,True,True,185,3,0.036,778,149.7
-positivo,Bôa - Duvet,5.0,1.646,True,True,True,96,2,0.021,739,143.2
-positivo,Bôa - Duvet,5.0,133.256,True,True,True,103,3,0.02,786,155.0
-positivo,Bôa - Duvet,5.0,104.442,True,True,True,465,3,0.001,645,147.5
-positivo,Bôa - Duvet,5.0,128.599,True,True,True,263,3,0.007,598,149.4
-positivo,Bôa - Duvet,5.0,51.126,True,True,True,378,2,0.004,638,191.5
-positivo,Bôa - Duvet,5.0,122.279,True,True,True,461,3,0.003,649,145.3
-positivo,Bôa - Duvet,5.0,151.821,True,True,True,196,2,0.009,728,151.6
-positivo,Bôa - Duvet,10.0,74.32,True,True,True,300,3,0.016,1525,163.3
-positivo,Bôa - Duvet,10.0,89.282,True,True,True,184,3,0.025,1332,183.5
-positivo,Bôa - Duvet,10.0,193.163,True,True,True,115,4,0.02,891,161.4
-positivo,Bôa - Duvet,10.0,155.93,True,True,True,227,3,0.031,1399,177.6
-positivo,Bôa - Duvet,10.0,189.992,True,True,True,496,3,0.052,1280,163.5
-positivo,Bôa - Duvet,10.0,73.515,True,True,True,1311,3,0.001,1504,207.0
-positivo,Bôa - Duvet,10.0,132.792,True,True,True,177,3,0.02,1510,171.8
-positivo,Bôa - Duvet,10.0,184.038,True,True,True,977,3,0.043,1511,167.9
-positivo,Bôa - Duvet,10.0,125.997,True,True,True,700,5,0.005,1256,162.7
-positivo,Bôa - Duvet,10.0,162.772,True,True,True,1122,3,0.0,1233,164.9
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,217.775,True,True,True,72,4,0.018,670,144.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,222.695,True,True,True,160,3,0.016,728,150.2
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,123.027,True,True,True,253,4,0.007,534,141.0
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,276.836,True,True,True,163,4,0.008,511,142.5
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,42.735,True,True,True,130,3,0.01,505,140.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,183.123,True,True,True,85,3,0.011,592,143.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,228.227,True,True,True,215,3,211.694,847,153.1
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,267.449,True,True,True,318,3,0.002,432,144.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,166.184,True,True,True,61,3,0.022,657,159.1
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,118.755,True,True,True,274,4,0.008,644,143.1
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,96.587,True,True,True,499,3,0.038,1493,174.0
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,131.679,True,True,True,263,5,143.617,1132,175.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,151.254,True,True,True,1159,4,0.001,1253,165.6
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,223.789,True,True,True,905,4,0.042,1525,176.8
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,276.922,True,True,True,795,3,0.001,1050,170.7
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,22.71,True,True,True,1278,5,0.001,1536,181.1
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,290.794,True,True,True,292,4,0.034,1159,171.1
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,165.422,True,True,True,807,3,0.003,1268,179.4
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,111.392,True,True,True,200,3,0.029,1282,179.3
-positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,209.443,True,True,True,1068,3,0.001,1244,170.5
-positivo,FLOW - HERO -Kibou no uta-,5.0,120.562,True,True,True,318,5,0.004,631,141.4
-positivo,FLOW - HERO -Kibou no uta-,5.0,53.708,True,True,True,40,3,0.023,651,138.6
-positivo,FLOW - HERO -Kibou no uta-,5.0,67.897,True,True,True,595,3,0.002,739,148.6
-positivo,FLOW - HERO -Kibou no uta-,5.0,151.778,True,True,True,68,3,0.012,620,145.2
-positivo,FLOW - HERO -Kibou no uta-,5.0,125.365,True,True,True,41,3,0.024,761,172.1
-positivo,FLOW - HERO -Kibou no uta-,5.0,106.405,True,True,True,198,3,0.011,795,157.8
-positivo,FLOW - HERO -Kibou no uta-,5.0,71.281,True,True,True,366,3,0.004,739,144.3
-positivo,FLOW - HERO -Kibou no uta-,5.0,160.458,True,True,True,305,3,0.008,746,168.2
-positivo,FLOW - HERO -Kibou no uta-,5.0,82.61,True,True,True,207,3,0.006,715,132.3
-positivo,FLOW - HERO -Kibou no uta-,5.0,69.227,True,True,True,123,3,0.032,749,151.1
-positivo,FLOW - HERO -Kibou no uta-,10.0,183.348,True,True,True,801,3,0.003,1355,170.9
-positivo,FLOW - HERO -Kibou no uta-,10.0,54.355,True,True,True,177,3,0.02,1415,169.5
-positivo,FLOW - HERO -Kibou no uta-,10.0,46.782,True,True,True,110,3,0.017,1425,169.1
-positivo,FLOW - HERO -Kibou no uta-,10.0,147.081,True,True,True,598,4,0.005,1354,168.2
-positivo,FLOW - HERO -Kibou no uta-,10.0,128.343,True,True,True,250,3,0.029,1529,162.1
-positivo,FLOW - HERO -Kibou no uta-,10.0,9.998,True,True,True,235,3,0.013,1429,166.5
-positivo,FLOW - HERO -Kibou no uta-,10.0,17.303,True,True,True,149,3,0.027,1405,188.1
-positivo,FLOW - HERO -Kibou no uta-,10.0,77.67,True,True,True,106,3,0.023,1370,175.8
-positivo,FLOW - HERO -Kibou no uta-,10.0,171.479,True,True,True,98,3,0.023,1368,157.4
-positivo,FLOW - HERO -Kibou no uta-,10.0,82.553,True,True,True,120,3,0.029,1463,150.5
-positivo,Geoxor - Virtual,5.0,244.751,True,True,True,53,3,0.013,408,112.3
-positivo,Geoxor - Virtual,5.0,98.406,True,True,True,496,3,0.0,555,130.6
-positivo,Geoxor - Virtual,5.0,74.433,True,True,True,167,3,0.036,526,137.1
-positivo,Geoxor - Virtual,5.0,246.179,True,True,True,313,2,0.001,429,132.9
-positivo,Geoxor - Virtual,5.0,272.546,True,True,True,195,4,0.037,619,141.4
-positivo,Geoxor - Virtual,5.0,24.659,True,True,True,320,2,0.001,397,120.2
-positivo,Geoxor - Virtual,5.0,18.212,True,True,True,148,2,0.008,496,151.8
-positivo,Geoxor - Virtual,5.0,208.732,True,True,True,84,3,0.031,608,140.6
-positivo,Geoxor - Virtual,5.0,104.517,True,True,True,39,3,0.027,370,112.1
-positivo,Geoxor - Virtual,5.0,178.378,True,True,True,372,3,0.003,534,157.4
-positivo,Geoxor - Virtual,10.0,45.979,True,True,True,617,3,0.003,998,178.6
-positivo,Geoxor - Virtual,10.0,263.133,True,True,True,565,3,0.004,1074,167.7
-positivo,Geoxor - Virtual,10.0,137.783,True,True,True,699,3,0.004,1015,165.1
-positivo,Geoxor - Virtual,10.0,273.827,True,True,True,159,3,0.017,1153,170.3
-positivo,Geoxor - Virtual,10.0,243.639,True,True,True,137,3,0.015,835,157.4
-positivo,Geoxor - Virtual,10.0,215.802,True,True,True,760,5,0.043,1221,181.2
-positivo,Geoxor - Virtual,10.0,70.566,True,True,True,199,3,0.024,1046,164.2
-positivo,Geoxor - Virtual,10.0,234.67,True,True,True,303,3,0.009,862,161.1
-positivo,Geoxor - Virtual,10.0,15.916,True,True,True,234,2,0.034,911,159.1
-positivo,Geoxor - Virtual,10.0,174.423,True,True,True,546,4,0.041,1097,168.5
-positivo,HOME - Resonance,5.0,84.145,True,True,True,314,3,0.004,549,139.3
-positivo,HOME - Resonance,5.0,207.299,True,True,True,35,1,0.009,325,133.9
-positivo,HOME - Resonance,5.0,41.29,True,True,True,336,3,0.005,524,142.6
-positivo,HOME - Resonance,5.0,196.874,True,True,True,221,3,11.3,871,157.0
-positivo,HOME - Resonance,5.0,18.876,True,True,True,54,3,0.022,589,147.7
-positivo,HOME - Resonance,5.0,129.618,True,True,True,423,3,0.004,800,141.0
-positivo,HOME - Resonance,5.0,120.707,True,True,True,299,4,0.01,826,149.7
-positivo,HOME - Resonance,5.0,186.978,True,True,True,298,4,11.295,850,148.1
-positivo,HOME - Resonance,5.0,62.128,True,True,True,191,3,0.009,621,158.2
-positivo,HOME - Resonance,5.0,187.629,True,True,True,299,2,11.296,843,151.7
-positivo,HOME - Resonance,10.0,136.413,True,True,True,516,3,5.647,1637,186.0
-positivo,HOME - Resonance,10.0,180.748,True,True,True,1264,3,0.003,1736,173.9
-positivo,HOME - Resonance,10.0,40.501,True,True,True,673,4,0.005,1177,170.5
-positivo,HOME - Resonance,10.0,153.921,True,True,True,650,3,22.589,1544,172.0
-positivo,HOME - Resonance,10.0,191.246,True,True,True,829,3,0.006,1746,172.0
-positivo,HOME - Resonance,10.0,9.865,True,True,True,151,2,0.02,1181,194.4
-positivo,HOME - Resonance,10.0,74.116,True,True,True,1023,3,0.044,1281,163.1
-positivo,HOME - Resonance,10.0,129.21,True,True,True,412,3,45.172,1573,167.7
-positivo,HOME - Resonance,10.0,21.415,True,True,True,501,3,0.006,1233,163.0
-positivo,HOME - Resonance,10.0,103.541,True,True,True,147,3,0.027,1216,179.6
-positivo,Home Made Kazoku - Thank You,5.0,158.4,True,True,True,367,3,0.007,785,142.8
-positivo,Home Made Kazoku - Thank You,5.0,192.36,True,True,True,353,3,62.143,756,183.5
-positivo,Home Made Kazoku - Thank You,5.0,233.443,True,True,True,100,3,8.581,521,124.3
-positivo,Home Made Kazoku - Thank You,5.0,103.188,True,True,True,504,3,0.002,693,145.6
-positivo,Home Made Kazoku - Thank You,5.0,110.88,True,True,True,50,2,0.028,690,137.8
-positivo,Home Made Kazoku - Thank You,5.0,119.399,True,True,True,482,3,0.002,615,137.9
-positivo,Home Made Kazoku - Thank You,5.0,240.351,True,True,True,230,3,8.567,767,154.3
-positivo,Home Made Kazoku - Thank You,5.0,49.288,True,True,True,39,2,0.015,489,146.0
-positivo,Home Made Kazoku - Thank You,5.0,125.866,True,True,True,203,2,51.423,679,144.2
-positivo,Home Made Kazoku - Thank You,5.0,12.547,True,True,True,323,3,0.008,750,146.5
-positivo,Home Made Kazoku - Thank You,10.0,104.94,True,True,True,201,3,0.032,1367,169.7
-positivo,Home Made Kazoku - Thank You,10.0,233.289,True,True,True,262,3,8.57,1379,171.2
-positivo,Home Made Kazoku - Thank You,10.0,153.059,True,True,True,611,3,0.007,1430,157.8
-positivo,Home Made Kazoku - Thank You,10.0,86.278,True,True,True,561,3,0.007,1530,179.0
-positivo,Home Made Kazoku - Thank You,10.0,245.575,True,True,True,1351,2,0.0,1543,168.8
-positivo,Home Made Kazoku - Thank You,10.0,148.998,True,True,True,80,3,0.019,1356,164.7
-positivo,Home Made Kazoku - Thank You,10.0,234.185,True,True,True,372,3,0.035,1242,157.9
-positivo,Home Made Kazoku - Thank You,10.0,4.03,True,True,True,561,3,0.037,1459,164.8
-positivo,Home Made Kazoku - Thank You,10.0,113.532,True,True,True,172,4,0.033,1219,162.4
-positivo,Home Made Kazoku - Thank You,10.0,206.054,True,True,True,1277,3,0.0,1400,159.2
-positivo,Linkin Park - Crawling,5.0,160.491,True,True,True,323,3,0.006,621,167.3
-positivo,Linkin Park - Crawling,5.0,86.308,True,True,True,34,2,0.023,530,142.5
-positivo,Linkin Park - Crawling,5.0,105.356,True,True,True,55,3,0.031,605,143.9
-positivo,Linkin Park - Crawling,5.0,89.009,True,True,True,56,3,0.03,546,143.2
-positivo,Linkin Park - Crawling,5.0,112.111,True,True,True,217,2,0.005,487,141.2
-positivo,Linkin Park - Crawling,5.0,48.767,True,True,True,182,3,0.006,509,148.8
-positivo,Linkin Park - Crawling,5.0,166.433,True,True,True,246,5,0.039,652,129.8
-positivo,Linkin Park - Crawling,5.0,16.459,True,True,True,88,3,4.617,653,159.9
-positivo,Linkin Park - Crawling,5.0,87.826,True,True,True,180,3,0.008,601,141.9
-positivo,Linkin Park - Crawling,5.0,59.699,True,True,True,43,2,0.024,516,139.5
-positivo,Linkin Park - Crawling,10.0,151.895,True,True,True,218,3,0.036,1242,166.5
-positivo,Linkin Park - Crawling,10.0,154.958,True,True,True,206,3,0.034,1239,165.3
-positivo,Linkin Park - Crawling,10.0,147.068,True,True,True,427,3,0.008,1241,185.9
-positivo,Linkin Park - Crawling,10.0,191.184,True,True,True,359,3,0.038,1244,166.2
-positivo,Linkin Park - Crawling,10.0,192.754,True,True,True,149,3,0.029,1305,170.2
-positivo,Linkin Park - Crawling,10.0,38.186,True,True,True,110,3,0.013,1100,162.6
-positivo,Linkin Park - Crawling,10.0,23.769,True,True,True,355,3,0.038,1206,172.9
-positivo,Linkin Park - Crawling,10.0,27.373,True,True,True,86,3,0.02,1174,172.0
-positivo,Linkin Park - Crawling,10.0,150.764,True,True,True,90,3,0.02,1146,185.3
-positivo,Linkin Park - Crawling,10.0,200.667,True,True,True,792,3,0.001,946,162.1
-positivo,Orange Range - Asterisk,5.0,296.646,True,True,True,151,3,0.034,773,143.1
-positivo,Orange Range - Asterisk,5.0,213.743,True,True,True,118,3,148.774,822,143.6
-positivo,Orange Range - Asterisk,5.0,309.601,True,True,True,165,3,0.032,710,158.4
-positivo,Orange Range - Asterisk,5.0,278.682,True,True,True,528,2,0.004,810,145.0
-positivo,Orange Range - Asterisk,5.0,4.704,True,True,True,115,3,0.014,753,157.7
-positivo,Orange Range - Asterisk,5.0,38.139,True,True,True,139,3,0.012,666,145.7
-positivo,Orange Range - Asterisk,5.0,276.244,True,True,True,141,3,218.612,862,143.2
-positivo,Orange Range - Asterisk,5.0,26.343,True,True,True,178,3,0.012,685,140.6
-positivo,Orange Range - Asterisk,5.0,313.845,True,True,True,529,3,0.004,839,145.8
-positivo,Orange Range - Asterisk,5.0,264.644,True,True,True,121,3,0.029,674,103.2
-positivo,Orange Range - Asterisk,10.0,301.387,True,True,True,535,3,0.038,1520,152.8
-positivo,Orange Range - Asterisk,10.0,113.451,True,True,True,1085,3,0.002,1470,143.6
-positivo,Orange Range - Asterisk,10.0,46.84,True,True,True,122,5,0.028,1337,166.3
-positivo,Orange Range - Asterisk,10.0,162.74,True,True,True,310,5,85.882,1505,170.0
-positivo,Orange Range - Asterisk,10.0,306.242,True,True,True,678,3,290.22,1574,175.9
-positivo,Orange Range - Asterisk,10.0,115.624,True,True,True,263,4,0.012,1529,166.2
-positivo,Orange Range - Asterisk,10.0,280.205,True,True,True,382,3,69.879,1610,172.1
-positivo,Orange Range - Asterisk,10.0,120.853,True,True,True,160,3,0.017,1475,175.5
-positivo,Orange Range - Asterisk,10.0,258.932,True,True,True,218,4,0.03,1336,167.4
-positivo,Orange Range - Asterisk,10.0,72.285,True,True,True,375,4,218.568,1553,157.4
-positivo,Petit Biscuit - Sunset Lover,5.0,100.382,True,True,True,207,3,10.567,690,135.4
-positivo,Petit Biscuit - Sunset Lover,5.0,68.355,True,True,True,385,3,0.005,610,134.7
-positivo,Petit Biscuit - Sunset Lover,5.0,48.597,True,True,True,499,3,10.567,618,140.2
-positivo,Petit Biscuit - Sunset Lover,5.0,186.691,True,True,True,476,4,0.003,588,133.5
-positivo,Petit Biscuit - Sunset Lover,5.0,167.701,True,True,True,383,4,0.006,643,135.2
-positivo,Petit Biscuit - Sunset Lover,5.0,29.207,True,True,True,456,3,0.043,747,139.4
-positivo,Petit Biscuit - Sunset Lover,5.0,193.142,True,True,True,415,3,0.002,545,147.8
-positivo,Petit Biscuit - Sunset Lover,5.0,203.064,True,True,True,352,3,10.57,507,147.4
-positivo,Petit Biscuit - Sunset Lover,5.0,55.657,True,True,True,290,3,10.61,589,133.5
-positivo,Petit Biscuit - Sunset Lover,5.0,89.18,True,True,True,176,3,10.573,609,139.4
-positivo,Petit Biscuit - Sunset Lover,10.0,110.015,True,True,True,1076,6,0.001,1434,171.7
-positivo,Petit Biscuit - Sunset Lover,10.0,134.136,True,True,True,293,5,10.525,1417,169.2
-positivo,Petit Biscuit - Sunset Lover,10.0,90.381,True,True,True,515,6,0.009,1210,176.2
-positivo,Petit Biscuit - Sunset Lover,10.0,30.367,True,True,True,734,3,0.042,1479,173.8
-positivo,Petit Biscuit - Sunset Lover,10.0,190.053,True,True,True,537,3,10.568,965,169.8
-positivo,Petit Biscuit - Sunset Lover,10.0,141.267,True,True,True,980,4,0.003,1396,177.3
-positivo,Petit Biscuit - Sunset Lover,10.0,8.27,True,True,True,991,3,0.003,1242,160.5
-positivo,Petit Biscuit - Sunset Lover,10.0,166.228,True,True,True,508,4,10.569,1268,175.1
-positivo,Petit Biscuit - Sunset Lover,10.0,149.428,True,True,True,391,5,0.03,1503,181.4
-positivo,Petit Biscuit - Sunset Lover,10.0,37.412,True,True,True,551,6,10.57,1430,175.3
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,149.329,True,True,True,26,6,0.024,690,144.5
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,121.936,True,True,True,114,3,0.031,779,140.3
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,6.894,True,True,True,52,3,0.021,789,141.3
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,225.413,True,True,True,239,5,0.04,588,156.0
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,174.813,True,True,True,174,3,0.013,739,122.9
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,75.402,True,True,True,110,5,0.03,632,146.0
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,3.887,True,True,True,148,3,0.032,868,152.6
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,22.186,True,True,True,124,3,0.034,766,141.5
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,184.227,True,True,True,575,5,0.0,751,146.0
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,36.298,True,True,True,50,3,0.029,627,158.0
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,122.067,True,True,True,135,3,0.023,1442,178.5
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,213.945,True,True,True,688,4,0.004,1091,164.1
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,221.181,True,True,True,247,5,0.035,1156,166.3
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,63.783,True,True,True,78,3,0.021,1197,150.4
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,15.731,True,True,True,333,6,0.035,1624,149.4
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,117.809,True,True,True,431,4,0.037,1629,169.9
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,200.283,True,True,True,209,6,0.034,979,152.7
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,148.704,True,True,True,809,5,0.004,1282,174.7
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,15.876,True,True,True,785,6,0.006,1606,173.8
-positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,154.779,True,True,True,752,4,0.005,1387,175.8
-positivo,Shiro SAGISU - Number One - Bankai,5.0,93.573,True,True,True,375,3,0.004,748,138.9
-positivo,Shiro SAGISU - Number One - Bankai,5.0,61.478,True,True,True,171,4,0.008,633,148.1
-positivo,Shiro SAGISU - Number One - Bankai,5.0,116.942,True,True,True,231,2,0.006,710,152.7
-positivo,Shiro SAGISU - Number One - Bankai,5.0,237.333,True,True,True,84,2,0.025,750,142.7
-positivo,Shiro SAGISU - Number One - Bankai,5.0,262.546,True,True,True,40,3,0.021,627,140.5
-positivo,Shiro SAGISU - Number One - Bankai,5.0,38.334,True,True,True,31,2,0.021,671,137.6
-positivo,Shiro SAGISU - Number One - Bankai,5.0,152.797,True,True,True,165,5,0.01,799,143.3
-positivo,Shiro SAGISU - Number One - Bankai,5.0,206.952,True,True,True,94,3,0.015,793,142.4
-positivo,Shiro SAGISU - Number One - Bankai,5.0,70.351,True,True,True,282,3,0.005,746,149.5
-positivo,Shiro SAGISU - Number One - Bankai,5.0,74.1,True,True,True,42,2,0.028,661,128.1
-positivo,Shiro SAGISU - Number One - Bankai,10.0,64.472,True,True,True,300,3,0.013,1445,166.5
-positivo,Shiro SAGISU - Number One - Bankai,10.0,55.92,True,True,True,741,4,0.006,1545,175.2
-positivo,Shiro SAGISU - Number One - Bankai,10.0,236.922,True,True,True,327,3,0.032,1387,179.3
-positivo,Shiro SAGISU - Number One - Bankai,10.0,58.321,True,True,True,603,4,0.039,1465,162.4
-positivo,Shiro SAGISU - Number One - Bankai,10.0,60.255,True,True,True,127,3,0.022,1515,169.8
-positivo,Shiro SAGISU - Number One - Bankai,10.0,33.464,True,True,True,155,2,0.028,1569,177.8
-positivo,Shiro SAGISU - Number One - Bankai,10.0,33.227,True,True,True,116,3,0.023,1438,163.4
-positivo,Shiro SAGISU - Number One - Bankai,10.0,207.671,True,True,True,531,3,0.038,1596,166.6
-positivo,Shiro SAGISU - Number One - Bankai,10.0,76.918,True,True,True,289,3,0.013,1485,160.2
-positivo,Shiro SAGISU - Number One - Bankai,10.0,213.942,True,True,True,607,3,0.04,1411,171.9
-positivo,The Killers - Somebody Told Me,5.0,115.638,True,True,True,518,3,0.002,672,143.6
-positivo,The Killers - Somebody Told Me,5.0,169.356,True,True,True,86,3,0.036,655,129.4
-positivo,The Killers - Somebody Told Me,5.0,109.318,True,True,True,618,3,0.002,717,152.0
-positivo,The Killers - Somebody Told Me,5.0,150.764,True,True,True,64,3,0.02,592,118.9
-positivo,The Killers - Somebody Told Me,5.0,159.75,True,True,True,378,3,0.004,711,160.0
-positivo,The Killers - Somebody Told Me,5.0,12.041,True,True,True,170,3,0.014,755,141.0
-positivo,The Killers - Somebody Told Me,5.0,110.578,True,True,True,435,3,0.004,701,146.1
-positivo,The Killers - Somebody Told Me,5.0,89.699,True,True,True,31,6,0.024,621,143.1
-positivo,The Killers - Somebody Told Me,5.0,56.903,True,True,True,108,3,0.014,625,139.6
-positivo,The Killers - Somebody Told Me,5.0,89.264,True,True,True,223,4,0.006,652,162.2
-positivo,The Killers - Somebody Told Me,10.0,79.397,True,True,True,172,3,0.031,1307,170.8
-positivo,The Killers - Somebody Told Me,10.0,94.574,True,True,True,95,3,0.023,1301,165.0
-positivo,The Killers - Somebody Told Me,10.0,157.318,True,True,True,152,3,0.026,1411,174.4
-positivo,The Killers - Somebody Told Me,10.0,158.736,True,True,True,739,3,0.005,1469,163.6
-positivo,The Killers - Somebody Told Me,10.0,120.472,True,True,True,630,3,0.007,1502,171.1
-positivo,The Killers - Somebody Told Me,10.0,136.583,True,True,True,958,3,0.003,1400,185.3
-positivo,The Killers - Somebody Told Me,10.0,184.423,True,True,True,248,3,0.01,1175,175.3
-positivo,The Killers - Somebody Told Me,10.0,122.473,True,True,True,390,3,0.011,1472,167.3
-positivo,The Killers - Somebody Told Me,10.0,71.034,True,True,True,119,2,0.027,1425,149.0
-positivo,The Killers - Somebody Told Me,10.0,15.785,True,True,True,694,3,0.005,1228,168.3
-positivo,The Neighbourhood - Sweater Weather,5.0,127.978,True,True,True,218,2,0.036,542,138.9
-positivo,The Neighbourhood - Sweater Weather,5.0,53.605,True,True,True,128,2,0.014,614,154.5
-positivo,The Neighbourhood - Sweater Weather,5.0,137.546,True,True,True,178,3,0.009,522,159.3
-positivo,The Neighbourhood - Sweater Weather,5.0,5.953,True,True,True,149,3,0.009,486,145.1
-positivo,The Neighbourhood - Sweater Weather,5.0,196.454,True,True,True,89,3,0.013,554,144.0
-positivo,The Neighbourhood - Sweater Weather,5.0,218.749,True,True,True,91,3,0.017,652,144.4
-positivo,The Neighbourhood - Sweater Weather,5.0,33.69,True,True,True,87,3,0.021,696,142.1
-positivo,The Neighbourhood - Sweater Weather,5.0,189.706,True,True,True,447,3,0.001,541,142.3
-positivo,The Neighbourhood - Sweater Weather,5.0,94.143,True,True,True,203,3,0.009,655,158.9
-positivo,The Neighbourhood - Sweater Weather,5.0,9.653,True,True,True,181,2,0.006,581,135.4
-positivo,The Neighbourhood - Sweater Weather,10.0,206.186,True,True,True,498,3,0.039,1240,165.3
-positivo,The Neighbourhood - Sweater Weather,10.0,213.2,True,True,True,651,3,0.006,1214,170.4
-positivo,The Neighbourhood - Sweater Weather,10.0,9.758,True,True,True,477,3,0.006,1222,172.7
-positivo,The Neighbourhood - Sweater Weather,10.0,134.449,True,True,True,517,3,0.006,1117,160.7
-positivo,The Neighbourhood - Sweater Weather,10.0,186.415,True,True,True,545,3,0.006,1158,176.5
-positivo,The Neighbourhood - Sweater Weather,10.0,178.971,True,True,True,252,3,0.038,866,155.4
-positivo,The Neighbourhood - Sweater Weather,10.0,94.121,True,True,True,410,3,0.034,1454,191.8
-positivo,The Neighbourhood - Sweater Weather,10.0,194.847,True,True,True,257,3,0.032,1225,166.8
-positivo,The Neighbourhood - Sweater Weather,10.0,188.024,True,True,True,269,3,0.035,1131,172.4
-positivo,The Neighbourhood - Sweater Weather,10.0,25.687,True,True,True,706,3,0.005,1355,171.1
-positivo,hkmori - anybody can find love (except you.),5.0,1.259,True,True,True,340,1,0.005,489,160.6
-positivo,hkmori - anybody can find love (except you.),5.0,12.927,True,True,True,168,3,110.185,763,143.6
-positivo,hkmori - anybody can find love (except you.),5.0,46.159,True,True,True,402,1,0.002,500,137.8
-positivo,hkmori - anybody can find love (except you.),5.0,13.87,True,True,True,147,1,0.031,615,132.0
-positivo,hkmori - anybody can find love (except you.),5.0,9.943,True,True,True,434,2,0.004,698,131.8
-positivo,hkmori - anybody can find love (except you.),5.0,32.719,True,True,True,44,1,0.026,636,130.4
-positivo,hkmori - anybody can find love (except you.),5.0,82.522,True,True,True,449,1,0.002,509,130.7
-positivo,hkmori - anybody can find love (except you.),5.0,66.281,True,True,True,98,3,0.012,419,111.9
-positivo,hkmori - anybody can find love (except you.),5.0,34.628,True,True,True,58,2,0.03,678,136.4
-positivo,hkmori - anybody can find love (except you.),5.0,120.184,True,True,True,447,1,0.002,645,128.9
-positivo,hkmori - anybody can find love (except you.),10.0,85.336,True,True,True,116,3,0.026,992,163.0
-positivo,hkmori - anybody can find love (except you.),10.0,77.048,True,True,True,557,1,0.005,997,178.5
-positivo,hkmori - anybody can find love (except you.),10.0,114.623,True,True,True,437,1,0.009,1338,167.4
-positivo,hkmori - anybody can find love (except you.),10.0,95.403,True,True,True,233,3,9.969,1270,195.0
-positivo,hkmori - anybody can find love (except you.),10.0,15.402,True,True,True,243,2,0.03,1214,163.9
-positivo,hkmori - anybody can find love (except you.),10.0,4.488,True,True,True,275,1,0.03,1381,175.6
-positivo,hkmori - anybody can find love (except you.),10.0,105.026,True,True,True,240,1,10.006,1274,174.4
-positivo,hkmori - anybody can find love (except you.),10.0,49.531,True,True,True,57,2,0.026,1045,152.8
-positivo,hkmori - anybody can find love (except you.),10.0,7.222,True,True,True,236,1,0.024,1436,160.5
-positivo,hkmori - anybody can find love (except you.),10.0,57.878,True,True,True,159,3,0.014,965,165.3
-positivo,nobodyknows - Hero’s Come Back,5.0,103.354,True,True,True,30,2,0.025,684,155.4
-positivo,nobodyknows - Hero’s Come Back,5.0,117.012,True,True,True,99,3,0.03,677,145.4
-positivo,nobodyknows - Hero’s Come Back,5.0,116.655,True,True,True,514,3,0.002,722,140.6
-positivo,nobodyknows - Hero’s Come Back,5.0,85.271,True,True,True,188,3,0.007,703,144.0
-positivo,nobodyknows - Hero’s Come Back,5.0,132.69,True,True,True,140,2,83.07,634,141.2
-positivo,nobodyknows - Hero’s Come Back,5.0,133.419,True,True,True,319,2,0.003,563,140.4
-positivo,nobodyknows - Hero’s Come Back,5.0,265.045,True,True,True,142,2,0.012,527,150.2
-positivo,nobodyknows - Hero’s Come Back,5.0,188.032,True,True,True,367,2,0.043,592,146.0
-positivo,nobodyknows - Hero’s Come Back,5.0,210.549,True,True,True,197,2,83.071,639,146.4
-positivo,nobodyknows - Hero’s Come Back,5.0,2.181,True,True,True,208,1,0.001,294,114.7
-positivo,nobodyknows - Hero’s Come Back,10.0,82.29,True,True,True,1024,3,0.002,1375,142.3
-positivo,nobodyknows - Hero’s Come Back,10.0,262.092,True,True,True,169,3,0.031,1040,158.1
-positivo,nobodyknows - Hero’s Come Back,10.0,71.894,True,True,True,596,2,0.005,1055,166.8
-positivo,nobodyknows - Hero’s Come Back,10.0,135.871,True,True,True,480,3,92.31,1686,156.1
-positivo,nobodyknows - Hero’s Come Back,10.0,229.964,True,True,True,635,2,0.04,1329,151.2
-positivo,nobodyknows - Hero’s Come Back,10.0,170.145,True,True,True,300,2,0.035,1313,166.5
-positivo,nobodyknows - Hero’s Come Back,10.0,234.81,True,True,True,496,4,0.01,1537,208.0
-positivo,nobodyknows - Hero’s Come Back,10.0,43.801,True,True,True,507,2,0.009,1511,141.8
-positivo,nobodyknows - Hero’s Come Back,10.0,136.069,True,True,True,1568,3,0.0,1717,155.4
-positivo,nobodyknows - Hero’s Come Back,10.0,169.346,True,True,True,70,3,0.026,1352,158.8
-positivo,siinamota - Young Girl A,5.0,81.645,True,True,True,359,3,0.004,717,142.8
-positivo,siinamota - Young Girl A,5.0,136.162,True,True,True,764,3,0.0,850,139.6
-positivo,siinamota - Young Girl A,5.0,235.932,True,True,True,77,2,0.018,514,143.4
-positivo,siinamota - Young Girl A,5.0,174.667,True,True,True,386,3,0.007,848,154.0
-positivo,siinamota - Young Girl A,5.0,74.922,True,True,True,57,3,0.015,796,104.8
-positivo,siinamota - Young Girl A,5.0,15.164,True,True,True,116,3,0.024,810,131.5
-positivo,siinamota - Young Girl A,5.0,43.328,True,True,True,702,5,0.0,782,107.1
-positivo,siinamota - Young Girl A,5.0,64.506,True,True,True,500,3,0.001,686,85.3
-positivo,siinamota - Young Girl A,5.0,208.704,True,True,True,511,3,0.003,850,151.0
-positivo,siinamota - Young Girl A,5.0,64.259,True,True,True,135,3,0.032,678,140.0
-positivo,siinamota - Young Girl A,10.0,188.574,True,True,True,233,4,0.028,1645,171.8
-positivo,siinamota - Young Girl A,10.0,63.567,True,True,True,479,4,0.037,1523,167.5
-positivo,siinamota - Young Girl A,10.0,155.042,True,True,True,165,3,0.026,1680,174.7
-positivo,siinamota - Young Girl A,10.0,122.311,True,True,True,440,3,0.035,1356,176.9
-positivo,siinamota - Young Girl A,10.0,222.484,True,True,True,552,3,0.037,1554,174.9
-positivo,siinamota - Young Girl A,10.0,131.482,True,True,True,505,3,0.01,1565,177.4
-positivo,siinamota - Young Girl A,10.0,214.893,True,True,True,298,6,0.016,1550,159.9
-positivo,siinamota - Young Girl A,10.0,223.312,True,True,True,249,4,0.029,1524,132.7
-positivo,siinamota - Young Girl A,10.0,173.697,True,True,True,410,3,0.011,1666,168.9
-positivo,siinamota - Young Girl A,10.0,145.87,True,True,True,1264,4,0.002,1606,169.5
-positivo,東方 - Bad Apple,5.0,184.319,True,True,True,642,3,0.001,770,151.0
-positivo,東方 - Bad Apple,5.0,213.391,True,True,True,483,3,0.0,545,138.8
-positivo,東方 - Bad Apple,5.0,52.926,True,True,True,94,3,97.4,755,143.5
-positivo,東方 - Bad Apple,5.0,120.467,True,True,True,398,6,0.002,609,143.6
-positivo,東方 - Bad Apple,5.0,30.248,True,True,True,134,3,0.016,656,156.4
-positivo,東方 - Bad Apple,5.0,22.471,True,True,True,99,3,0.04,375,122.3
-positivo,東方 - Bad Apple,5.0,143.494,True,True,True,315,3,0.041,775,150.0
-positivo,東方 - Bad Apple,5.0,10.181,True,True,True,40,1,0.01,164,123.5
-positivo,東方 - Bad Apple,5.0,153.036,True,True,True,81,4,97.447,748,155.9
-positivo,東方 - Bad Apple,5.0,175.791,True,True,True,109,3,97.4,800,146.4
-positivo,東方 - Bad Apple,10.0,34.939,True,True,True,227,3,0.016,1477,173.6
-positivo,東方 - Bad Apple,10.0,142.302,True,True,True,421,3,0.01,1486,170.7
-positivo,東方 - Bad Apple,10.0,82.731,True,True,True,202,3,0.021,1648,157.6
-positivo,東方 - Bad Apple,10.0,186.85,True,True,True,141,3,0.022,1616,191.1
-positivo,東方 - Bad Apple,10.0,190.38,True,True,True,144,3,0.023,1610,179.9
-positivo,東方 - Bad Apple,10.0,120.785,True,True,True,847,5,0.005,1357,175.9
-positivo,東方 - Bad Apple,10.0,117.417,True,True,True,132,5,0.017,1410,178.1
-positivo,東方 - Bad Apple,10.0,148.618,True,True,True,406,3,0.01,1479,168.2
-positivo,東方 - Bad Apple,10.0,120.959,True,True,True,167,4,0.029,1381,173.0
-positivo,東方 - Bad Apple,10.0,155.998,True,True,True,749,4,0.006,1554,167.6
-positivo,稲葉曇 - ラグトレイン,5.0,47.933,True,True,True,262,3,0.007,604,161.2
-positivo,稲葉曇 - ラグトレイン,5.0,193.124,True,True,True,85,3,0.027,740,133.6
-positivo,稲葉曇 - ラグトレイン,5.0,129.882,True,True,True,247,3,0.011,615,153.5
-positivo,稲葉曇 - ラグトレイン,5.0,185.643,True,True,True,68,3,0.023,660,139.9
-positivo,稲葉曇 - ラグトレイン,5.0,129.243,True,True,True,516,3,0.001,633,144.2
-positivo,稲葉曇 - ラグトレイン,5.0,75.694,True,True,True,477,4,0.043,729,139.6
-positivo,稲葉曇 - ラグトレイン,5.0,21.959,True,True,True,378,4,0.007,766,155.9
-positivo,稲葉曇 - ラグトレイン,5.0,129.72,True,True,True,123,5,0.014,639,119.1
-positivo,稲葉曇 - ラグトレイン,5.0,242.455,True,True,True,207,3,0.038,658,137.9
-positivo,稲葉曇 - ラグトレイン,5.0,8.848,True,True,True,82,2,0.024,654,144.9
-positivo,稲葉曇 - ラグトレイン,10.0,138.228,True,True,True,177,5,0.023,1433,173.6
-positivo,稲葉曇 - ラグトレイン,10.0,108.163,True,True,True,862,3,0.004,1304,167.2
-positivo,稲葉曇 - ラグトレイン,10.0,1.55,True,True,True,106,3,0.018,1104,165.2
-positivo,稲葉曇 - ラグトレイン,10.0,131.496,True,True,True,165,5,0.025,1273,153.9
-positivo,稲葉曇 - ラグトレイン,10.0,186.914,True,True,True,605,5,0.04,1377,172.1
-positivo,稲葉曇 - ラグトレイン,10.0,179.384,True,True,True,352,5,0.033,1421,183.7
-positivo,稲葉曇 - ラグトレイン,10.0,236.655,True,True,True,1180,5,0.002,1580,162.9
-positivo,稲葉曇 - ラグトレイン,10.0,127.991,True,True,True,970,3,0.002,1344,168.9
-positivo,稲葉曇 - ラグトレイン,10.0,142.697,True,True,True,399,5,0.034,1446,183.9
-positivo,稲葉曇 - ラグトレイン,10.0,233.643,True,True,True,958,3,0.004,1525,154.4
-negativo,Adrian Barba - El poder nuestro es,5.0,73.535,False,False,False,4,3,,808,119.4
-negativo,Adrian Barba - El poder nuestro es,5.0,183.675,False,False,False,2,2,,653,103.8
-negativo,Adrian Barba - El poder nuestro es,5.0,43.131,False,False,False,2,2,,699,109.4
-negativo,Adrian Barba - El poder nuestro es,5.0,83.25,False,False,False,2,2,,702,109.7
-negativo,Adrian Barba - El poder nuestro es,5.0,154.698,False,False,False,3,2,,779,108.4
-negativo,Adrian Barba - El poder nuestro es,5.0,133.327,False,False,False,3,3,,776,106.3
-negativo,Adrian Barba - El poder nuestro es,5.0,44.88,False,False,False,2,1,,701,91.8
-negativo,Adrian Barba - El poder nuestro es,5.0,151.671,False,False,False,3,2,,776,109.0
-negativo,Adrian Barba - El poder nuestro es,5.0,132.882,False,False,False,5,2,,828,111.5
-negativo,Adrian Barba - El poder nuestro es,5.0,211.731,False,False,False,4,3,,808,113.7
-negativo,Adrian Barba - El poder nuestro es,10.0,135.519,False,False,False,3,3,,1586,141.2
-negativo,Adrian Barba - El poder nuestro es,10.0,199.007,False,False,False,5,3,,1576,138.4
-negativo,Adrian Barba - El poder nuestro es,10.0,216.569,False,False,False,3,3,,1443,135.5
-negativo,Adrian Barba - El poder nuestro es,10.0,19.707,False,False,False,3,2,,1339,153.3
-negativo,Adrian Barba - El poder nuestro es,10.0,16.261,False,False,False,3,3,,1432,138.5
-negativo,Adrian Barba - El poder nuestro es,10.0,113.084,False,False,False,3,3,,1606,133.3
-negativo,Adrian Barba - El poder nuestro es,10.0,112.506,False,False,False,3,2,,1508,137.7
-negativo,Adrian Barba - El poder nuestro es,10.0,124.891,False,False,False,4,3,,1522,139.1
-negativo,Adrian Barba - El poder nuestro es,10.0,167.44,False,False,False,3,3,,1809,139.6
-negativo,Adrian Barba - El poder nuestro es,10.0,70.959,False,False,False,3,3,,1524,133.9
-negativo,FLOW - HERO -Kibou no uta-,5.0,37.385,False,False,False,3,2,,656,121.6
-negativo,FLOW - HERO -Kibou no uta-,5.0,143.467,False,False,False,3,2,,698,117.2
-negativo,FLOW - HERO -Kibou no uta-,5.0,81.861,False,False,False,2,1,,687,113.8
-negativo,FLOW - HERO -Kibou no uta-,5.0,196.12,False,False,False,3,2,,691,112.5
-negativo,FLOW - HERO -Kibou no uta-,5.0,13.268,False,False,False,2,1,,679,130.0
-negativo,FLOW - HERO -Kibou no uta-,5.0,149.601,False,False,False,3,2,,683,113.9
-negativo,FLOW - HERO -Kibou no uta-,5.0,153.121,False,False,False,4,3,,699,114.4
-negativo,FLOW - HERO -Kibou no uta-,5.0,57.172,False,False,False,3,2,,727,110.5
-negativo,FLOW - HERO -Kibou no uta-,5.0,18.514,False,False,False,5,2,,667,115.5
-negativo,FLOW - HERO -Kibou no uta-,5.0,67.131,False,False,False,3,2,,734,111.5
-negativo,FLOW - HERO -Kibou no uta-,10.0,81.367,False,False,False,3,3,,1359,131.4
-negativo,FLOW - HERO -Kibou no uta-,10.0,201.706,False,False,False,3,3,,1127,128.9
-negativo,FLOW - HERO -Kibou no uta-,10.0,179.898,False,False,False,3,2,,1332,147.1
-negativo,FLOW - HERO -Kibou no uta-,10.0,47.591,False,False,False,4,3,,1492,127.1
-negativo,FLOW - HERO -Kibou no uta-,10.0,97.268,False,False,False,3,3,,1447,134.8
-negativo,FLOW - HERO -Kibou no uta-,10.0,123.544,False,False,False,3,2,,1290,129.3
-negativo,FLOW - HERO -Kibou no uta-,10.0,187.95,False,False,False,3,2,,1395,138.4
-negativo,FLOW - HERO -Kibou no uta-,10.0,27.811,False,False,False,3,3,,1389,123.8
-negativo,FLOW - HERO -Kibou no uta-,10.0,157.737,False,False,False,3,2,,1518,125.6
-negativo,FLOW - HERO -Kibou no uta-,10.0,190.55,False,False,False,3,2,,1332,121.7
-negativo,Linkin Park - Crawling,5.0,193.87,False,False,False,3,2,,593,109.5
-negativo,Linkin Park - Crawling,5.0,58.679,False,False,False,2,1,,503,112.5
-negativo,Linkin Park - Crawling,5.0,26.985,False,False,False,3,2,,626,105.3
-negativo,Linkin Park - Crawling,5.0,125.771,False,False,False,3,2,,646,112.7
-negativo,Linkin Park - Crawling,5.0,15.581,False,False,False,3,2,,644,107.1
-negativo,Linkin Park - Crawling,5.0,27.534,False,False,False,3,2,,585,113.4
-negativo,Linkin Park - Crawling,5.0,14.895,False,False,False,3,3,,695,121.2
-negativo,Linkin Park - Crawling,5.0,44.668,False,False,False,3,3,,493,89.5
-negativo,Linkin Park - Crawling,5.0,184.027,False,False,False,4,3,,575,74.3
-negativo,Linkin Park - Crawling,5.0,142.473,False,False,False,2,2,,582,105.7
-negativo,Linkin Park - Crawling,10.0,131.129,False,False,False,3,3,,1449,140.9
-negativo,Linkin Park - Crawling,10.0,203.785,False,False,False,2,2,,729,146.0
-negativo,Linkin Park - Crawling,10.0,102.693,False,False,False,3,2,,1060,126.8
-negativo,Linkin Park - Crawling,10.0,8.272,False,False,False,3,3,,1309,137.7
-negativo,Linkin Park - Crawling,10.0,33.822,False,False,False,3,3,,1156,141.2
-negativo,Linkin Park - Crawling,10.0,53.83,False,False,False,3,2,,1104,131.9
-negativo,Linkin Park - Crawling,10.0,139.331,False,False,False,3,3,,1200,131.6
-negativo,Linkin Park - Crawling,10.0,73.84,False,False,False,3,3,,1347,141.2
-negativo,Linkin Park - Crawling,10.0,65.767,False,False,False,3,3,,1040,143.5
-negativo,Linkin Park - Crawling,10.0,23.2,False,False,False,4,3,,1252,133.2
-negativo,Shiro SAGISU - Number One - Bankai,5.0,193.195,False,False,False,3,2,,798,122.4
-negativo,Shiro SAGISU - Number One - Bankai,5.0,6.654,False,False,False,1,1,,544,114.0
-negativo,Shiro SAGISU - Number One - Bankai,5.0,125.11,False,False,False,2,2,,758,91.3
-negativo,Shiro SAGISU - Number One - Bankai,5.0,202.311,False,False,False,2,2,,722,72.9
-negativo,Shiro SAGISU - Number One - Bankai,5.0,137.914,False,False,False,3,1,,718,86.2
-negativo,Shiro SAGISU - Number One - Bankai,5.0,186.713,False,False,False,2,2,,695,113.4
-negativo,Shiro SAGISU - Number One - Bankai,5.0,214.606,False,False,False,3,1,,676,127.0
-negativo,Shiro SAGISU - Number One - Bankai,5.0,61.118,False,False,False,4,2,,700,109.9
-negativo,Shiro SAGISU - Number One - Bankai,5.0,25.205,False,False,False,2,1,,746,115.5
-negativo,Shiro SAGISU - Number One - Bankai,5.0,15.314,False,False,False,3,3,,768,126.7
-negativo,Shiro SAGISU - Number One - Bankai,10.0,154.395,False,False,False,3,2,,1504,125.9
-negativo,Shiro SAGISU - Number One - Bankai,10.0,70.437,False,False,False,3,3,,1495,126.5
-negativo,Shiro SAGISU - Number One - Bankai,10.0,52.616,False,False,False,3,2,,1481,142.2
-negativo,Shiro SAGISU - Number One - Bankai,10.0,196.06,False,False,False,2,2,,1408,128.1
-negativo,Shiro SAGISU - Number One - Bankai,10.0,215.586,False,False,False,3,2,,1359,154.4
-negativo,Shiro SAGISU - Number One - Bankai,10.0,254.606,False,False,False,3,3,,1233,150.9
-negativo,Shiro SAGISU - Number One - Bankai,10.0,130.409,False,False,False,3,3,,1564,131.9
-negativo,Shiro SAGISU - Number One - Bankai,10.0,139.414,False,False,False,4,3,,1564,134.3
-negativo,Shiro SAGISU - Number One - Bankai,10.0,263.753,False,False,False,4,3,,1399,131.1
-negativo,Shiro SAGISU - Number One - Bankai,10.0,134.377,False,False,False,3,3,,1565,140.5
-negativo,nobodyknows - Hero’s Come Back,5.0,49.657,False,False,False,2,2,,663,108.6
-negativo,nobodyknows - Hero’s Come Back,5.0,69.424,False,False,False,3,2,,486,109.3
-negativo,nobodyknows - Hero’s Come Back,5.0,261.396,False,False,False,2,2,,460,115.1
-negativo,nobodyknows - Hero’s Come Back,5.0,11.729,False,False,False,2,1,,682,117.1
-negativo,nobodyknows - Hero’s Come Back,5.0,217.396,False,False,False,2,2,,629,109.0
-negativo,nobodyknows - Hero’s Come Back,5.0,175.753,False,False,False,3,1,,637,111.9
-negativo,nobodyknows - Hero’s Come Back,5.0,130.63,False,False,False,2,2,,617,116.4
-negativo,nobodyknows - Hero’s Come Back,5.0,226.24,False,False,False,2,2,,632,88.7
-negativo,nobodyknows - Hero’s Come Back,5.0,220.82,False,False,False,3,2,,786,105.2
-negativo,nobodyknows - Hero’s Come Back,5.0,119.43,False,False,False,3,3,,649,114.5
-negativo,nobodyknows - Hero’s Come Back,10.0,160.619,False,False,False,2,2,,1239,126.2
-negativo,nobodyknows - Hero’s Come Back,10.0,203.476,False,False,False,3,2,,1307,139.4
-negativo,nobodyknows - Hero’s Come Back,10.0,174.546,False,False,False,4,3,,1359,131.4
-negativo,nobodyknows - Hero’s Come Back,10.0,129.362,False,False,False,3,2,,1284,132.4
-negativo,nobodyknows - Hero’s Come Back,10.0,243.438,False,False,False,3,3,,1375,127.4
-negativo,nobodyknows - Hero’s Come Back,10.0,235.207,False,False,False,3,2,,1592,136.4
-negativo,nobodyknows - Hero’s Come Back,10.0,17.39,False,False,False,3,2,,1399,132.8
-negativo,nobodyknows - Hero’s Come Back,10.0,145.768,False,False,False,3,2,,1183,130.2
-negativo,nobodyknows - Hero’s Come Back,10.0,222.469,False,False,False,4,2,,1360,142.4
-negativo,nobodyknows - Hero’s Come Back,10.0,22.495,False,False,False,3,3,,1410,133.4
+positivo,Adrian Barba - El poder nuestro es,5.0,195.665,True,True,True,186,3,0.013,1030,107.9
+positivo,Adrian Barba - El poder nuestro es,5.0,146.517,True,True,True,1294,4,0.001,1499,108.2
+positivo,Adrian Barba - El poder nuestro es,5.0,117.574,True,True,True,261,6,0.012,1165,100.4
+positivo,Adrian Barba - El poder nuestro es,5.0,62.058,True,True,True,187,4,0.014,1142,106.3
+positivo,Adrian Barba - El poder nuestro es,5.0,70.808,True,True,True,212,4,0.034,1079,102.6
+positivo,Adrian Barba - El poder nuestro es,5.0,9.425,True,True,True,687,5,0.002,1019,97.1
+positivo,Adrian Barba - El poder nuestro es,5.0,17.307,True,True,True,153,6,0.031,1185,97.5
+positivo,Adrian Barba - El poder nuestro es,5.0,3.802,True,True,True,709,6,0.04,1410,100.6
+positivo,Adrian Barba - El poder nuestro es,5.0,40.316,True,True,True,494,4,0.006,1017,103.5
+positivo,Adrian Barba - El poder nuestro es,5.0,187.072,True,True,True,189,5,0.012,1099,166.1
+positivo,Adrian Barba - El poder nuestro es,10.0,146.135,True,True,True,611,7,0.035,2925,126.8
+positivo,Adrian Barba - El poder nuestro es,10.0,205.393,True,True,True,510,5,0.035,2440,116.3
+positivo,Adrian Barba - El poder nuestro es,10.0,113.329,True,True,True,264,3,0.015,2304,114.9
+positivo,Adrian Barba - El poder nuestro es,10.0,136.508,True,True,True,196,7,0.021,2455,117.2
+positivo,Adrian Barba - El poder nuestro es,10.0,218.441,True,True,True,528,6,0.034,2323,199.5
+positivo,Adrian Barba - El poder nuestro es,10.0,164.155,True,True,True,801,5,0.036,2799,302.2
+positivo,Adrian Barba - El poder nuestro es,10.0,142.277,True,True,True,395,6,0.031,2861,276.3
+positivo,Adrian Barba - El poder nuestro es,10.0,122.329,True,True,True,936,9,0.006,2273,261.8
+positivo,Adrian Barba - El poder nuestro es,10.0,125.995,True,True,True,1457,9,0.004,2532,258.3
+positivo,Adrian Barba - El poder nuestro es,10.0,210.414,True,True,True,1466,5,0.005,2451,280.1
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,66.383,True,True,True,94,5,0.02,1379,298.3
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,195.275,True,True,True,723,4,0.005,1411,233.7
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,160.575,True,True,True,102,4,0.032,1341,225.6
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,0.655,True,True,True,227,3,0.005,602,212.3
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,94.34,True,True,True,84,5,0.02,1394,229.9
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,205.22,True,True,True,858,4,0.002,1187,234.4
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,132.676,True,True,True,708,5,0.043,1224,237.9
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,8.039,True,True,True,561,5,0.005,999,255.4
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,183.077,True,True,True,486,5,0.011,1327,243.6
+positivo,Asian Kung-Fu Generation - Haruka Kanata,5.0,174.643,True,True,True,165,5,0.029,1282,260.6
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,198.395,True,True,True,1540,5,0.004,2599,309.1
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,41.165,True,True,True,235,4,0.019,2708,278.7
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,20.924,True,True,True,171,5,0.026,2635,301.2
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,5.18,True,True,True,263,6,0.025,2291,264.2
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,126.892,True,True,True,375,6,0.018,2659,297.2
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,18.842,True,True,True,405,6,0.034,2814,302.5
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,70.238,True,True,True,328,7,0.02,2569,273.8
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,112.737,True,True,True,203,8,0.027,2483,347.6
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,99.057,True,True,True,1901,4,0.001,2125,278.0
+positivo,Asian Kung-Fu Generation - Haruka Kanata,10.0,94.499,True,True,True,846,5,0.04,2330,281.3
+positivo,Bôa - Duvet,5.0,5.627,True,True,True,512,4,0.008,1079,261.4
+positivo,Bôa - Duvet,5.0,1.064,True,True,True,837,6,0.042,1260,314.7
+positivo,Bôa - Duvet,5.0,24.696,True,True,True,272,3,0.036,1196,304.2
+positivo,Bôa - Duvet,5.0,1.646,True,True,True,158,4,0.021,1181,330.7
+positivo,Bôa - Duvet,5.0,133.256,True,True,True,186,3,0.02,1200,284.7
+positivo,Bôa - Duvet,5.0,104.442,True,True,True,841,4,0.001,999,341.7
+positivo,Bôa - Duvet,5.0,128.599,True,True,True,475,5,0.007,1131,279.2
+positivo,Bôa - Duvet,5.0,51.126,True,True,True,695,4,0.043,1245,254.2
+positivo,Bôa - Duvet,5.0,122.279,True,True,True,740,4,0.003,1073,283.2
+positivo,Bôa - Duvet,5.0,151.821,True,True,True,391,7,0.009,1314,312.2
+positivo,Bôa - Duvet,10.0,74.32,True,True,True,533,4,0.016,2542,313.4
+positivo,Bôa - Duvet,10.0,89.282,True,True,True,299,4,0.025,2162,300.9
+positivo,Bôa - Duvet,10.0,193.163,True,True,True,179,4,0.02,1611,332.1
+positivo,Bôa - Duvet,10.0,155.93,True,True,True,293,4,0.031,2090,302.3
+positivo,Bôa - Duvet,10.0,189.992,True,True,True,1016,4,0.052,2080,274.4
+positivo,Bôa - Duvet,10.0,73.515,True,True,True,2159,4,0.001,2454,322.6
+positivo,Bôa - Duvet,10.0,132.792,True,True,True,333,4,0.02,2453,303.4
+positivo,Bôa - Duvet,10.0,184.038,True,True,True,1691,5,0.043,2480,349.7
+positivo,Bôa - Duvet,10.0,125.997,True,True,True,1328,6,0.005,2239,295.7
+positivo,Bôa - Duvet,10.0,162.772,True,True,True,2112,6,0.0,2283,269.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,217.775,True,True,True,202,4,0.018,1334,276.0
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,222.695,True,True,True,205,4,0.016,1098,315.6
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,123.027,True,True,True,460,6,0.007,977,273.0
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,276.836,True,True,True,316,4,0.008,813,242.8
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,42.735,True,True,True,215,4,0.01,757,262.1
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,183.123,True,True,True,163,5,0.011,924,257.5
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,228.227,True,True,True,368,6,211.694,1421,297.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,267.449,True,True,True,623,6,0.002,770,265.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,166.184,True,True,True,137,5,0.022,1074,259.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),5.0,118.755,True,True,True,403,6,0.008,949,255.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,96.587,True,True,True,1021,6,0.038,2682,287.3
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,131.679,True,True,True,396,5,143.617,1973,316.9
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,151.254,True,True,True,1857,6,0.001,2034,294.5
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,223.789,True,True,True,1507,6,0.042,2492,304.9
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,276.922,True,True,True,1536,6,0.001,1841,287.7
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,22.71,True,True,True,2266,4,0.001,2692,294.5
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,290.794,True,True,True,453,5,0.034,1966,268.8
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,165.422,True,True,True,1313,6,0.003,2076,298.6
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,111.392,True,True,True,357,5,0.029,1982,260.8
+positivo,Edward Maya Vika Jigulina - Stereo Love (Remastered Version),10.0,209.443,True,True,True,1927,5,0.001,2271,262.5
+positivo,FLOW - HERO -Kibou no uta-,5.0,120.562,True,True,True,777,5,0.004,1220,231.6
+positivo,FLOW - HERO -Kibou no uta-,5.0,53.708,True,True,True,66,4,0.023,1170,273.2
+positivo,FLOW - HERO -Kibou no uta-,5.0,67.897,True,True,True,810,4,0.002,1182,275.4
+positivo,FLOW - HERO -Kibou no uta-,5.0,151.778,True,True,True,217,5,0.012,1145,244.6
+positivo,FLOW - HERO -Kibou no uta-,5.0,125.365,True,True,True,73,4,0.024,1211,257.4
+positivo,FLOW - HERO -Kibou no uta-,5.0,106.405,True,True,True,331,5,0.011,1227,310.6
+positivo,FLOW - HERO -Kibou no uta-,5.0,71.281,True,True,True,640,5,0.004,1301,255.3
+positivo,FLOW - HERO -Kibou no uta-,5.0,160.458,True,True,True,492,4,0.008,1180,223.3
+positivo,FLOW - HERO -Kibou no uta-,5.0,82.61,True,True,True,443,6,0.006,1183,223.2
+positivo,FLOW - HERO -Kibou no uta-,5.0,69.227,True,True,True,185,5,0.032,1205,307.8
+positivo,FLOW - HERO -Kibou no uta-,10.0,183.348,True,True,True,1312,5,0.003,2170,288.1
+positivo,FLOW - HERO -Kibou no uta-,10.0,54.355,True,True,True,273,7,0.02,2431,288.4
+positivo,FLOW - HERO -Kibou no uta-,10.0,46.782,True,True,True,226,7,0.017,2470,300.5
+positivo,FLOW - HERO -Kibou no uta-,10.0,147.081,True,True,True,1153,5,0.005,2355,373.1
+positivo,FLOW - HERO -Kibou no uta-,10.0,128.343,True,True,True,335,5,0.029,2385,269.7
+positivo,FLOW - HERO -Kibou no uta-,10.0,9.998,True,True,True,507,5,0.013,2266,281.9
+positivo,FLOW - HERO -Kibou no uta-,10.0,17.303,True,True,True,227,5,0.027,2078,279.1
+positivo,FLOW - HERO -Kibou no uta-,10.0,77.67,True,True,True,204,6,0.023,2340,282.7
+positivo,FLOW - HERO -Kibou no uta-,10.0,171.479,True,True,True,183,6,0.023,2348,311.2
+positivo,FLOW - HERO -Kibou no uta-,10.0,82.553,True,True,True,269,7,0.029,2406,307.0
+positivo,Geoxor - Virtual,5.0,244.751,True,True,True,173,4,0.013,791,296.8
+positivo,Geoxor - Virtual,5.0,98.406,True,True,True,900,5,0.0,983,258.9
+positivo,Geoxor - Virtual,5.0,74.433,True,True,True,221,5,0.036,916,255.7
+positivo,Geoxor - Virtual,5.0,246.179,True,True,True,667,5,0.001,779,256.2
+positivo,Geoxor - Virtual,5.0,272.546,True,True,True,264,5,0.037,967,258.3
+positivo,Geoxor - Virtual,5.0,24.659,True,True,True,739,3,0.001,825,229.0
+positivo,Geoxor - Virtual,5.0,18.212,True,True,True,310,4,0.008,831,280.6
+positivo,Geoxor - Virtual,5.0,208.732,True,True,True,155,4,0.031,1022,269.6
+positivo,Geoxor - Virtual,5.0,104.517,True,True,True,92,5,7.496,811,242.7
+positivo,Geoxor - Virtual,5.0,178.378,True,True,True,647,4,0.003,903,235.1
+positivo,Geoxor - Virtual,10.0,45.979,True,True,True,954,4,0.003,1528,290.6
+positivo,Geoxor - Virtual,10.0,263.133,True,True,True,1008,6,0.004,1872,271.3
+positivo,Geoxor - Virtual,10.0,137.783,True,True,True,1003,4,0.042,1635,284.3
+positivo,Geoxor - Virtual,10.0,273.827,True,True,True,254,5,0.017,1783,276.3
+positivo,Geoxor - Virtual,10.0,243.639,True,True,True,313,5,0.015,1714,244.1
+positivo,Geoxor - Virtual,10.0,215.802,True,True,True,1306,7,0.043,2047,277.5
+positivo,Geoxor - Virtual,10.0,70.566,True,True,True,279,5,0.024,1769,281.2
+positivo,Geoxor - Virtual,10.0,234.67,True,True,True,446,6,0.009,1566,276.6
+positivo,Geoxor - Virtual,10.0,15.916,True,True,True,378,4,0.034,1728,275.2
+positivo,Geoxor - Virtual,10.0,174.423,True,True,True,961,8,0.041,1956,279.2
+positivo,HOME - Resonance,5.0,84.145,True,True,True,605,4,0.004,974,244.1
+positivo,HOME - Resonance,5.0,207.299,True,True,True,187,3,0.009,768,231.8
+positivo,HOME - Resonance,5.0,41.29,True,True,True,671,3,0.005,1036,235.6
+positivo,HOME - Resonance,5.0,196.874,True,True,True,259,3,11.3,1297,283.8
+positivo,HOME - Resonance,5.0,18.876,True,True,True,130,3,0.022,1011,245.5
+positivo,HOME - Resonance,5.0,129.618,True,True,True,754,4,0.004,1278,283.7
+positivo,HOME - Resonance,5.0,120.707,True,True,True,440,4,0.01,1232,259.9
+positivo,HOME - Resonance,5.0,186.978,True,True,True,399,4,0.01,1307,276.0
+positivo,HOME - Resonance,5.0,62.128,True,True,True,275,3,0.038,1042,251.4
+positivo,HOME - Resonance,5.0,187.629,True,True,True,389,4,5.608,1337,275.5
+positivo,HOME - Resonance,10.0,136.413,True,True,True,619,4,22.588,2441,278.2
+positivo,HOME - Resonance,10.0,180.748,True,True,True,1735,4,0.003,2552,298.0
+positivo,HOME - Resonance,10.0,40.501,True,True,True,1305,4,0.005,2165,278.4
+positivo,HOME - Resonance,10.0,153.921,True,True,True,718,4,22.635,2361,283.7
+positivo,HOME - Resonance,10.0,191.246,True,True,True,1348,4,0.006,2580,285.9
+positivo,HOME - Resonance,10.0,9.865,True,True,True,255,3,0.02,1904,296.3
+positivo,HOME - Resonance,10.0,74.116,True,True,True,1790,5,0.044,2255,277.9
+positivo,HOME - Resonance,10.0,129.21,True,True,True,590,6,45.172,2487,261.7
+positivo,HOME - Resonance,10.0,21.415,True,True,True,975,4,0.006,2189,250.8
+positivo,HOME - Resonance,10.0,103.541,True,True,True,270,5,0.027,2471,254.9
+positivo,Home Made Kazoku - Thank You,5.0,158.4,True,True,True,638,5,0.007,1308,234.5
+positivo,Home Made Kazoku - Thank You,5.0,192.36,True,True,True,516,3,62.143,1168,218.9
+positivo,Home Made Kazoku - Thank You,5.0,233.443,True,True,True,248,4,0.036,917,239.3
+positivo,Home Made Kazoku - Thank You,5.0,103.188,True,True,True,823,3,0.002,1055,235.0
+positivo,Home Made Kazoku - Thank You,5.0,110.88,True,True,True,89,4,0.028,1145,254.2
+positivo,Home Made Kazoku - Thank You,5.0,119.399,True,True,True,794,3,0.002,1053,247.0
+positivo,Home Made Kazoku - Thank You,5.0,240.351,True,True,True,368,5,8.567,1222,258.7
+positivo,Home Made Kazoku - Thank You,5.0,49.288,True,True,True,119,3,0.015,894,241.6
+positivo,Home Made Kazoku - Thank You,5.0,125.866,True,True,True,400,4,51.423,1124,246.3
+positivo,Home Made Kazoku - Thank You,5.0,12.547,True,True,True,594,5,0.008,1227,252.4
+positivo,Home Made Kazoku - Thank You,10.0,104.94,True,True,True,315,4,0.032,2247,271.7
+positivo,Home Made Kazoku - Thank You,10.0,233.289,True,True,True,400,7,0.021,2069,261.4
+positivo,Home Made Kazoku - Thank You,10.0,153.059,True,True,True,991,5,0.007,2382,280.7
+positivo,Home Made Kazoku - Thank You,10.0,86.278,True,True,True,818,4,0.04,2370,303.7
+positivo,Home Made Kazoku - Thank You,10.0,245.575,True,True,True,2087,5,0.0,2302,291.9
+positivo,Home Made Kazoku - Thank You,10.0,148.998,True,True,True,151,3,0.019,2157,294.7
+positivo,Home Made Kazoku - Thank You,10.0,234.185,True,True,True,606,6,0.035,2088,272.3
+positivo,Home Made Kazoku - Thank You,10.0,4.03,True,True,True,994,4,0.037,2286,281.6
+positivo,Home Made Kazoku - Thank You,10.0,113.532,True,True,True,278,3,0.033,2112,314.5
+positivo,Home Made Kazoku - Thank You,10.0,206.054,True,True,True,2157,6,0.0,2255,291.1
+positivo,Linkin Park - Crawling,5.0,160.491,True,True,True,492,4,0.006,1013,235.4
+positivo,Linkin Park - Crawling,5.0,86.308,True,True,True,57,4,0.023,892,238.9
+positivo,Linkin Park - Crawling,5.0,105.356,True,True,True,124,3,0.031,997,251.5
+positivo,Linkin Park - Crawling,5.0,89.009,True,True,True,120,3,0.03,938,282.3
+positivo,Linkin Park - Crawling,5.0,112.111,True,True,True,422,4,0.005,900,230.0
+positivo,Linkin Park - Crawling,5.0,48.767,True,True,True,237,4,0.006,712,223.9
+positivo,Linkin Park - Crawling,5.0,166.433,True,True,True,424,7,0.039,1084,239.2
+positivo,Linkin Park - Crawling,5.0,16.459,True,True,True,130,4,0.019,1063,252.7
+positivo,Linkin Park - Crawling,5.0,87.826,True,True,True,257,4,0.008,918,257.3
+positivo,Linkin Park - Crawling,5.0,59.699,True,True,True,72,2,0.024,791,243.9
+positivo,Linkin Park - Crawling,10.0,151.895,True,True,True,416,5,0.036,2130,277.7
+positivo,Linkin Park - Crawling,10.0,154.958,True,True,True,311,5,0.034,2162,271.0
+positivo,Linkin Park - Crawling,10.0,147.068,True,True,True,731,6,0.008,2137,268.5
+positivo,Linkin Park - Crawling,10.0,191.184,True,True,True,649,6,0.038,2110,278.7
+positivo,Linkin Park - Crawling,10.0,192.754,True,True,True,239,5,0.029,2240,303.0
+positivo,Linkin Park - Crawling,10.0,38.186,True,True,True,266,5,0.013,1810,278.7
+positivo,Linkin Park - Crawling,10.0,23.769,True,True,True,608,4,0.038,1991,292.4
+positivo,Linkin Park - Crawling,10.0,27.373,True,True,True,159,5,0.02,2025,257.4
+positivo,Linkin Park - Crawling,10.0,150.764,True,True,True,204,4,0.02,2086,309.9
+positivo,Linkin Park - Crawling,10.0,200.667,True,True,True,1385,6,0.001,1577,268.4
+positivo,Orange Range - Asterisk,5.0,296.646,True,True,True,282,6,0.034,1290,261.3
+positivo,Orange Range - Asterisk,5.0,213.743,True,True,True,222,3,148.774,1343,245.1
+positivo,Orange Range - Asterisk,5.0,309.601,True,True,True,306,4,0.032,1276,255.8
+positivo,Orange Range - Asterisk,5.0,278.682,True,True,True,876,3,0.004,1300,263.3
+positivo,Orange Range - Asterisk,5.0,4.704,True,True,True,199,3,0.014,1210,271.3
+positivo,Orange Range - Asterisk,5.0,38.139,True,True,True,239,3,0.012,1103,239.8
+positivo,Orange Range - Asterisk,5.0,276.244,True,True,True,347,6,218.612,1446,248.0
+positivo,Orange Range - Asterisk,5.0,26.343,True,True,True,282,4,0.012,1138,236.6
+positivo,Orange Range - Asterisk,5.0,313.845,True,True,True,874,5,0.004,1392,252.8
+positivo,Orange Range - Asterisk,5.0,264.644,True,True,True,184,4,0.029,1140,246.9
+positivo,Orange Range - Asterisk,10.0,301.387,True,True,True,920,5,0.038,2571,279.4
+positivo,Orange Range - Asterisk,10.0,113.451,True,True,True,1801,3,0.045,2376,287.2
+positivo,Orange Range - Asterisk,10.0,46.84,True,True,True,279,5,0.028,2384,271.7
+positivo,Orange Range - Asterisk,10.0,162.74,True,True,True,583,5,85.882,2629,271.9
+positivo,Orange Range - Asterisk,10.0,306.242,True,True,True,1031,5,290.22,2542,304.4
+positivo,Orange Range - Asterisk,10.0,115.624,True,True,True,482,5,0.035,2369,302.9
+positivo,Orange Range - Asterisk,10.0,280.205,True,True,True,613,5,0.033,2666,294.8
+positivo,Orange Range - Asterisk,10.0,120.853,True,True,True,244,5,0.017,2303,298.6
+positivo,Orange Range - Asterisk,10.0,258.932,True,True,True,355,4,0.03,2220,280.1
+positivo,Orange Range - Asterisk,10.0,72.285,True,True,True,598,5,148.722,2669,264.9
+positivo,Petit Biscuit - Sunset Lover,5.0,100.382,True,True,True,349,5,10.567,990,226.6
+positivo,Petit Biscuit - Sunset Lover,5.0,68.355,True,True,True,564,6,0.005,877,234.8
+positivo,Petit Biscuit - Sunset Lover,5.0,48.597,True,True,True,614,4,10.567,964,229.6
+positivo,Petit Biscuit - Sunset Lover,5.0,186.691,True,True,True,662,4,0.003,945,223.0
+positivo,Petit Biscuit - Sunset Lover,5.0,167.701,True,True,True,565,6,0.006,1115,236.3
+positivo,Petit Biscuit - Sunset Lover,5.0,29.207,True,True,True,735,5,0.043,1202,254.8
+positivo,Petit Biscuit - Sunset Lover,5.0,193.142,True,True,True,602,3,0.002,839,247.8
+positivo,Petit Biscuit - Sunset Lover,5.0,203.064,True,True,True,565,4,10.57,881,234.6
+positivo,Petit Biscuit - Sunset Lover,5.0,55.657,True,True,True,409,4,10.61,914,257.6
+positivo,Petit Biscuit - Sunset Lover,5.0,89.18,True,True,True,305,6,10.526,972,245.7
+positivo,Petit Biscuit - Sunset Lover,10.0,110.015,True,True,True,1676,5,0.045,2185,271.3
+positivo,Petit Biscuit - Sunset Lover,10.0,134.136,True,True,True,515,9,10.571,2158,303.8
+positivo,Petit Biscuit - Sunset Lover,10.0,90.381,True,True,True,714,6,0.009,1850,298.4
+positivo,Petit Biscuit - Sunset Lover,10.0,30.367,True,True,True,1266,5,0.042,2298,273.2
+positivo,Petit Biscuit - Sunset Lover,10.0,190.053,True,True,True,953,7,10.568,1693,271.9
+positivo,Petit Biscuit - Sunset Lover,10.0,141.267,True,True,True,1641,12,0.003,2197,312.8
+positivo,Petit Biscuit - Sunset Lover,10.0,8.27,True,True,True,1585,5,0.003,2031,297.1
+positivo,Petit Biscuit - Sunset Lover,10.0,166.228,True,True,True,921,9,10.522,2267,281.4
+positivo,Petit Biscuit - Sunset Lover,10.0,149.428,True,True,True,536,5,0.03,2243,308.4
+positivo,Petit Biscuit - Sunset Lover,10.0,37.412,True,True,True,893,6,10.57,2050,263.7
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,149.329,True,True,True,70,5,0.024,1282,255.2
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,121.936,True,True,True,209,5,0.031,1245,254.6
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,6.894,True,True,True,130,6,0.021,1562,256.2
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,225.413,True,True,True,478,5,0.04,1109,267.9
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,174.813,True,True,True,258,7,0.013,1188,245.1
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,75.402,True,True,True,165,4,0.03,1022,234.1
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,3.887,True,True,True,297,5,0.032,1490,235.8
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,22.186,True,True,True,335,6,0.034,1333,253.7
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,184.227,True,True,True,977,6,0.0,1210,261.3
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,5.0,36.298,True,True,True,84,5,0.029,1005,254.8
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,122.067,True,True,True,266,6,0.023,2564,300.4
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,213.945,True,True,True,1372,8,0.004,2300,336.9
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,221.181,True,True,True,526,6,0.035,2195,318.0
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,63.783,True,True,True,178,6,0.021,2107,309.9
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,15.731,True,True,True,680,7,0.035,2790,297.5
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,117.809,True,True,True,801,4,0.037,2574,329.4
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,200.283,True,True,True,404,6,0.034,1792,274.8
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,148.704,True,True,True,1367,8,0.004,2216,288.3
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,15.876,True,True,True,1341,6,0.006,2744,272.1
+positivo,ROSA WALTON x HALLIE COGGINS - I REALLY WANT TO STAY AT YOUR HOUSE,10.0,154.779,True,True,True,1276,8,0.005,2502,297.3
+positivo,Shiro SAGISU - Number One - Bankai,5.0,93.573,True,True,True,708,5,0.004,1242,232.9
+positivo,Shiro SAGISU - Number One - Bankai,5.0,61.478,True,True,True,308,3,0.038,1092,254.1
+positivo,Shiro SAGISU - Number One - Bankai,5.0,116.942,True,True,True,519,3,0.006,1253,255.7
+positivo,Shiro SAGISU - Number One - Bankai,5.0,237.333,True,True,True,113,3,0.025,1215,236.4
+positivo,Shiro SAGISU - Number One - Bankai,5.0,262.546,True,True,True,87,3,0.021,1082,249.9
+positivo,Shiro SAGISU - Number One - Bankai,5.0,38.334,True,True,True,80,7,0.021,1293,234.6
+positivo,Shiro SAGISU - Number One - Bankai,5.0,152.797,True,True,True,358,4,0.01,1346,236.7
+positivo,Shiro SAGISU - Number One - Bankai,5.0,206.952,True,True,True,164,3,0.015,1294,253.9
+positivo,Shiro SAGISU - Number One - Bankai,5.0,70.351,True,True,True,545,5,0.005,1252,243.9
+positivo,Shiro SAGISU - Number One - Bankai,5.0,74.1,True,True,True,101,4,0.028,1127,260.1
+positivo,Shiro SAGISU - Number One - Bankai,10.0,64.472,True,True,True,488,6,0.013,2394,292.4
+positivo,Shiro SAGISU - Number One - Bankai,10.0,55.92,True,True,True,1328,5,0.006,2594,273.8
+positivo,Shiro SAGISU - Number One - Bankai,10.0,236.922,True,True,True,471,4,0.032,2472,272.5
+positivo,Shiro SAGISU - Number One - Bankai,10.0,58.321,True,True,True,971,6,0.039,2600,298.7
+positivo,Shiro SAGISU - Number One - Bankai,10.0,60.255,True,True,True,195,6,0.022,2386,271.5
+positivo,Shiro SAGISU - Number One - Bankai,10.0,33.464,True,True,True,283,7,0.028,2466,269.8
+positivo,Shiro SAGISU - Number One - Bankai,10.0,33.227,True,True,True,214,7,0.023,2367,265.9
+positivo,Shiro SAGISU - Number One - Bankai,10.0,207.671,True,True,True,865,4,0.038,2657,268.9
+positivo,Shiro SAGISU - Number One - Bankai,10.0,76.918,True,True,True,558,5,0.013,2666,277.3
+positivo,Shiro SAGISU - Number One - Bankai,10.0,213.942,True,True,True,981,3,0.04,2351,253.4
+positivo,The Killers - Somebody Told Me,5.0,115.638,True,True,True,825,7,0.002,1108,224.5
+positivo,The Killers - Somebody Told Me,5.0,169.356,True,True,True,195,3,0.036,1087,220.8
+positivo,The Killers - Somebody Told Me,5.0,109.318,True,True,True,916,4,0.002,1153,237.7
+positivo,The Killers - Somebody Told Me,5.0,150.764,True,True,True,108,4,0.02,1040,228.9
+positivo,The Killers - Somebody Told Me,5.0,159.75,True,True,True,625,5,0.004,1238,235.9
+positivo,The Killers - Somebody Told Me,5.0,12.041,True,True,True,262,4,0.014,1384,251.2
+positivo,The Killers - Somebody Told Me,5.0,110.578,True,True,True,712,5,0.004,1116,238.6
+positivo,The Killers - Somebody Told Me,5.0,89.699,True,True,True,50,6,45.256,1069,231.2
+positivo,The Killers - Somebody Told Me,5.0,56.903,True,True,True,179,5,0.014,1121,243.6
+positivo,The Killers - Somebody Told Me,5.0,89.264,True,True,True,483,5,0.006,1122,229.1
+positivo,The Killers - Somebody Told Me,10.0,79.397,True,True,True,273,5,0.031,2217,274.7
+positivo,The Killers - Somebody Told Me,10.0,94.574,True,True,True,155,4,0.023,2149,269.9
+positivo,The Killers - Somebody Told Me,10.0,157.318,True,True,True,195,4,0.026,2355,269.2
+positivo,The Killers - Somebody Told Me,10.0,158.736,True,True,True,1337,5,0.005,2518,277.8
+positivo,The Killers - Somebody Told Me,10.0,120.472,True,True,True,926,4,0.007,2432,265.0
+positivo,The Killers - Somebody Told Me,10.0,136.583,True,True,True,1642,7,0.003,2465,272.4
+positivo,The Killers - Somebody Told Me,10.0,184.423,True,True,True,486,5,0.01,2073,267.9
+positivo,The Killers - Somebody Told Me,10.0,122.473,True,True,True,607,5,0.011,2381,279.9
+positivo,The Killers - Somebody Told Me,10.0,71.034,True,True,True,200,6,0.027,2348,263.0
+positivo,The Killers - Somebody Told Me,10.0,15.785,True,True,True,1445,6,0.005,2407,283.4
+positivo,The Neighbourhood - Sweater Weather,5.0,127.978,True,True,True,290,3,0.036,998,236.9
+positivo,The Neighbourhood - Sweater Weather,5.0,53.605,True,True,True,235,4,0.014,1117,249.8
+positivo,The Neighbourhood - Sweater Weather,5.0,137.546,True,True,True,334,8,0.009,903,244.8
+positivo,The Neighbourhood - Sweater Weather,5.0,5.953,True,True,True,373,3,0.009,879,241.8
+positivo,The Neighbourhood - Sweater Weather,5.0,196.454,True,True,True,193,3,0.013,958,233.2
+positivo,The Neighbourhood - Sweater Weather,5.0,218.749,True,True,True,210,4,0.017,1227,248.7
+positivo,The Neighbourhood - Sweater Weather,5.0,33.69,True,True,True,193,3,0.021,1238,233.6
+positivo,The Neighbourhood - Sweater Weather,5.0,189.706,True,True,True,818,4,0.001,1006,231.8
+positivo,The Neighbourhood - Sweater Weather,5.0,94.143,True,True,True,372,5,0.009,1068,225.5
+positivo,The Neighbourhood - Sweater Weather,5.0,9.653,True,True,True,387,6,0.04,898,233.6
+positivo,The Neighbourhood - Sweater Weather,10.0,206.186,True,True,True,900,6,0.039,2255,274.8
+positivo,The Neighbourhood - Sweater Weather,10.0,213.2,True,True,True,1113,5,0.041,2229,273.4
+positivo,The Neighbourhood - Sweater Weather,10.0,9.758,True,True,True,853,4,0.006,2013,261.2
+positivo,The Neighbourhood - Sweater Weather,10.0,134.449,True,True,True,1015,5,0.006,1971,260.8
+positivo,The Neighbourhood - Sweater Weather,10.0,186.415,True,True,True,1079,4,0.006,2064,276.8
+positivo,The Neighbourhood - Sweater Weather,10.0,178.971,True,True,True,807,6,0.038,1922,271.4
+positivo,The Neighbourhood - Sweater Weather,10.0,94.121,True,True,True,595,6,0.034,2235,268.2
+positivo,The Neighbourhood - Sweater Weather,10.0,194.847,True,True,True,431,4,0.032,2081,253.4
+positivo,The Neighbourhood - Sweater Weather,10.0,188.024,True,True,True,447,5,0.035,2134,271.1
+positivo,The Neighbourhood - Sweater Weather,10.0,25.687,True,True,True,1178,5,0.005,2325,259.7
+positivo,hkmori - anybody can find love (except you.),5.0,1.259,True,True,True,531,2,0.005,752,228.8
+positivo,hkmori - anybody can find love (except you.),5.0,12.927,True,True,True,486,3,110.185,1506,236.2
+positivo,hkmori - anybody can find love (except you.),5.0,46.159,True,True,True,864,3,0.045,1103,238.6
+positivo,hkmori - anybody can find love (except you.),5.0,13.87,True,True,True,372,3,0.031,1346,237.5
+positivo,hkmori - anybody can find love (except you.),5.0,9.943,True,True,True,959,3,110.197,1316,259.6
+positivo,hkmori - anybody can find love (except you.),5.0,32.719,True,True,True,125,3,0.026,1136,245.7
+positivo,hkmori - anybody can find love (except you.),5.0,82.522,True,True,True,730,3,0.002,929,232.4
+positivo,hkmori - anybody can find love (except you.),5.0,66.281,True,True,True,200,2,0.012,812,217.0
+positivo,hkmori - anybody can find love (except you.),5.0,34.628,True,True,True,149,3,0.03,1152,236.9
+positivo,hkmori - anybody can find love (except you.),5.0,120.184,True,True,True,1023,3,0.044,1364,243.0
+positivo,hkmori - anybody can find love (except you.),10.0,85.336,True,True,True,235,3,0.026,1789,253.3
+positivo,hkmori - anybody can find love (except you.),10.0,77.048,True,True,True,1149,3,0.005,1986,260.2
+positivo,hkmori - anybody can find love (except you.),10.0,114.623,True,True,True,1044,3,0.009,2643,286.2
+positivo,hkmori - anybody can find love (except you.),10.0,95.403,True,True,True,657,4,10.015,2289,297.7
+positivo,hkmori - anybody can find love (except you.),10.0,15.402,True,True,True,576,4,0.03,2639,294.2
+positivo,hkmori - anybody can find love (except you.),10.0,4.488,True,True,True,565,4,0.03,2488,276.7
+positivo,hkmori - anybody can find love (except you.),10.0,105.026,True,True,True,586,3,10.006,2664,272.3
+positivo,hkmori - anybody can find love (except you.),10.0,49.531,True,True,True,173,4,0.026,1822,277.5
+positivo,hkmori - anybody can find love (except you.),10.0,7.222,True,True,True,583,3,90.116,2693,265.8
+positivo,hkmori - anybody can find love (except you.),10.0,57.878,True,True,True,311,3,0.014,1808,254.7
+positivo,nobodyknows - Hero’s Come Back,5.0,103.354,True,True,True,73,4,0.025,1155,238.2
+positivo,nobodyknows - Hero’s Come Back,5.0,117.012,True,True,True,152,3,0.03,1098,229.6
+positivo,nobodyknows - Hero’s Come Back,5.0,116.655,True,True,True,960,3,0.002,1255,230.6
+positivo,nobodyknows - Hero’s Come Back,5.0,85.271,True,True,True,336,3,0.007,1051,219.2
+positivo,nobodyknows - Hero’s Come Back,5.0,132.69,True,True,True,235,5,83.07,1075,220.0
+positivo,nobodyknows - Hero’s Come Back,5.0,133.419,True,True,True,618,3,0.003,1123,229.4
+positivo,nobodyknows - Hero’s Come Back,5.0,265.045,True,True,True,237,3,0.012,915,220.2
+positivo,nobodyknows - Hero’s Come Back,5.0,188.032,True,True,True,616,3,0.043,1096,229.2
+positivo,nobodyknows - Hero’s Come Back,5.0,210.549,True,True,True,277,3,0.037,1169,270.2
+positivo,nobodyknows - Hero’s Come Back,5.0,2.181,True,True,True,428,3,0.001,550,220.2
+positivo,nobodyknows - Hero’s Come Back,10.0,82.29,True,True,True,1663,4,0.002,2193,276.1
+positivo,nobodyknows - Hero’s Come Back,10.0,262.092,True,True,True,279,5,0.031,1728,251.6
+positivo,nobodyknows - Hero’s Come Back,10.0,71.894,True,True,True,1127,3,0.005,1913,265.5
+positivo,nobodyknows - Hero’s Come Back,10.0,135.871,True,True,True,718,4,92.31,2587,256.4
+positivo,nobodyknows - Hero’s Come Back,10.0,229.964,True,True,True,1106,4,0.04,2429,267.6
+positivo,nobodyknows - Hero’s Come Back,10.0,170.145,True,True,True,500,4,0.035,2242,281.2
+positivo,nobodyknows - Hero’s Come Back,10.0,234.81,True,True,True,833,3,0.01,2464,262.5
+positivo,nobodyknows - Hero’s Come Back,10.0,43.801,True,True,True,819,5,0.009,2422,282.8
+positivo,nobodyknows - Hero’s Come Back,10.0,136.069,True,True,True,2314,6,0.0,2616,289.9
+positivo,nobodyknows - Hero’s Come Back,10.0,169.346,True,True,True,145,3,0.026,2282,267.0
+positivo,siinamota - Young Girl A,5.0,81.645,True,True,True,826,6,0.004,1362,239.8
+positivo,siinamota - Young Girl A,5.0,136.162,True,True,True,1264,4,0.0,1467,244.5
+positivo,siinamota - Young Girl A,5.0,235.932,True,True,True,164,6,0.018,1141,238.4
+positivo,siinamota - Young Girl A,5.0,174.667,True,True,True,665,4,0.007,1567,254.3
+positivo,siinamota - Young Girl A,5.0,74.922,True,True,True,171,7,0.015,1494,266.5
+positivo,siinamota - Young Girl A,5.0,15.164,True,True,True,192,4,0.024,1426,272.9
+positivo,siinamota - Young Girl A,5.0,43.328,True,True,True,1172,4,0.0,1328,251.6
+positivo,siinamota - Young Girl A,5.0,64.506,True,True,True,1046,3,0.001,1365,254.7
+positivo,siinamota - Young Girl A,5.0,208.704,True,True,True,905,4,0.003,1348,261.1
+positivo,siinamota - Young Girl A,5.0,64.259,True,True,True,296,4,0.032,1321,249.7
+positivo,siinamota - Young Girl A,10.0,188.574,True,True,True,440,5,0.028,3046,287.9
+positivo,siinamota - Young Girl A,10.0,63.567,True,True,True,806,4,0.037,2578,283.0
+positivo,siinamota - Young Girl A,10.0,155.042,True,True,True,301,5,0.026,2778,288.7
+positivo,siinamota - Young Girl A,10.0,122.311,True,True,True,716,5,0.035,2421,283.6
+positivo,siinamota - Young Girl A,10.0,222.484,True,True,True,899,6,0.037,2710,312.9
+positivo,siinamota - Young Girl A,10.0,131.482,True,True,True,920,5,0.01,2665,287.7
+positivo,siinamota - Young Girl A,10.0,214.893,True,True,True,530,6,0.016,2898,272.3
+positivo,siinamota - Young Girl A,10.0,223.312,True,True,True,439,6,0.029,2629,262.5
+positivo,siinamota - Young Girl A,10.0,173.697,True,True,True,704,4,0.011,2787,285.2
+positivo,siinamota - Young Girl A,10.0,145.87,True,True,True,1938,6,0.002,2708,275.7
+positivo,東方 - Bad Apple,5.0,184.319,True,True,True,1023,5,0.001,1210,265.0
+positivo,東方 - Bad Apple,5.0,213.391,True,True,True,824,5,0.0,904,240.3
+positivo,東方 - Bad Apple,5.0,52.926,True,True,True,204,7,0.031,1307,233.7
+positivo,東方 - Bad Apple,5.0,120.467,True,True,True,846,7,0.002,1147,244.4
+positivo,東方 - Bad Apple,5.0,30.248,True,True,True,218,5,0.016,1142,233.1
+positivo,東方 - Bad Apple,5.0,22.471,True,True,True,392,5,0.04,817,234.9
+positivo,東方 - Bad Apple,5.0,143.494,True,True,True,630,5,0.041,1376,277.5
+positivo,東方 - Bad Apple,5.0,10.181,True,True,True,54,2,0.01,330,215.2
+positivo,東方 - Bad Apple,5.0,153.036,True,True,True,162,5,97.447,1318,252.7
+positivo,東方 - Bad Apple,5.0,175.791,True,True,True,250,4,0.016,1353,231.7
+positivo,東方 - Bad Apple,10.0,34.939,True,True,True,323,7,0.016,2444,284.9
+positivo,東方 - Bad Apple,10.0,142.302,True,True,True,723,7,0.01,2582,313.4
+positivo,東方 - Bad Apple,10.0,82.731,True,True,True,347,5,0.021,2634,301.6
+positivo,東方 - Bad Apple,10.0,186.85,True,True,True,211,4,0.022,2609,259.4
+positivo,東方 - Bad Apple,10.0,190.38,True,True,True,224,5,0.023,2572,287.8
+positivo,東方 - Bad Apple,10.0,120.785,True,True,True,1565,9,0.005,2428,283.8
+positivo,東方 - Bad Apple,10.0,117.417,True,True,True,264,8,0.017,2396,282.0
+positivo,東方 - Bad Apple,10.0,148.618,True,True,True,847,6,0.01,2644,285.2
+positivo,東方 - Bad Apple,10.0,120.959,True,True,True,464,7,0.029,2480,334.2
+positivo,東方 - Bad Apple,10.0,155.998,True,True,True,1192,6,0.006,2568,296.5
+positivo,稲葉曇 - ラグトレイン,5.0,47.933,True,True,True,435,3,0.007,1041,247.0
+positivo,稲葉曇 - ラグトレイン,5.0,193.124,True,True,True,180,4,0.027,1217,254.9
+positivo,稲葉曇 - ラグトレイン,5.0,129.882,True,True,True,451,3,0.036,1024,260.3
+positivo,稲葉曇 - ラグトレイン,5.0,185.643,True,True,True,116,5,0.023,1079,244.9
+positivo,稲葉曇 - ラグトレイン,5.0,129.243,True,True,True,925,4,0.001,988,251.8
+positivo,稲葉曇 - ラグトレイン,5.0,75.694,True,True,True,785,4,0.003,1209,229.9
+positivo,稲葉曇 - ラグトレイン,5.0,21.959,True,True,True,572,4,0.007,1291,238.8
+positivo,稲葉曇 - ラグトレイン,5.0,129.72,True,True,True,213,5,0.014,992,230.1
+positivo,稲葉曇 - ラグトレイン,5.0,242.455,True,True,True,405,6,0.038,1131,234.0
+positivo,稲葉曇 - ラグトレイン,5.0,8.848,True,True,True,99,6,0.024,946,237.3
+positivo,稲葉曇 - ラグトレイン,10.0,138.228,True,True,True,280,9,0.023,2334,298.1
+positivo,稲葉曇 - ラグトレイン,10.0,108.163,True,True,True,1582,6,0.004,2345,302.1
+positivo,稲葉曇 - ラグトレイン,10.0,1.55,True,True,True,175,6,0.018,1646,251.2
+positivo,稲葉曇 - ラグトレイン,10.0,131.496,True,True,True,283,4,0.025,2204,280.9
+positivo,稲葉曇 - ラグトレイン,10.0,186.914,True,True,True,1001,4,0.04,2270,271.8
+positivo,稲葉曇 - ラグトレイン,10.0,179.384,True,True,True,431,5,0.033,2238,272.4
+positivo,稲葉曇 - ラグトレイン,10.0,236.655,True,True,True,1936,6,0.044,2555,276.6
+positivo,稲葉曇 - ラグトレイン,10.0,127.991,True,True,True,1504,5,0.002,2141,286.6
+positivo,稲葉曇 - ラグトレイン,10.0,142.697,True,True,True,654,6,0.034,2372,262.9
+positivo,稲葉曇 - ラグトレイン,10.0,233.643,True,True,True,1552,5,0.05,2521,268.9
+negativo,Adrian Barba - El poder nuestro es,5.0,73.535,False,False,False,4,3,,1190,188.0
+negativo,Adrian Barba - El poder nuestro es,5.0,183.675,False,False,False,4,3,,1104,193.9
+negativo,Adrian Barba - El poder nuestro es,5.0,43.131,False,False,False,3,2,,915,177.6
+negativo,Adrian Barba - El poder nuestro es,5.0,83.25,False,False,False,3,3,,1109,174.4
+negativo,Adrian Barba - El poder nuestro es,5.0,154.698,False,False,False,5,4,,1362,190.5
+negativo,Adrian Barba - El poder nuestro es,5.0,133.327,False,False,False,3,3,,1221,195.8
+negativo,Adrian Barba - El poder nuestro es,5.0,44.88,False,False,False,5,3,,1018,170.3
+negativo,Adrian Barba - El poder nuestro es,5.0,151.671,False,False,False,4,3,,1335,185.4
+negativo,Adrian Barba - El poder nuestro es,5.0,132.882,False,False,False,4,4,,1228,208.7
+negativo,Adrian Barba - El poder nuestro es,5.0,211.731,False,False,False,4,4,,1273,196.0
+negativo,Adrian Barba - El poder nuestro es,10.0,135.519,False,False,False,6,4,,2468,202.7
+negativo,Adrian Barba - El poder nuestro es,10.0,199.007,False,False,False,6,4,,2465,234.8
+negativo,Adrian Barba - El poder nuestro es,10.0,216.569,False,False,False,6,6,,2226,206.3
+negativo,Adrian Barba - El poder nuestro es,10.0,19.707,False,False,False,5,4,,2029,209.5
+negativo,Adrian Barba - El poder nuestro es,10.0,16.261,False,False,False,5,4,,2211,219.8
+negativo,Adrian Barba - El poder nuestro es,10.0,113.084,False,False,False,5,4,,2249,209.3
+negativo,Adrian Barba - El poder nuestro es,10.0,112.506,False,False,False,4,3,,2360,214.2
+negativo,Adrian Barba - El poder nuestro es,10.0,124.891,False,False,False,3,3,,2453,209.9
+negativo,Adrian Barba - El poder nuestro es,10.0,167.44,False,False,False,7,5,,2827,223.3
+negativo,Adrian Barba - El poder nuestro es,10.0,70.959,False,False,False,4,4,,2419,220.0
+negativo,FLOW - HERO -Kibou no uta-,5.0,37.385,False,False,False,4,4,,1088,146.7
+negativo,FLOW - HERO -Kibou no uta-,5.0,143.467,False,False,False,5,4,,1193,174.0
+negativo,FLOW - HERO -Kibou no uta-,5.0,81.861,False,False,False,5,4,,1126,130.4
+negativo,FLOW - HERO -Kibou no uta-,5.0,196.12,False,False,False,4,4,,1131,177.5
+negativo,FLOW - HERO -Kibou no uta-,5.0,13.268,False,False,False,3,3,,1063,179.2
+negativo,FLOW - HERO -Kibou no uta-,5.0,149.601,False,False,False,3,3,,1228,191.5
+negativo,FLOW - HERO -Kibou no uta-,5.0,153.121,False,False,False,5,3,,1217,184.9
+negativo,FLOW - HERO -Kibou no uta-,5.0,57.172,False,False,False,5,4,,1206,181.4
+negativo,FLOW - HERO -Kibou no uta-,5.0,18.514,False,False,False,5,3,,1008,176.4
+negativo,FLOW - HERO -Kibou no uta-,5.0,67.131,False,False,False,6,3,,1163,179.3
+negativo,FLOW - HERO -Kibou no uta-,10.0,81.367,False,False,False,5,4,,2323,205.8
+negativo,FLOW - HERO -Kibou no uta-,10.0,201.706,False,False,False,5,5,,2070,218.0
+negativo,FLOW - HERO -Kibou no uta-,10.0,179.898,False,False,False,7,4,,2201,206.4
+negativo,FLOW - HERO -Kibou no uta-,10.0,47.591,False,False,False,7,4,,2391,207.3
+negativo,FLOW - HERO -Kibou no uta-,10.0,97.268,False,False,False,6,4,,2271,222.0
+negativo,FLOW - HERO -Kibou no uta-,10.0,123.544,False,False,False,5,5,,2247,221.8
+negativo,FLOW - HERO -Kibou no uta-,10.0,187.95,False,False,False,5,4,,2158,219.3
+negativo,FLOW - HERO -Kibou no uta-,10.0,27.811,False,False,False,5,4,,2422,207.6
+negativo,FLOW - HERO -Kibou no uta-,10.0,157.737,False,False,False,5,4,,2425,216.3
+negativo,FLOW - HERO -Kibou no uta-,10.0,190.55,False,False,False,5,4,,2306,215.0
+negativo,Linkin Park - Crawling,5.0,193.87,False,False,False,5,4,,1152,191.4
+negativo,Linkin Park - Crawling,5.0,58.679,False,False,False,2,2,,733,170.7
+negativo,Linkin Park - Crawling,5.0,26.985,False,False,False,6,4,,1004,173.6
+negativo,Linkin Park - Crawling,5.0,125.771,False,False,False,4,4,,1107,190.9
+negativo,Linkin Park - Crawling,5.0,15.581,False,False,False,4,4,,1028,182.7
+negativo,Linkin Park - Crawling,5.0,27.534,False,False,False,5,4,,1003,212.3
+negativo,Linkin Park - Crawling,5.0,14.895,False,False,False,4,3,,1053,178.0
+negativo,Linkin Park - Crawling,5.0,44.668,False,False,False,4,3,,860,182.6
+negativo,Linkin Park - Crawling,5.0,184.027,False,False,False,4,4,,983,181.5
+negativo,Linkin Park - Crawling,5.0,142.473,False,False,False,4,3,,1060,176.3
+negativo,Linkin Park - Crawling,10.0,131.129,False,False,False,5,4,,2115,206.8
+negativo,Linkin Park - Crawling,10.0,203.785,False,False,False,5,3,,1304,197.6
+negativo,Linkin Park - Crawling,10.0,102.693,False,False,False,6,5,,1855,205.0
+negativo,Linkin Park - Crawling,10.0,8.272,False,False,False,6,4,,1926,201.5
+negativo,Linkin Park - Crawling,10.0,33.822,False,False,False,5,4,,1951,235.9
+negativo,Linkin Park - Crawling,10.0,53.83,False,False,False,3,3,,1683,200.6
+negativo,Linkin Park - Crawling,10.0,139.331,False,False,False,5,4,,2003,212.5
+negativo,Linkin Park - Crawling,10.0,73.84,False,False,False,4,4,,2009,217.7
+negativo,Linkin Park - Crawling,10.0,65.767,False,False,False,4,3,,1649,201.7
+negativo,Linkin Park - Crawling,10.0,23.2,False,False,False,6,6,,2051,219.8
+negativo,Shiro SAGISU - Number One - Bankai,5.0,193.195,False,False,False,5,4,,1403,182.7
+negativo,Shiro SAGISU - Number One - Bankai,5.0,6.654,False,False,False,3,2,,1034,176.3
+negativo,Shiro SAGISU - Number One - Bankai,5.0,125.11,False,False,False,5,3,,1291,191.1
+negativo,Shiro SAGISU - Number One - Bankai,5.0,202.311,False,False,False,4,3,,1231,180.1
+negativo,Shiro SAGISU - Number One - Bankai,5.0,137.914,False,False,False,5,3,,1207,173.4
+negativo,Shiro SAGISU - Number One - Bankai,5.0,186.713,False,False,False,4,4,,1239,172.2
+negativo,Shiro SAGISU - Number One - Bankai,5.0,214.606,False,False,False,4,3,,1171,180.4
+negativo,Shiro SAGISU - Number One - Bankai,5.0,61.118,False,False,False,5,3,,1136,178.1
+negativo,Shiro SAGISU - Number One - Bankai,5.0,25.205,False,False,False,3,3,,1133,182.3
+negativo,Shiro SAGISU - Number One - Bankai,5.0,15.314,False,False,False,6,5,,1302,182.0
+negativo,Shiro SAGISU - Number One - Bankai,10.0,154.395,False,False,False,3,3,,2492,211.3
+negativo,Shiro SAGISU - Number One - Bankai,10.0,70.437,False,False,False,4,3,,2505,223.8
+negativo,Shiro SAGISU - Number One - Bankai,10.0,52.616,False,False,False,5,4,,2764,211.9
+negativo,Shiro SAGISU - Number One - Bankai,10.0,196.06,False,False,False,6,5,,2620,213.8
+negativo,Shiro SAGISU - Number One - Bankai,10.0,215.586,False,False,False,3,3,,2304,218.8
+negativo,Shiro SAGISU - Number One - Bankai,10.0,254.606,False,False,False,5,3,,2124,206.6
+negativo,Shiro SAGISU - Number One - Bankai,10.0,130.409,False,False,False,5,4,,2634,219.6
+negativo,Shiro SAGISU - Number One - Bankai,10.0,139.414,False,False,False,3,3,,2600,216.0
+negativo,Shiro SAGISU - Number One - Bankai,10.0,263.753,False,False,False,5,3,,2271,216.2
+negativo,Shiro SAGISU - Number One - Bankai,10.0,134.377,False,False,False,5,4,,2578,212.1
+negativo,nobodyknows - Hero’s Come Back,5.0,49.657,False,False,False,3,3,,1095,189.5
+negativo,nobodyknows - Hero’s Come Back,5.0,69.424,False,False,False,3,3,,1000,211.2
+negativo,nobodyknows - Hero’s Come Back,5.0,261.396,False,False,False,3,3,,914,180.1
+negativo,nobodyknows - Hero’s Come Back,5.0,11.729,False,False,False,5,5,,1282,182.5
+negativo,nobodyknows - Hero’s Come Back,5.0,217.396,False,False,False,3,3,,1175,200.6
+negativo,nobodyknows - Hero’s Come Back,5.0,175.753,False,False,False,4,3,,1194,182.4
+negativo,nobodyknows - Hero’s Come Back,5.0,130.63,False,False,False,3,2,,1104,185.7
+negativo,nobodyknows - Hero’s Come Back,5.0,226.24,False,False,False,4,3,,1150,188.2
+negativo,nobodyknows - Hero’s Come Back,5.0,220.82,False,False,False,3,3,,1282,177.6
+negativo,nobodyknows - Hero’s Come Back,5.0,119.43,False,False,False,3,3,,1173,182.2
+negativo,nobodyknows - Hero’s Come Back,10.0,160.619,False,False,False,3,3,,2155,204.9
+negativo,nobodyknows - Hero’s Come Back,10.0,203.476,False,False,False,3,3,,2411,221.9
+negativo,nobodyknows - Hero’s Come Back,10.0,174.546,False,False,False,3,3,,2360,211.6
+negativo,nobodyknows - Hero’s Come Back,10.0,129.362,False,False,False,3,3,,2296,210.4
+negativo,nobodyknows - Hero’s Come Back,10.0,243.438,False,False,False,4,4,,2305,192.8
+negativo,nobodyknows - Hero’s Come Back,10.0,235.207,False,False,False,4,3,,2488,205.5
+negativo,nobodyknows - Hero’s Come Back,10.0,17.39,False,False,False,4,3,,2270,222.2
+negativo,nobodyknows - Hero’s Come Back,10.0,145.768,False,False,False,4,3,,2044,206.4
+negativo,nobodyknows - Hero’s Come Back,10.0,222.469,False,False,False,4,3,,2248,207.8
+negativo,nobodyknows - Hero’s Come Back,10.0,22.495,False,False,False,5,4,,2309,212.3

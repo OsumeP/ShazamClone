@@ -11,9 +11,9 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import matplotlib
+from scripts import plot_style
 
-matplotlib.use("Agg")
+plot_style.setup()
 import matplotlib.pyplot as plt  # noqa: E402
 
 from fingerprint import config  # noqa: E402

@@ -1,0 +1,6 @@
+﻿240 consultas positivas y 80 negativas por configuración, fragmentos de 5 s
+
+configuración              hash/s  % WAV   babble:0  babble:-5    pink:-5   white:-5   FP neg máx  lat ms
+vecindario 15×15              227   2.57      90.0%      38.3%      75.0%      95.0%    0       6     180
+vecindario 15×15 fo15         351   3.98      91.7%      48.3%      80.0%      98.3%    0       7     117
+vecindario 15×15 +6dB         275   3.11      90.0%      50.0%      73.3%      91.7%    0       6     225

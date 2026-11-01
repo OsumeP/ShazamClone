@@ -26,8 +26,11 @@ DB_EPS = 1e-10              # ε en S_dB = 10·log10(|X|² + ε)
 # energía; fs sigue siendo 44.1 kHz (RNF1), solo se ignoran bins altos.
 PEAK_FMIN_HZ = 60.0
 PEAK_FMAX_HZ = 5_000.0
-PEAK_NEIGHBORHOOD_FREQ = 21     # bins (~226 Hz): tamaño del vecindario del máximo local
-PEAK_NEIGHBORHOOD_TIME = 21     # ventanas (~0.98 s)
+# Vecindario ajustado en la Fase 5 (antes 21×21): más picos por segundo dan más
+# hashes que sobreviven al ruido (babble a 0 dB: 77 % → 90 % de acierto en 5 s)
+# con la huella aún en ~2.6 % del WAV.
+PEAK_NEIGHBORHOOD_FREQ = 15     # bins (~161 Hz): tamaño del vecindario del máximo local
+PEAK_NEIGHBORHOOD_TIME = 15     # ventanas (~0.70 s)
 PEAK_MIN_PROMINENCE_DB = 10.0   # el pico debe superar la mediana de su ventana en ≥ X dB
 
 # --- Hashing combinatorio (RF3, RNF2) ------------------------------------
