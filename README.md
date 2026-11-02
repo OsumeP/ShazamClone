@@ -28,6 +28,7 @@ grabación ─► normalización ─► STFT ─► picos (constelación) ─►
 | RNF5 Portabilidad | Python, sin GPU | Python + numpy/scipy, solo CPU |
 | Audio limpio | — | 400/400 fragmentos de 5 y 10 s reconocidos |
 
+El informe técnico está en [`docs/Informe_ShazamClone.docx`](docs/Informe_ShazamClone.docx).
 El detalle de cada módulo, las decisiones de diseño y los experimentos está en
 [`docs/DOCUMENTACION.md`](docs/DOCUMENTACION.md). Los requerimientos originales,
 en [`Requirements.md`](Requirements.md).
@@ -141,7 +142,8 @@ backend/
   tests/         pruebas con pytest
 frontend/        React + TypeScript + Vite (captura con AudioWorklet, PCM sin compresión)
 evaluation/      experimentos de robustez y Teoría de la Información; results/
-docs/            DOCUMENTACION.md y figures/
+docs/            Informe_ShazamClone.docx (informe técnico; se regenera con informe/generar_informe.js),
+                 DOCUMENTACION.md y figures/
 data/            raw/ (audio propio), normalized/ (WAV de referencia), fingerprints.db — no versionados
 ```
 

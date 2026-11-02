@@ -1,0 +1,11 @@
+{
+  "name": "informe-shazamclone",
+  "private": true,
+  "description": "Genera docs/Informe_ShazamClone.docx",
+  "scripts": {
+    "build": "node generar_informe.js"
+  },
+  "dependencies": {
+    "docx": "9.15.1"
+  }
+}
