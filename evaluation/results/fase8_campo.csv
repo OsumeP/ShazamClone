@@ -1,0 +1,3 @@
+fecha,condicion,esperada,reconocida,correcta,esperada_top1,score,score_2,score_esperada,nivel_dbfs,pico,latencia_ms,dispositivo_fs,wav
+20261101-fase6-2,fase6-celular,Petit Biscuit - Sunset Lover,,False,True,4,4,4,-58.6,0.007,105,44100,data/prueba.wav
+20261101-fase6-3,fase6-celular,Petit Biscuit - Sunset Lover,Petit Biscuit - Sunset Lover,True,True,23,5,23,-49.8,0.051,106,44100,data/prueba2.wav

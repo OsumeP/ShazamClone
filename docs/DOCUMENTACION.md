@@ -402,6 +402,7 @@ Se ejecutan desde `backend/` con el venv activo: `python -m scripts.<nombre>`.
 | `ingest_folder` | **Proceso 5.1 completo.** Por archivo: SHA-1 (omite los ya cargados) → metadatos → normalización (guarda el WAV de referencia) → huella → inserción. Al final reporta el tamaño de la huella lógica y del archivo SQLite frente al WAV. `--list` lista el contenido de la BD; `--folder` y `--db` cambian las rutas. |
 | `recognize_file` | Reconoce un fragmento (`--start`, `--duration`) de un archivo contra la BD. Muestra la canción, la posición estimada, los mejores candidatos y la latencia por etapa. |
 | `record_and_recognize` | **Proceso 5.2 completo con micrófono (RF4).** Cuenta regresiva, graba 5–10 s mono a 44.1 kHz (si el dispositivo no lo admite, graba a su frecuencia nativa y remuestrea), informa el nivel (dBFS) con avisos de saturación o señal débil, reconoce y muestra la latencia desde el fin de la grabación. `--exclusive` usa la versión WASAPI del micrófono en modo exclusivo, que salta el procesamiento de audio de Windows (A2), pero también su ganancia (ver resultados de la Fase 6); `--save` guarda la grabación; `--list-devices` lista los micrófonos. |
+| `field_test` | **Pruebas de campo (Fase 8).** Graba N intentos de una canción conocida (`--expected`) en una condición etiquetada (`--condition silencio/cafe/calle…`), guarda cada grabación en `data/campo/` y agrega una fila por intento a `evaluation/results/fase8_campo.csv` (acierto, score propio y de la canción esperada, segundo candidato, nivel, latencia). `--summary` resume por condición. `--replay` vuelve a reconocer las grabaciones guardadas con la BD y los parámetros actuales, así cualquier cambio futuro se compara contra **audio real**. |
 | `plot_matches` | Coherencia temporal de un fragmento. Para la canción reconocida y la segunda candidata muestra el diagrama t_fragmento vs. t_canción, una ampliación alrededor del mejor Δ (con la recta de pendiente 1) y el histograma de Δ. |
 
 Las figuras se guardan en `docs/figures/`. `plot_style.py` configura
@@ -576,8 +577,8 @@ consultas negativas, y la latencia máxima fue de 456 ms.
 - Con los servidores corriendo: la página, el worklet y el proxy `/api` (health,
   songs) responden. Un WAV de 7 s a 48 kHz subido a través del proxy de Vite se
   reconoce (*稲葉曇 - ラグトレイン*, score 165, 111 ms en el servidor).
-- La prueba con el micrófono en el navegador la hace el equipo (ver `PLAN.md`,
-  tarea 7.7).
+- **Prueba con micrófono en el navegador** (equipo): la canción reproducida se
+  reconoció. Queda verificado el flujo completo navegador → backend → resultado.
 
 ---
 
@@ -754,3 +755,57 @@ esa banda:
   7.2 kbit/s, contra 705.6 kbit/s del PCM de 16 bits (≈ 1 %). Guarda la
   información identificadora y descarta el resto (timbre, fase, detalle
   espectral).
+
+---
+
+## 7. Verificación de requerimientos (Fase 8)
+
+Estado con la configuración final (vecindario 15×15, umbral por ventana, fan-out
+10) y un corpus de 20 canciones (80.8 min).
+
+### Requerimientos funcionales
+
+| Req. | Verificación | Evidencia |
+|---|---|---|
+| **RF1** Carga e indexación `.wav`/`.mp3` | ✅ 20 MP3 ingestados; WAV, FLAC y OGG con soundfile, el resto con FFmpeg; ingesta idempotente por SHA-1 | `scripts/ingest_folder`, `POST /api/ingest`, `test_audio_io.py`, `test_database.py`, `test_api.py` |
+| **RF2** STFT | ✅ STFT propia con numpy; coincide con `scipy.signal.ShortTimeFFT` (error relativo ~1e-7) | §2.3, `test_spectrogram.py`, `figures/espectrograma_*.png` |
+| **RF3** Picos + hashes con Δt | ✅ Mapa de constelación y pares (f1, f2, Δt) en 32 bits, invariantes a desplazamiento y ganancia | §2.4–2.5, `test_fingerprint.py`, `figures/constelacion_*.png` |
+| **RF4** Captura 5–10 s | ✅ CLI (`record_and_recognize`, `field_test`) y navegador (AudioWorklet, botones de 5/7/10 s) | §2d, Fases 6–7 |
+| **RF5** Matching y respuesta correcta | ✅ 400/400 fragmentos limpios; reconocimiento con micrófono real (CLI y navegador) | §2.7, `eval_matching.py`, `figures/matching_*.png` |
+
+### Requerimientos no funcionales
+
+| Req. | Meta | Resultado | Evidencia |
+|---|---|---|---|
+| **RNF1** Nyquist | fs ≥ 44.1 kHz | ✅ Todo el audio se normaliza a 44.1 kHz; el navegador graba a 48 kHz y el servidor remuestrea | `audio_io.py`, §2d |
+| **RNF2** Almacenamiento | huella ≤ 5 % del WAV (A1) | ✅ **2.56 %** (peor canción 3.06 %); archivo SQLite completo 3.93 % | `fingerprint_stats`, `ingest_folder --list`, §5 Fase 3 |
+| **RNF3** Latencia | < 3 s desde el fin de la grabación (A3) | ✅ Servidor: mediana 234 ms, máx. 456 ms (4 998 consultas); ida y vuelta HTTP ≤ 747 ms; micrófono real 106–125 ms | `eval_noise.py`, §6.5, §5 Fase 6 |
+| **RNF4** Ruido moderado | > 80 % con SNR ≥ 5 dB (A3) | ✅ **≥ 98 %** (5 s) y **100 %** (10 s) con 4 tipos de ruido; 0/1 000 falsos positivos | §6.5, `figures/ruido_acierto_vs_snr.png` |
+| **RNF5** Portabilidad | Python/open source, sin GPU | ✅ numpy, scipy, soundfile, FastAPI, SQLite y React; solo CPU | `requirements.txt`, `package.json` |
+
+### Limitaciones conocidas
+
+- **El canal acústico real es más exigente que el ruido aditivo simulado.** Con
+  el parlante de un celular y un nivel bajo de grabación, la puntuación cae
+  cerca del umbral (Fase 6: 8, 4 y 23 en tres intentos). La causa decisiva fue
+  el nivel (< −50 dBFS); la interfaz lo mide y avisa.
+- **Corpus de 20 canciones** (el plan pedía ≥ 30). La tasa de falsos positivos
+  y el umbral `MATCH_MIN_SCORE` se calibraron con 5 canciones fuera de la BD; con
+  una biblioteca mucho mayor convendría recalibrarlos.
+- **Posición ambigua en secciones repetidas** (loops, estribillos): la canción
+  se identifica bien, pero la posición estimada puede ser la de otra repetición.
+- El "ambiente" de la Fase 5 es simulado (murmullo sintético). Las pruebas en
+  entornos reales se registran con `scripts/field_test` (§7.1).
+
+### 7.1 Pruebas de campo
+
+Registro en `evaluation/results/fase8_campo.csv` (resumen con
+`python -m scripts.field_test --summary`):
+
+| Condición | Intentos | Acierto | Esperada en top-1 | Score mediano de la esperada | Nivel mediano |
+|---|---|---|---|---|---|
+| fase6-celular (Sunset Lover desde el celular, cuarto silencioso) | 2 | 50 % | 100 % | 14 | −54.2 dBFS |
+
+Las dos filas iniciales son las grabaciones guardadas en la Fase 6
+(`data/prueba.wav` y `data/prueba2.wav`). El primer intento de esa fase no se
+guardó.
