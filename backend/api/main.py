@@ -62,8 +62,14 @@ app.add_middleware(
 
 
 def get_db():
-    """Una conexión SQLite por petición (sqlite3 no comparte conexiones entre hilos)."""
-    db = FingerprintDB(os.environ.get("SHAZAM_DB_PATH", config.DB_PATH))
+    """Una conexión SQLite por petición.
+
+    FastAPI ejecuta esta dependencia (síncrona, con yield) y el endpoint en hilos
+    del threadpool que pueden ser distintos, así que se desactiva la verificación
+    de hilo de sqlite3. Es seguro: la conexión es exclusiva de la petición y se
+    usa de forma secuencial (nunca desde dos hilos a la vez).
+    """
+    db = FingerprintDB(os.environ.get("SHAZAM_DB_PATH", config.DB_PATH), check_same_thread=False)
     try:
         yield db
     finally:

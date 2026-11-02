@@ -55,10 +55,10 @@ def file_sha1(path: str | Path, chunk_size: int = 1 << 20) -> str:
 class FingerprintDB:
     """Acceso a la base de datos de huellas. Usar como context manager."""
 
-    def __init__(self, path: str | Path = config.DB_PATH):
+    def __init__(self, path: str | Path = config.DB_PATH, check_same_thread: bool = True):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.conn = sqlite3.connect(self.path)
+        self.conn = sqlite3.connect(self.path, check_same_thread=check_same_thread)
         self.conn.row_factory = sqlite3.Row
         self.conn.execute("PRAGMA foreign_keys = ON")
         self.conn.execute("PRAGMA journal_mode = WAL")
