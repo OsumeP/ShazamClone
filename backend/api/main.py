@@ -3,7 +3,8 @@
 Endpoints:
     GET  /api/health      estado y tamaño de la BD
     GET  /api/songs       canciones indexadas
-    POST /api/recognize   reconoce una grabación (multipart: file)
+    POST /api/recognize   reconoce una grabación (multipart: file; ?analysis=true añade
+                          el espectrograma reducido y los picos para dibujar la constelación)
     POST /api/ingest      agrega una canción (multipart: file [+ title, artist, album])
 
 Ejecutar (desde backend/, con el venv activo):
@@ -17,6 +18,7 @@ Variables de entorno:
 
 from __future__ import annotations
 
+import base64
 import logging
 import os
 import subprocess
@@ -24,6 +26,7 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+import numpy as np
 import soundfile as sf
 from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -96,6 +99,16 @@ class CandidateOut(BaseModel):
     offset_s: float
 
 
+class AnalysisOut(BaseModel):
+    n_frames: int               # ventanas (columnas) de la imagen
+    n_rows: int                 # filas de la imagen (cada una agrupa ANALYSIS_POOL bins)
+    frame_s: float              # segundos entre ventanas (HOP / fs)
+    bin_hz: float               # Hz por bin de la FFT
+    f_top_hz: float             # frecuencia que representa el borde superior de la imagen
+    spectrogram: str            # uint8 en base64, fila por fila (fila 0 = frecuencias bajas)
+    peaks: list[tuple[int, int]]  # mapa de constelación: (ventana, bin)
+
+
 class RecognizeOut(BaseModel):
     recognized: bool
     song: Song | None
@@ -106,6 +119,7 @@ class RecognizeOut(BaseModel):
     n_query_hashes: int
     candidates: list[CandidateOut]
     timings_ms: dict[str, float]
+    analysis: AnalysisOut | None = None
 
 
 class IngestOut(BaseModel):
@@ -145,6 +159,29 @@ def _check_ffmpeg() -> None:
         logging.getLogger("uvicorn.error").warning("%s Solo se podrán procesar WAV/FLAC/OGG.", exc)
 
 
+ANALYSIS_POOL = 4           # bins de la FFT por fila de la imagen (máximo del grupo)
+ANALYSIS_RANGE_DB = 80      # rango dinámico mostrado, igual que las figuras del informe
+
+
+def _analysis(r) -> AnalysisOut:
+    """Espectrograma reducido (0–5 kHz, 8 bits) y picos del fragmento, para dibujarlos."""
+    bin_hz = config.SAMPLE_RATE / config.N_FFT
+    n_show = int(config.PEAK_FMAX_HZ // bin_hz) // ANALYSIS_POOL * ANALYSIS_POOL
+    band = r.spectrogram[:n_show]
+    rows = band.reshape(n_show // ANALYSIS_POOL, ANALYSIS_POOL, -1).max(axis=1)
+    img = np.clip((rows - (rows.max() - ANALYSIS_RANGE_DB)) / ANALYSIS_RANGE_DB, 0.0, 1.0)
+    img = (img * 255).astype(np.uint8)
+    return AnalysisOut(
+        n_frames=img.shape[1],
+        n_rows=img.shape[0],
+        frame_s=config.HOP / config.SAMPLE_RATE,
+        bin_hz=bin_hz,
+        f_top_hz=n_show * bin_hz,
+        spectrogram=base64.b64encode(img.tobytes()).decode("ascii"),
+        peaks=r.peaks.tolist(),
+    )
+
+
 def _read_limited(upload: UploadFile, limit: int) -> bytes:
     data = upload.file.read(limit + 1)
     if len(data) > limit:
@@ -168,9 +205,14 @@ def list_songs(db: FingerprintDB = Depends(get_db)):
 
 
 @app.post("/api/recognize", response_model=RecognizeOut)
-def recognize_upload(file: UploadFile = File(...), db: FingerprintDB = Depends(get_db)):
+def recognize_upload(
+    file: UploadFile = File(...),
+    analysis: bool = False,
+    db: FingerprintDB = Depends(get_db),
+):
     """Reconoce una grabación corta. Se recomienda WAV PCM (sin compresión con
-    pérdidas); otros formatos se decodifican con FFmpeg."""
+    pérdidas); otros formatos se decodifican con FFmpeg. Con ?analysis=true la respuesta
+    incluye el espectrograma reducido y los picos (solo para grabaciones del micrófono)."""
     t0 = time.perf_counter()
     data = _read_limited(file, MAX_RECOGNIZE_BYTES)
     x = _decode_or_http_error(load_audio_bytes, data, Path(file.filename or "").suffix or ".wav")
@@ -180,7 +222,7 @@ def recognize_upload(file: UploadFile = File(...), db: FingerprintDB = Depends(g
     if not MIN_QUERY_S <= duration <= MAX_QUERY_S:
         raise HTTPException(422, f"La grabación dura {duration:.1f} s; se esperan {MIN_QUERY_S:g}–{MAX_QUERY_S:g} s")
 
-    r = recognize(x, db)
+    r = recognize(x, db, with_analysis=analysis)
     best = r.best
     second = r.candidates[1].score if len(r.candidates) > 1 else 0
     candidates = []
@@ -204,6 +246,7 @@ def recognize_upload(file: UploadFile = File(...), db: FingerprintDB = Depends(g
         n_query_hashes=r.n_query_hashes,
         candidates=candidates,
         timings_ms=timings,
+        analysis=_analysis(r) if analysis else None,
     )
 
 

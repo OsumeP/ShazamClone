@@ -14,7 +14,8 @@ interface Props {
   recording?: RecordingInfo;
 }
 
-const fmtTime = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+// Un desfase negativo (coincidencias casuales) no es una posición válida en la canción.
+const fmtTime = (s: number) => (s < 0 ? "—" : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`);
 
 export function ResultCard({ result, latencyMs, recording }: Props) {
   const t = result.timings_ms;
@@ -23,8 +24,8 @@ export function ResultCard({ result, latencyMs, recording }: Props) {
     <section className={`card result ${result.recognized ? "hit" : "miss"}`}>
       {result.recognized && result.song ? (
         <>
+          <h2>{result.song.title}</h2>        
           <p className="eyebrow">Canción reconocida</p>
-          <h2>{result.song.title}</h2>
           <p className="artist">{result.song.artist ?? "Artista desconocido"}</p>
           <p className="detail">
             El fragmento empieza en <strong>{fmtTime(result.offset_s ?? 0)}</strong> de la canción
@@ -32,8 +33,8 @@ export function ResultCard({ result, latencyMs, recording }: Props) {
         </>
       ) : (
         <>
+          <h2>No reconocida</h2>        
           <p className="eyebrow">Sin coincidencia</p>
-          <h2>No reconocida</h2>
           <p className="detail">
             Ninguna canción alcanzó el umbral (≥ 10 hashes alineados y el doble que la segunda).
           </p>

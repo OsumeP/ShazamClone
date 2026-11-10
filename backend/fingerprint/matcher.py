@@ -1,4 +1,4 @@
-"""Matching y coherencia temporal (RF5), según Wang (2003) §2.3.
+"""Matching y coherencia temporal (RF5), según Wang (2003) §2.3. 
 
 1. Se buscan en la BD todos los hashes del fragmento (coincidencias exactas).
 2. Por cada coincidencia se calcula Δ = offset_canción − offset_fragmento.
@@ -18,7 +18,9 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from . import config
-from .hashing import fingerprint_signal
+from .hashing import fingerprint_signal, generate_hashes
+from .peaks import find_peaks
+from .spectrogram import spectrogram_db
 
 
 @dataclass
@@ -39,6 +41,8 @@ class Recognition:
     candidates: list[Candidate]         # ordenados por puntuación descendente
     n_query_hashes: int
     timings: dict[str, float] = field(default_factory=dict)
+    spectrogram: np.ndarray | None = None   # S en dB (n_bins, n_ventanas); solo con with_analysis
+    peaks: np.ndarray | None = None         # mapa de constelación (ventana, bin); solo con with_analysis
 
     @property
     def recognized(self) -> bool:
@@ -129,6 +133,7 @@ def recognize(
     tolerance: int = config.MATCH_DELTA_TOLERANCE,
     min_score: int = config.MATCH_MIN_SCORE,
     min_ratio: float = config.MATCH_MIN_RATIO,
+    with_analysis: bool = False,
 ) -> Recognition:
     """Reconoce un fragmento ya normalizado (mono, 44.1 kHz).
 
@@ -136,7 +141,14 @@ def recognize(
     termina la grabación (acuerdo A3).
     """
     t0 = time.perf_counter()
-    _, hashes, offsets = fingerprint_signal(x)
+    if with_analysis:
+        # Mismo proceso que fingerprint_signal, pero conservando el espectrograma y los picos.
+        S_db = spectrogram_db(x)
+        peaks = find_peaks(S_db)
+        hashes, offsets = generate_hashes(peaks)
+    else:
+        S_db = peaks = None
+        _, hashes, offsets = fingerprint_signal(x)
     t1 = time.perf_counter()
     song_ids, song_offsets, query_offsets = find_matches(db, hashes, offsets)
     t2 = time.perf_counter()
@@ -152,4 +164,4 @@ def recognize(
         "scoring_s": t3 - t2,
         "total_s": time.perf_counter() - t0,
     }
-    return Recognition(song, candidates, len(hashes), timings)
+    return Recognition(song, candidates, len(hashes), timings, S_db, peaks)

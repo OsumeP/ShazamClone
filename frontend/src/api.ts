@@ -19,6 +19,17 @@ export interface Candidate {
   offset_s: number;
 }
 
+// Datos para dibujar la constelación (solo con ?analysis=true, grabaciones del micrófono).
+export interface Analysis {
+  n_frames: number; // columnas de la imagen (ventanas de la STFT)
+  n_rows: number; // filas de la imagen (de menor a mayor frecuencia)
+  frame_s: number; // segundos entre ventanas
+  bin_hz: number; // Hz por bin de la FFT
+  f_top_hz: number; // frecuencia del borde superior de la imagen
+  spectrogram: string; // uint8 en base64, fila por fila
+  peaks: [number, number][]; // (ventana, bin)
+}
+
 export interface Recognition {
   recognized: boolean;
   song: Song | null;
@@ -29,6 +40,7 @@ export interface Recognition {
   n_query_hashes: number;
   candidates: Candidate[];
   timings_ms: Record<string, number>;
+  analysis?: Analysis | null;
 }
 
 export interface Health {
@@ -67,10 +79,11 @@ export const getHealth = () => request<Health>("/api/health");
 
 export const getSongs = () => request<Song[]>("/api/songs");
 
-export function recognize(audio: Blob, filename = "grabacion.wav") {
+export function recognize(audio: Blob, filename = "grabacion.wav", withAnalysis = false) {
   const form = new FormData();
   form.append("file", audio, filename);
-  return request<Recognition>("/api/recognize", { method: "POST", body: form });
+  const url = withAnalysis ? "/api/recognize?analysis=true" : "/api/recognize";
+  return request<Recognition>(url, { method: "POST", body: form });
 }
 
 export function ingest(file: File, meta: { title?: string; artist?: string; album?: string }) {

@@ -7,33 +7,42 @@ interface Props {
   onChanged: () => void;
 }
 
+type Status = { tone: "busy" | "ok" | "exists" | "bad"; title: string; detail?: string };
+
+const ICONS: Record<Status["tone"], string> = { busy: "…", ok: "✓", exists: "i", bad: "✕" };
+
 const fmtTime = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
 
 export function Library({ songs, error, onChanged }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
-  const [status, setStatus] = useState<{ tone: "ok" | "bad" | "busy"; text: string } | null>(null);
+  const [status, setStatus] = useState<Status | null>(null);
 
-  async function submit(e: FormEvent) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget; // se guarda antes del await: después currentTarget ya no existe
     if (!file) return;
-    setStatus({ tone: "busy", text: "Calculando la huella…" });
+    setStatus({ tone: "busy", title: "Calculando la huella…", detail: "Puede tardar unos segundos." });
     try {
       const r = await ingest(file, { title: title.trim(), artist: artist.trim() });
-      setStatus({
-        tone: "ok",
-        text: r.already_existed
-          ? `Ya estaba en la biblioteca: ${r.song.title}`
-          : `Agregada: ${r.song.artist ?? "?"} — ${r.song.title} (${r.song.n_hashes.toLocaleString()} hashes)`,
-      });
+      const label = `${r.song.artist ?? "Artista desconocido"} — ${r.song.title}`;
+      setStatus(
+        r.already_existed
+          ? { tone: "exists", title: "Esa canción ya estaba en la biblioteca", detail: label }
+          : { tone: "ok", title: "¡Canción agregada!", detail: `${label} · ${r.song.n_hashes.toLocaleString()} hashes` },
+      );
       setFile(null);
       setTitle("");
       setArtist("");
-      (e.target as HTMLFormElement).reset();
+      form.reset();
       onChanged();
     } catch (err) {
-      setStatus({ tone: "bad", text: err instanceof Error ? err.message : String(err) });
+      setStatus({
+        tone: "bad",
+        title: "No se pudo agregar la canción",
+        detail: err instanceof Error ? err.message : String(err),
+      });
     }
   }
 
@@ -42,14 +51,41 @@ export function Library({ songs, error, onChanged }: Props) {
       <section className="card">
         <h2>Agregar canción</h2>
         <form onSubmit={submit} className="ingest">
-          <input type="file" accept="audio/*,.mp3,.wav,.flac,.ogg,.m4a" onChange={(e) => setFile(e.target.files?.[0] ?? null)} required />
-          <input placeholder="Título (opcional: si no, se usa «Artista - Título» del nombre de archivo)" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <input placeholder="Artista (opcional)" value={artist} onChange={(e) => setArtist(e.target.value)} />
-          <button type="submit" disabled={!file || status?.tone === "busy"}>
+          <div className="file-row">
+            <label className="btn btn-secondary">
+              Elegir archivo
+              <input
+                type="file"
+                className="visually-hidden"
+                accept="audio/*,.mp3,.wav,.flac,.ogg,.m4a"
+                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                required
+              />
+            </label>
+            <span className="file-name">{file ? file.name : "Ningún archivo seleccionado"}</span>
+          </div>
+          <input
+            aria-label="Título"
+            placeholder="Título (opcional: si no, se usa «Artista - Título» del nombre de archivo)"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input aria-label="Artista" placeholder="Artista (opcional)" value={artist} onChange={(e) => setArtist(e.target.value)} />
+          <button type="submit" className="btn btn-primary" disabled={!file || status?.tone === "busy"}>
             Agregar
           </button>
         </form>
-        {status && <p className={`hint ${status.tone}`}>{status.text}</p>}
+        {status && (
+          <div className={`notice ${status.tone}`} role="status">
+            <span className="notice-icon" aria-hidden="true">
+              {ICONS[status.tone]}
+            </span>
+            <div>
+              <p className="notice-title">{status.title}</p>
+              {status.detail && <p className="notice-detail">{status.detail}</p>}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="card">

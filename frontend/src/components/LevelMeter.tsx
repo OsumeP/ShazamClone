@@ -10,17 +10,20 @@ export function levelHint(dbfs: number, peak?: number): { tone: "ok" | "warn" | 
   return { tone: "ok", text: "Buen nivel" };
 }
 
-export function LevelMeter({ dbfs }: { dbfs: number | null }) {
+// En vertical el nivel sube de abajo hacia arriba (altura); en horizontal crece a la derecha (ancho).
+export function LevelMeter({ dbfs, vertical = false, icon }: { dbfs: number | null; vertical?: boolean; icon?: string }) {
   const value = dbfs ?? MIN_DB;
   const pct = Math.max(0, Math.min(100, ((value - MIN_DB) / -MIN_DB) * 100));
   const hint = levelHint(value);
+  const label = dbfs === null ? "— dBFS" : `${value.toFixed(vertical ? 0 : 1)} dBFS`;
   return (
-    <div className="level">
+    <div className={`level ${vertical ? "vertical" : ""}`}>
       <div className="level-bar">
-        <div className={`level-fill ${hint.tone}`} style={{ width: `${pct}%` }} />
+        <div className={`level-fill ${hint.tone}`} style={vertical ? { height: `${pct}%` } : { width: `${pct}%` }} />
         <div className="level-target" title="Zona recomendada: −35 a −15 dBFS" />
       </div>
-      <span className="level-label">{dbfs === null ? "— dBFS" : `${value.toFixed(1)} dBFS`}</span>
+      {vertical && icon && <img className="level-icon" src={icon} alt="" />}
+      <span className="level-label">{label}</span>
     </div>
   );
 }

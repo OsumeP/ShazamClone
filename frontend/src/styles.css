@@ -1,18 +1,24 @@
+/* Tema claro: lila y azul verdoso. Contrastes verificados (texto >= 4.5:1). */
 :root {
-  --bg: #0f1020;
-  --panel: #181a30;
-  --panel-2: #20233d;
-  --text: #e8e9f3;
-  --muted: #9a9cb8;
-  --accent: #ff7a45;
-  --accent-2: #b14bff;
-  --ok: #3ccf91;
-  --warn: #ffc247;
-  --bad: #ff5d73;
+  --panel: rgba(234, 231, 246, 0.85);   /* paneles lila claro, no blancos */
+  --panel-2: #f6f4fc;
+  --select: #4855a0;                    /* color del aro del ícono */
+  --btn-off: #f6f4fc;
+  --btn-off-border: #8577b5;
+  --text: #2d2a4a;
+  --muted: #5d5a80;
+  --accent: #1a7078;       /* azul verdoso */
+  --accent-2: #6b54c0;     /* lila-violeta */
+  --ok: #17744d;
+  --warn: #8a5a00;
+  --bad: #b4233f;
+  --border: #cfc6ea;
+  --input-border: #9a8cc4;
   --radius: 14px;
-  color-scheme: dark;
+  --shadow: 0 8px 30px rgba(110, 90, 170, 0.12);
+  --viz-h: 130px;          /* alto de las gráficas y del medidor de nivel */
+  color-scheme: light;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
   color: var(--text);
 }
 
@@ -23,13 +29,16 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(1200px 600px at 20% -10%, #2a1d4d 0%, transparent 60%), var(--bg);
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(167, 139, 250, 0.28), transparent 60%),
+    linear-gradient(160deg, #efe9fb 0%, #e4f1f5 55%, #dff3ee 100%);
+  background-attachment: fixed;
 }
 
 .app {
   max-width: 880px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 12px 16px 24px;
 }
 
 header {
@@ -42,7 +51,7 @@ header {
 
 h1 {
   margin: 0;
-  font-size: 1.9rem;
+  font-size: 1.6rem;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   background-clip: text;
@@ -63,24 +72,76 @@ figcaption {
   font-size: 0.9rem;
 }
 
-.status {
-  margin: 0;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  background: var(--panel);
-}
-.status.ok {
-  color: var(--ok);
-}
-.status.bad {
-  color: var(--bad);
+header .subtitle {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
 }
 
+/* --- Estado y contadores ---------------------------------------------------- */
+.conn {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+.conn .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.conn.ok {
+  color: var(--ok);
+}
+.conn.bad {
+  color: var(--bad);
+}
+.conn.wait {
+  color: var(--muted);
+}
+.stats {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+.stats div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.stats dt {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.stats dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* --- Pestañas, botones y foco ----------------------------------------------- */
+/* Fila con las pestañas a la izquierda y los contadores a la derecha. */
+.tabs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0;
+}
 .tabs {
   display: flex;
   gap: 8px;
-  margin: 20px 0 16px;
 }
 
 button {
@@ -92,27 +153,96 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
+button:focus-visible,
+.btn:focus-within,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
 .tabs button,
-.segmented button,
-.ingest button {
-  background: var(--panel);
-  border: 1px solid #2c2f52;
-  border-radius: 10px;
-  padding: 8px 16px;
+.segmented button {
+  background: #fff;
+  border: 1px solid #a399cc;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: background 0.15s ease;
+}
+.tabs button:hover:not(.selected):not(:disabled),
+.segmented button:hover:not(.selected):not(:disabled) {
+  background: #ebe7f8;
 }
 .tabs button.selected,
 .segmented button.selected {
-  background: var(--panel-2);
-  border-color: var(--accent);
+  background: var(--select);
+  border-color: var(--select);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover:not(:disabled):not(.disabled) {
+  filter: brightness(1.06);
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-secondary {
+  background: #fff;
+  color: var(--accent);
+}
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .card {
   background: var(--panel);
-  border: 1px solid #262948;
+  border: 3px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+/* Título que flota sobre el borde de la tarjeta. */
+.card.panel-container {
+  position: relative;
+  padding-top: 28px;
+}
+.panel-container .step-title {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  z-index: 1;
+  margin: 0;
+  padding: 0 12px;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
 }
 
 /* --- Captura ---------------------------------------------------------------- */
@@ -127,67 +257,174 @@ button:disabled {
   position: relative;
   width: 168px;
   height: 168px;
-  border-radius: 50%;
+  padding: 0;
   border: none;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 10px 40px rgba(177, 75, 255, 0.35);
+  border-radius: 50%;
+  background: none;
   transition: transform 0.15s;
 }
 .listen:hover:not(:disabled) {
   transform: scale(1.04);
 }
-.listen .label {
-  position: relative;
-  font-size: 1.25rem;
-  font-weight: 700;
+.listen-img {
+  position: absolute;
+  inset: 5%;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(90, 80, 160, 0.3));
 }
 .listen .pulse {
   position: absolute;
-  inset: 0;
+  inset: 5%; /* mismo recuadro que la imagen: el pulso nace del aro */
   border-radius: 50%;
+  pointer-events: none;
 }
 .listen.active .pulse {
   animation: pulse 1.4s ease-out infinite;
 }
 @keyframes pulse {
   from {
-    box-shadow: 0 0 0 0 rgba(255, 122, 69, 0.6);
+    box-shadow: 0 0 0 0 rgba(184, 175, 218, 0.75);
   }
   to {
-    box-shadow: 0 0 0 36px rgba(255, 122, 69, 0);
+    box-shadow: 0 0 0 36px rgba(184, 175, 218, 0);
   }
 }
+.listen-label {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+.duration-label {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 .segmented {
   display: flex;
   gap: 6px;
+  margin-top: 4px;
 }
 
-.file {
-  color: var(--accent);
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: 0.9rem;
+/* --- Entrada: grabar | o | subir archivo -------------------------------------- */
+.inputs {
+  display: grid;
+  grid-template-columns: 2.2fr auto 1fr; /* más espacio para el bloque de grabar */
+  align-items: center;
+  gap: 24px;
 }
-.file.disabled {
-  opacity: 0.5;
-  pointer-events: none;
+.input-record {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
-.file input {
-  display: none;
+/* Texto y botones de duración a la derecha del círculo. */
+.record-info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
 }
+.input-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.input-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.divider-v {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.divider-v::before,
+.divider-v::after {
+  content: "";
+  flex: 1;
+  min-height: 24px;
+  border-left: 1px solid var(--btn-off-border);
+}
+/* Estado compartido por grabar y subir archivo; conserva su alto para que nada salte. */
+.process-status {
+  min-height: 1.6em;
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.process-status.ok {
+  color: var(--ok);
+}
+.process-status.busy {
+  color: var(--muted);
+}
+.card .tip {
+  margin: 16px 0 0;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .inputs {
+    grid-template-columns: 1fr;
+  }
+  .divider-v {
+    flex-direction: row;
+  }
+  .divider-v::before,
+  .divider-v::after {
+    min-height: 0;
+    border-left: none;
+    border-top: 1px solid var(--btn-off-border);
+  }
+}
+
+/* El mensaje aparece a la derecha del botón sin desplazarlo. */
 
 progress {
   width: 100%;
   max-width: 640px;
   accent-color: var(--accent);
+}
+/* Barra de progreso delgada entre las tarjetas; conserva su espacio para que nada salte. */
+.mid-progress-bar {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 5px;
+  margin: 0 0 12px;
+  border: none;
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(110, 90, 170, 0.12);
+}
+/* Sin esto el navegador pinta la barra de verde y gris. */
+.mid-progress-bar::-webkit-progress-bar {
+  background: rgba(110, 90, 170, 0.12);
+  border-radius: 10px;
+}
+.mid-progress-bar::-webkit-progress-value {
+  background: var(--accent);
+  border-radius: 10px;
+}
+.mid-progress-bar::-moz-progress-bar {
+  background: var(--accent);
+  border-radius: 10px;
+}
+.mid-progress-bar.idle {
+  visibility: hidden;
 }
 
 .level {
@@ -203,6 +440,7 @@ progress {
   height: 10px;
   border-radius: 6px;
   background: var(--panel-2);
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 .level-fill {
@@ -213,7 +451,7 @@ progress {
   background: var(--ok);
 }
 .level-fill.warn {
-  background: var(--warn);
+  background: #b8780a; /* ámbar más vivo que el del texto; 3,4:1 contra la pista */
 }
 .level-fill.bad {
   background: var(--bad);
@@ -235,6 +473,51 @@ progress {
   color: var(--muted);
 }
 
+/* Medidor vertical (a la derecha del espectrograma). El nivel se controla con la altura. */
+.level.vertical {
+  flex: none;
+  flex-direction: column;
+  width: 64px;
+  gap: 6px;
+}
+.level.vertical .level-bar {
+  flex: none;
+  width: 14px;
+  height: var(--viz-h);
+  border-radius: 20px;
+}
+.level.vertical .level-fill {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  transition: height 0.08s linear;
+}
+.level.vertical .level-target {
+  top: auto;
+  right: 0;
+  bottom: 50%;
+  left: 0;
+  width: auto;
+  height: 28.6%;
+  border-right: none;
+  border-left: none;
+  border-top: 1px dashed var(--muted);
+  border-bottom: 1px dashed var(--muted);
+}
+.level.vertical .level-icon {
+  width: 22px;
+  height: auto;
+  opacity: 0.85;
+}
+.level.vertical .level-label {
+  width: auto;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* El lienzo de las gráficas se mantiene oscuro: se leen mejor sobre fondo negro. */
 .spectrogram {
   margin: 0;
   width: 100%;
@@ -242,9 +525,10 @@ progress {
 }
 .spectrogram canvas {
   width: 100%;
-  height: 160px;
+  height: var(--viz-h);
   border-radius: 10px;
   background: #07060f;
+  border: 1px solid var(--border);
   display: block;
 }
 figcaption {
@@ -252,12 +536,86 @@ figcaption {
   margin-top: 4px;
 }
 
+/* --- Análisis: tarjeta con las gráficas ------------------------------------- */
+.step-title {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.analysis-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.analysis-head .step-title {
+  margin: 0;
+}
+.origin-badge {
+  padding: 2px 12px;
+  font-size: 0.85rem;
+  background: #fff;
+  border: 1px solid var(--btn-off-border);
+  border-radius: 999px;
+}
+/* Fila: [espectrograma + espectro apilados] | [medidor de nivel]. */
+.analysis-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  max-width: 725px;
+  margin: 0 auto;
+}
+.graphs {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.analysis-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.tip-inline {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.analysis-constellation {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+.axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
 /* --- Resultado -------------------------------------------------------------- */
+/* Fondos más saturados para que el resultado destaque. Dentro de la tarjeta se
+   oscurecen los textos secundarios para conservar el contraste (>= 4,5:1). */
+.result.hit,
+.result.miss {
+  --muted: #36345a;
+  --accent: #0d4a50;
+  --warn: #573700;
+}
 .result.hit {
-  border-color: rgba(60, 207, 145, 0.5);
+  border-color: rgba(23, 116, 77, 0.55);
+  background: #91c5a7;
 }
 .result.miss {
-  border-color: rgba(255, 194, 71, 0.5);
+  background: #b0c3da;
+  border-color: #4855a0;
 }
 .eyebrow {
   margin: 0;
@@ -340,7 +698,7 @@ th,
 td {
   text-align: left;
   padding: 6px 8px;
-  border-bottom: 1px solid #262948;
+  border-bottom: 1px solid var(--border);
 }
 th {
   color: var(--muted);
@@ -352,29 +710,81 @@ th:nth-child(n + 2) {
 }
 
 .error {
-  border-color: rgba(255, 93, 115, 0.6);
+  border-color: rgba(180, 35, 63, 0.5);
 }
 
-/* --- Biblioteca ------------------------------------------------------------- */
+/* --- Biblioteca: campos de entrada en blanco -------------------------------- */
 .ingest {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 .ingest input:not([type="file"]) {
-  background: var(--panel-2);
-  border: 1px solid #2c2f52;
+  background: #fff;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 9px 12px;
   color: var(--text);
   font: inherit;
 }
-.ingest button {
-  justify-self: start;
-  background: var(--accent);
-  border: none;
-  color: #1a0d05;
-  font-weight: 600;
+.ingest input::placeholder {
+  color: #6b6890;
 }
+.file-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.file-name {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.ingest .btn-primary {
+  justify-self: start;
+}
+
+/* Mensaje al agregar una canción: grande, con color y ícono según el resultado. */
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 2px solid;
+  border-radius: 12px;
+}
+.notice p {
+  margin: 0;
+}
+.notice-icon {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+.notice-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.notice-detail {
+  margin-top: 2px;
+  font-size: 1rem;
+}
+.notice.ok { background: #91c5a7; border-color: #17744d; color: #0b3d27; }
+.notice.ok .notice-icon { background: #17744d; }
+.notice.exists { background: #b0c3da; border-color: #4855a0; color: #1c2760; }
+.notice.exists .notice-icon { background: #4855a0; }
+.notice.bad { background: #f0bcc6; border-color: #b4233f; color: #5c0f1f; }
+.notice.bad .notice-icon { background: #b4233f; }
+.notice.busy { background: #f3dfae; border-color: #b8780a; color: #4a3000; }
+.notice.busy .notice-icon { background: #8a5a00; }
 
 footer {
   margin-top: 32px;
@@ -388,5 +798,15 @@ footer {
   }
   .result h2 {
     font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listen.active .pulse {
+    animation: none;
+  }
+  .listen,
+  .level-fill {
+    transition: none;
   }
 }
